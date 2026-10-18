@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Huellas franciscanas · Tierra Santa en 3D</title>
+<meta name="description" content="Un viaje en 3D por Tierra Santa: la maqueta en relieve, veinte santuarios en vídeo, ocho siglos de presencia franciscana y un siglo de Revista Tierra Santa.">
+<meta name="theme-color" content="#140f0b">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23140f0b'/%3E%3Cpath d='M32 14v38M19 24h26' stroke='%23d9b26a' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/estilo.css">
+<script type="importmap">{"imports":{"three":"./vendor/three.module.min.js"}}</script>
+</head>
+<body>
+<div id="candado" role="dialog" aria-modal="true" aria-labelledby="candadoTitulo" hidden>
+  <form class="candado-caja" autocomplete="off">
+    <svg viewBox="0 0 64 64" class="tau" aria-hidden="true"><path d="M32 12v40M17 22h30"/></svg>
+    <h1 id="candadoTitulo">Huellas franciscanas</h1>
+    <p>Escribe la contraseña para entrar</p>
+    <input type="password" inputmode="numeric" aria-label="Contraseña" placeholder="Contraseña" required>
+    <button type="submit" class="btn oro">Entrar</button>
+    <p class="candado-error" aria-live="polite"></p>
+  </form>
+</div>
+<canvas id="escena" aria-hidden="true"></canvas>
+<div id="velo" aria-hidden="true"></div>
+<div id="etiquetas" aria-label="Lugares en la maqueta"></div>
+
+<div id="carga" role="status" aria-live="polite">
+  <div class="carga-in">
+    <svg viewBox="0 0 64 64" class="tau" aria-hidden="true"><path d="M32 12v40M17 22h30"/></svg>
+    <p>Preparando la maqueta de Tierra Santa…</p>
+    <div class="barra"><i></i></div>
+  </div>
+</div>
+
+<header class="cabecera">
+  <a class="marca" href="#inicio" aria-label="Huellas franciscanas · inicio">
+    <svg viewBox="0 0 40 40" class="marca-ic" aria-hidden="true"><circle cx="20" cy="20" r="18"/><path d="M20 10v21M13 15h14"/></svg>
+    <span><b>Huellas franciscanas</b><small>Tierra Santa · 3D</small></span>
+  </a>
+  <nav class="menu" aria-label="Secciones">
+    <a href="#recorrido">Recorrido</a>
+    <a href="#santuarios">Santuarios</a>
+    <a href="#historia">Historia</a>
+    <a href="#franciscanos">Presencia</a>
+    <a href="#revista">Revista</a>
+  </nav>
+  <button class="btn-explorar" data-explorar type="button">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="m3 13 9 5 9-5"/></svg>
+    <span>Explorar maqueta</span>
+  </button>
+</header>
+
+<main id="contenido">
+
+  <!-- 0 · Portada -->
+  <section id="inicio" class="escena portada" data-camara="inicio">
+    <div class="portada-in">
+      <p class="antetitulo">Un viaje visual por Tierra Santa</p>
+      <h1>Huellas<br><em>franciscanas</em></h1>
+      <p class="lema" id="mision"></p>
+      <div class="acciones">
+        <a class="btn oro" href="#recorrido">Comenzar el recorrido</a>
+        <button class="btn vidrio" type="button" data-pelicula>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg> Ver la película de entrada
+        </button>
+      </div>
+    </div>
+    <div class="desliza" aria-hidden="true"><span></span>Desliza para descender a la tierra</div>
+    <ul class="cifras" aria-label="La web en cifras">
+      <li><b data-n="20">20</b><span>santuarios en vídeo</span></li>
+      <li><b data-n="800">8</b><span>siglos de Custodia</span></li>
+      <li><b data-n="503">503</b><span>números de la revista</span></li>
+    </ul>
+  </section>
+
+  <!-- 1 · Recorrido: se rellena desde datos -->
+  <section id="recorrido" class="bloque-intro" data-camara="vista">
+    <div class="intro-tarjeta">
+      <p class="antetitulo">El recorrido</p>
+      <h2>Cinco paradas en la vida de Jesús</h2>
+      <p>De Belén a Jerusalén, sigue la ruta sobre la maqueta en relieve. En cada lugar descubrirás qué recordamos allí y cómo lo cuidan hoy los franciscanos.</p>
+    </div>
+  </section>
+  <div id="paradas"></div>
+
+  <!-- 2 · Santuarios -->
+  <section id="santuarios" class="escena santuarios" data-camara="cenital">
+    <div class="titular">
+      <p class="antetitulo">Visitas en vídeo</p>
+      <h2>Veinte santuarios para recorrer</h2>
+      <p>Gira el carrusel y entra en cada santuario: un vídeo con música, una explicación sencilla y una reflexión para llevar contigo.</p>
+    </div>
+    <div class="carrusel" id="carrusel" tabindex="0" aria-roledescription="carrusel" aria-label="Santuarios en vídeo. Usa las flechas para girar.">
+      <div class="anillo" id="anillo"></div>
+    </div>
+    <div class="carrusel-ctl">
+      <button type="button" class="redondo" data-giro="-1" aria-label="Santuario anterior"><svg viewBox="0 0 24 24"><path d="m15 6-6 6 6 6"/></svg></button>
+      <div class="carrusel-nombre" id="carruselNombre" aria-live="polite"></div>
+      <button type="button" class="redondo" data-giro="1" aria-label="Santuario siguiente"><svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></button>
+    </div>
+    <div class="filtros" id="filtros" role="tablist" aria-label="Filtrar por lugar"></div>
+  </section>
+
+  <!-- 3 · Historia -->
+  <section id="historia" class="historia" data-camara="historia">
+    <div class="historia-pegajosa">
+      <div class="titular">
+        <p class="antetitulo">Línea del tiempo</p>
+        <h2>De la antigüedad a hoy</h2>
+        <p>Seis etapas en la historia de los Santos Lugares. Desliza: el tiempo avanza en profundidad.</p>
+        <button class="btn vidrio" type="button" data-pelicula><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg> Ver la película (25 s)</button>
+      </div>
+      <div class="tunel" id="tunel"></div>
+      <ol class="regla" id="regla"></ol>
+      <p class="aviso-ia">Recreaciones visuales creadas con IA; no son fotografías documentales exactas.</p>
+    </div>
+  </section>
+
+  <!-- 4 · Presencia franciscana -->
+  <section id="franciscanos" class="escena franciscanos" data-camara="jerusalen-cerca">
+    <div class="fr-texto">
+      <p class="antetitulo">Custodia de Tierra Santa</p>
+      <h2>Una presencia que cuida, acoge y reza</h2>
+      <p>Desde hace ocho siglos, los hermanos de san Francisco custodian los Santos Lugares. Rezan en ellos, reciben a los peregrinos, acompañan a las comunidades cristianas locales y sostienen escuelas y obras sociales.</p>
+      <ul class="fr-puntos">
+        <li><b>Oración</b> en los santuarios, día tras día.</li>
+        <li><b>Acogida</b> de peregrinos de todo el mundo.</li>
+        <li><b>Servicio</b> a los cristianos de la tierra de Jesús.</li>
+      </ul>
+    </div>
+    <div class="fr-mosaico" id="frMosaico">
+      <figure style="--z:60px"><img src="assets/franciscanos/procession_aux_flambeaux-20-1.webp" alt="Custodiar la memoria" loading="lazy"><figcaption><b>Custodiar la memoria</b><span>Los Santos Lugares conservan la memoria de la fe y reciben a peregrinos de todo el mundo.</span></figcaption></figure>
+      <figure style="--z:20px"><img src="assets/franciscanos/prayer_peace_school-25-1.webp" alt="Educar para el encuentro" loading="lazy"><figcaption><b>Educar para el encuentro</b><span>La formación y la educación son parte de la labor de la Custodia.</span></figcaption></figure>
+      <figure style="--z:30px"><img src="assets/franciscanos/cristiani_locali-1-1.webp" alt="Caminar con las comunidades" loading="lazy"><figcaption><b>Caminar con las comunidades</b><span>Una presencia cercana que comparte la oración y la vida de los cristianos de Tierra Santa.</span></figcaption></figure>
+      <figure style="--z:80px"><img src="assets/franciscanos/cts_220830_1931-1.webp" alt="Cultivar el diálogo" loading="lazy"><figcaption><b>Cultivar el diálogo</b><span>El encuentro entre comunidades abre espacios de cercanía y respeto.</span></figcaption></figure>
+    </div>
+  </section>
+
+  <!-- 5 · Revista -->
+  <section id="revista" class="revista" data-camara="alto">
+    <div class="titular">
+      <p class="antetitulo">Revista Tierra Santa · desde 1921</p>
+      <h2>Un siglo de revista, en una torre de portadas</h2>
+      <p>Elige una década y gira la torre. Cada portada es una puerta a la hemeroteca oficial, donde puedes seguir leyendo.</p>
+    </div>
+    <div class="decadas" id="decadas" role="tablist" aria-label="Décadas"></div>
+    <div class="torre-marco" id="torreMarco" tabindex="0" aria-label="Torre de portadas. Arrastra o usa las flechas para girarla.">
+      <div class="torre" id="torre"></div>
+    </div>
+    <p class="torre-info" id="torreInfo" aria-live="polite"></p>
+    <div class="acciones centro">
+      <a class="btn oro" href="https://revistatierrasanta.com/hemeroteca/" target="_blank" rel="noopener">Ir a la hemeroteca oficial ↗</a>
+      <a class="btn vidrio" href="https://revistatierrasanta.com/" target="_blank" rel="noopener">Revista Tierra Santa ↗</a>
+    </div>
+  </section>
+
+  <!-- 6 · Explorar -->
+  <section id="explorar-cta" class="escena cierre" data-camara="final">
+    <div class="cierre-in">
+      <p class="antetitulo">Tu turno</p>
+      <h2>Recorre la maqueta a tu ritmo</h2>
+      <p>Gira, acerca y elige un lugar. Cada luz dorada señala santuarios que puedes visitar en vídeo.</p>
+      <button class="btn oro grande" type="button" data-explorar>Explorar la maqueta 3D</button>
+    </div>
+  </section>
+
+  <footer class="pie">
+    <div class="pie-col">
+      <b>Huellas franciscanas · Tierra Santa</b>
+      <p>Una propuesta visual para conocer los Santos Lugares, la presencia franciscana y la Revista Tierra Santa. Los enlaces conducen a la web oficial; no se alojan aquí los números completos.</p>
+    </div>
+    <div class="pie-col">
+      <b>Créditos</b>
+      <p>Fotografías de monumentos: <a href="assets/monumentos/creditos.html" target="_blank" rel="noopener">autores y licencias</a>. Música de la película de entrada: «Ethereal Ascension», Sandra’s Tape. Maqueta 3D: relieve modelado a partir del mapa físico de la web original (altitudes aproximadas, con fines ilustrativos). Gráficos 3D con three.js (licencia MIT).</p>
+    </div>
+    <div class="pie-col">
+      <b>Aviso</b>
+      <p>Algunas imágenes y vídeos son recreaciones creadas con IA; no son fotografías documentales exactas.</p>
+      <p><a href="https://www.custodia.org/es/" target="_blank" rel="noopener">Custodia de Tierra Santa ↗</a></p>
+    </div>
+  </footer>
+</main>
+
+<!-- Modo exploración -->
+<div class="explorar-ui" id="explorarUI" hidden>
+  <div class="explorar-barra">
+    <button class="btn vidrio" type="button" data-salir>← Volver al recorrido</button>
+    <p>Arrastra para girar · rueda o pellizco para acercar · toca una luz dorada</p>
+    <button class="redondo" type="button" data-encuadre aria-label="Ver toda la maqueta"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+  </div>
+  <aside class="panel-lugar" id="panelLugar" hidden aria-live="polite"></aside>
+</div>
+
+<!-- Ventana del santuario -->
+<dialog class="ventana" id="ventana" aria-labelledby="vTitulo">
+  <div class="ventana-in">
+    <button class="cerrar" type="button" data-cerrar aria-label="Cerrar">×</button>
+    <div class="v-video"><video id="vVideo" controls playsinline preload="none"></video></div>
+    <div class="v-cuerpo">
+      <p class="antetitulo" id="vLugar"></p>
+      <h3 id="vTitulo"></h3>
+      <div id="vTexto"></div>
+      <nav class="v-nav">
+        <button type="button" class="btn vidrio" data-v="-1">← Anterior</button>
+        <button type="button" class="btn vidrio" data-v="1">Siguiente →</button>
+      </nav>
+    </div>
+  </div>
+</dialog>
+
+<!-- Película de entrada -->
+<dialog class="ventana pelicula" id="pelicula" aria-label="Película de entrada">
+  <div class="ventana-in">
+    <button class="cerrar" type="button" data-cerrar aria-label="Cerrar">×</button>
+    <video id="pVideo" controls playsinline preload="none" poster="assets/entrada/evolucion-franciscana.webp"></video>
+    <p class="aviso-ia">Recreación animada creada con IA · Música: «Ethereal Ascension», Sandra’s Tape.</p>
+  </div>
+</dialog>
+
+<script>
+if (location.protocol === 'file:') {
+  var c = document.querySelector('#carga .carga-in');
+  c.innerHTML = '<p style="font-size:20px;color:#f0d394;margin:0 0 12px">La web debe abrirse desde un servidor</p>' +
+    '<p style="max-width:520px;line-height:1.6;margin:0 auto">El navegador no permite cargar la maqueta 3D con doble clic.<br>' +
+    'Abre PowerShell en esta carpeta y escribe <code style="color:#f0d394">py -m http.server 8000</code>,<br>' +
+    'después visita <a href="http://localhost:8000" style="color:#f0d394">http://localhost:8000</a>.<br>' +
+    'Publicada en GitHub Pages funciona directamente.</p>';
+}
+</script>
+<script src="data/contenido.js"></script>
+<script type="module">
+// Acceso con contraseña sencilla (cortina de privacidad, no seguridad real).
+const CLAVE = 'yhvold';
+const resumen = t => { let h = 5381; for (const c of t) h = ((h * 33) ^ c.charCodeAt(0)) >>> 0; return h.toString(36); };
+const abrir = () => { document.getElementById('candado').remove(); import('./js/app.js'); };
+let dentro = false; try { dentro = localStorage.getItem('hf-acceso') === CLAVE; } catch {}
+if (dentro) abrir();
+else {
+  const caja = document.getElementById('candado'), form = caja.querySelector('form'), campo = form.querySelector('input'), error = form.querySelector('.candado-error');
+  caja.hidden = false; campo.focus();
+  form.onsubmit = e => {
+    e.preventDefault();
+    if (resumen(campo.value.trim()) === CLAVE) { try { localStorage.setItem('hf-acceso', CLAVE); } catch {} abrir(); }
+    else { error.textContent = 'Contraseña incorrecta'; campo.value = ''; campo.focus(); }
+  };
+}
+</script>
+</body>
+</html>
