@@ -11,9 +11,9 @@ const movil = matchMedia('(max-width: 700px)').matches || matchMedia('(pointer: 
 const estrecho = () => innerWidth <= 700;
 const reducido = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const sitio = id => D.sites.find(s => s.id === id);
-const nombreLugar = { jerusalen: 'Jerusalén', belen: 'Belén', ainkarem: 'Ain Karem', nazaret: 'Nazaret', cana: 'Caná', tabor: 'Monte Tabor', galilea: 'Galilea', tabgha: 'Tabgha', cafarnaun: 'Cafarnaún', jordan: 'Río Jordán', jafa: 'Jafa', betfage: 'Betfagé' };
+const nombreLugar = { emaus: 'Emaús', ramla: 'Ramla', nebo: 'Monte Nebo', betania: 'Betania', jerusalen: 'Jerusalén', belen: 'Belén', ainkarem: 'Ain Karem', nazaret: 'Nazaret', cana: 'Caná', tabor: 'Monte Tabor', galilea: 'Galilea', tabgha: 'Tabgha', cafarnaun: 'Cafarnaún', jordan: 'Río Jordán', jafa: 'Jafa', betfage: 'Betfagé' };
 // desplazamiento de etiquetas en vista lejana para evitar solapes (px)
-const DESPLAZA = { jerusalen: [0, -38], belen: [16, 34], ainkarem: [-78, 6], nazaret: [-70, 4], cana: [-40, -34], tabor: [52, 22], galilea: [36, -30], jordan: [40, 0], jafa: [0, 0] };
+const DESPLAZA = { emaus: [-74, -52], ramla: [34, -58], nebo: [64, 34], jerusalen: [22, -38], belen: [16, 34], ainkarem: [-78, 6], nazaret: [-70, 4], cana: [-40, -34], tabor: [52, 22], galilea: [36, -30], jordan: [40, -14], jafa: [-44, -4] };
 const grupoDe = id => D.groups.find(g => g.sites.includes(id));
 
 // Orden de visita de los santuarios (sigue los grupos geográficos)
@@ -205,7 +205,7 @@ function pintarCarrusel() {
       p.tabIndex = d === 0 ? 0 : -1;
     });
     const s = ORDEN[f];
-    $('#carruselNombre').innerHTML = `${esc(s.name)}<small>${esc(nombreLugar[s.place] || s.placeName)} · vídeo con música</small>`;
+    $('#carruselNombre').innerHTML = `${esc(s.name)}<small>${esc(nombreLugar[s.place] || s.placeName)} · ${s.nuevo ? 'vídeo' : 'vídeo con música'}</small>`;
     $$('#filtros button').forEach(b => b.setAttribute('aria-selected', String(b.dataset.grupo === grupoDe(s.id)?.key)));
   }
 }
@@ -355,12 +355,12 @@ function pintarSitio() {
   $('#vTitulo').textContent = s.name;
   const L = s.lesson, F = s.faith;
   let h = `<p>${esc(s.text)}</p>`;
-  if (L) h += `<h4>El lugar</h4><p>${esc(L.intro)}</p><h4>Qué recordamos</h4><p>${esc(L.meaning)}</p>${L.look ? `<h4>Fíjate en</h4><p>${esc(L.look)}</p>` : ''}`;
+  if (L) h += `<h4>El lugar</h4><p>${esc(L.intro)}</p>${L.meaning ? `<h4>Qué recordamos</h4><p>${esc(L.meaning)}</p>` : ''}${L.look ? `<h4>Fíjate en</h4><p>${esc(L.look)}</p>` : ''}`;
   if (F) h += `<div class="reflexion"><b>${esc(F.title)}</b>${F.paragraphs.map(p => `<p>${esc(p)}</p>`).join('')}</div>`;
   if (s.mags?.length) h += `<h4>Este lugar en la revista · ${s.magCount} números</h4><div class="v-revistas">${s.mags.map(m => `<a href="https://revistatierrasanta.com/hemeroteca/" target="_blank" rel="noopener" title="Tierra Santa nº ${m.n}">${portada(m.s, m.k, 'role="img" aria-label="Portada nº ' + m.n + '"')}nº ${m.n}</a>`).join('')}</div>`;
   const enlaces = [L?.url && `<a href="${esc(L.url)}" target="_blank" rel="noopener">Custodia de Tierra Santa ↗</a>`, s.source && s.source.includes('custodia') && !L?.url && `<a href="${esc(s.source)}" target="_blank" rel="noopener">Ficha en custodia.org ↗</a>`].filter(Boolean);
   if (enlaces.length) h += `<div class="v-enlaces">${enlaces.join('')}</div>`;
-  h += `<p class="aviso-ia" style="text-align:left">Vídeo de recorrido con movimientos de cámara y música. Algunas imágenes pueden ser recreaciones creadas con IA.</p>`;
+  h += `<p class="aviso-ia" style="text-align:left">Vídeo de recorrido con movimientos de cámara${s.nuevo ? '' : ' y música'}. Algunas imágenes pueden ser recreaciones creadas con IA.</p>`;
   $('#vTexto').innerHTML = h;
   $('.v-cuerpo').scrollTop = 0;
 }
