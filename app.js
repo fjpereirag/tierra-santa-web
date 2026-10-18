@@ -1,5 +1,5 @@
 // Huellas franciscanas · Tierra Santa en 3D — interfaz y narración por scroll.
-import { crearMaqueta } from './maqueta.js';
+import { crearMaqueta } from './maqueta.js?v=4';
 
 const D = window.HF;
 const portada = (s, k, extra = '') => { const sp = D.sprites[s], col = k % sp.cols, fila = Math.floor(k / sp.cols);
@@ -47,6 +47,21 @@ $('#paradas').addEventListener('click', e => {
   const t = b.closest('.tarjeta'), abierta = t.classList.toggle('abierta');
   b.setAttribute('aria-expanded', String(abierta));
   b.firstChild.textContent = abierta ? 'Cerrar' : 'Leer más';
+});
+
+// navegador de las cinco paradas
+const pasos = document.createElement('nav');
+pasos.id = 'pasos'; pasos.setAttribute('aria-label', 'Paradas del recorrido');
+pasos.innerHTML = `<button type="button" class="paso-flecha" data-paso="-1" aria-label="Parada anterior">‹</button>` +
+  D.journey.map((p, i) => `<button type="button" class="paso" data-ir="${i}" aria-label="${i + 1}. ${esc(p.name)}"><i>${i + 1}</i><span>${esc(p.name)}</span></button>`).join('') +
+  `<button type="button" class="paso-flecha" data-paso="1" aria-label="Parada siguiente">›</button>`;
+document.body.append(pasos);
+let pasoActual = -1;
+const irParada = i => { const sec = $$('.parada')[Math.max(0, Math.min(D.journey.length - 1, i))]; if (sec) scrollTo({ top: sec.offsetTop + sec.offsetHeight * 0.3, behavior: reducido ? 'auto' : 'smooth' }); };
+pasos.addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  if (b.dataset.ir) irParada(Number(b.dataset.ir));
+  else irParada(pasoActual < 0 ? 0 : pasoActual + Number(b.dataset.paso));
 });
 
 // ================= Escena 3D =================
@@ -164,6 +179,10 @@ function alDesplazar() {
     progresoRutaObjetivo = Math.max(0, Math.min(1, p));
   }
   $('.cabecera').classList.toggle('solida', scrollY > 40);
+  const enRecorrido = encuadreActual.startsWith('parada-') || encuadreActual === 'vista';
+  document.body.classList.toggle('en-recorrido', enRecorrido);
+  pasoActual = encuadreActual.startsWith('parada-') ? Number(encuadreActual.slice(7)) : -1;
+  $$('#pasos .paso').forEach((b, i) => { b.classList.toggle('activo', i === pasoActual); b.classList.toggle('hecho', i < pasoActual); });
   const ids = ['recorrido', 'santuarios', 'historia', 'franciscanos', 'revista'];
   let activo = null;
   ids.forEach(id => { const r = $('#' + id).getBoundingClientRect(); if (r.top < centro) activo = id; });

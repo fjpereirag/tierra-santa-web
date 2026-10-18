@@ -358,5 +358,29 @@ h3{font-size:clamp(28px,3vw,38px)}
 .candado-caja .btn{width:100%;justify-content:center}
 .candado-caja .candado-error{color:#f0a48a;min-height:22px;margin:12px 0 0;font-size:14px}
 
+/* ---------- navegador de paradas ---------- */
+#pasos{position:fixed;left:50%;bottom:20px;z-index:12;display:flex;align-items:center;gap:4px;padding:6px;border-radius:999px;background:rgba(20,15,11,.82);border:1px solid var(--vidrio-borde);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:var(--sombra);transform:translate(-50%,30px);opacity:0;pointer-events:none;transition:opacity .4s,transform .4s}
+body.en-recorrido:not(.explorando) #pasos{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+#pasos button{border:0;background:none;color:var(--marfil-2);font:500 13px var(--sans);display:flex;align-items:center;gap:6px;padding:6px 10px 6px 6px;border-radius:999px;transition:.25s}
+#pasos .paso i{font-style:normal;display:grid;place-items:center;width:24px;height:24px;border-radius:50%;border:1px solid rgba(240,211,148,.45);font-size:12px;font-weight:700;color:var(--oro-2)}
+#pasos .paso.hecho i{background:rgba(217,178,106,.25)}
+#pasos .paso.activo{background:var(--oro);color:var(--noche)}
+#pasos .paso.activo i{background:var(--noche);border-color:var(--noche)}
+#pasos .paso-flecha{font-size:22px;line-height:1;width:34px;height:34px;justify-content:center;padding:0;color:var(--oro-2)}
+#pasos .paso-flecha:hover{background:rgba(244,234,216,.1)}
+@media (max-width:700px){
+  #pasos{top:112px;bottom:auto;transform:translate(-50%,-20px);gap:2px;padding:4px;max-width:calc(100vw - 24px)}
+  body.en-recorrido:not(.explorando) #pasos{transform:translate(-50%,0)}
+  #pasos .paso span{display:none}
+  #pasos .paso.activo span{display:inline}
+  #pasos .paso{padding:4px}
+  #pasos .paso.activo{padding:4px 10px 4px 4px}
+  .menu a{font-size:12.5px;padding:6px 8px}
+  .menu{justify-content:space-between}
+  .tarjeta.abierta .chips{flex-wrap:wrap;overflow:visible}
+  .tarjeta.abierta .chip{flex:1 1 100%}
+}
+
 .spr{display:block;width:100%;height:100%;background-repeat:no-repeat}
 .v-revistas .spr{width:62px;height:86px;border-radius:4px;margin-bottom:4px}
