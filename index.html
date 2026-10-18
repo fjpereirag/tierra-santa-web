@@ -11,8 +11,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/estilo.css">
-<script type="importmap">{"imports":{"three":"./vendor/three.module.min.js"}}</script>
+<link rel="stylesheet" href="estilo.css">
+<script type="importmap">{"imports":{"three":"./three.module.min.js"}}</script>
 </head>
 <body>
 <div id="candado" role="dialog" aria-modal="true" aria-labelledby="candadoTitulo" hidden>
@@ -134,10 +134,10 @@
       </ul>
     </div>
     <div class="fr-mosaico" id="frMosaico">
-      <figure style="--z:60px"><img src="assets/franciscanos/procession_aux_flambeaux-20-1.webp" alt="Custodiar la memoria" loading="lazy"><figcaption><b>Custodiar la memoria</b><span>Los Santos Lugares conservan la memoria de la fe y reciben a peregrinos de todo el mundo.</span></figcaption></figure>
-      <figure style="--z:20px"><img src="assets/franciscanos/prayer_peace_school-25-1.webp" alt="Educar para el encuentro" loading="lazy"><figcaption><b>Educar para el encuentro</b><span>La formación y la educación son parte de la labor de la Custodia.</span></figcaption></figure>
-      <figure style="--z:30px"><img src="assets/franciscanos/cristiani_locali-1-1.webp" alt="Caminar con las comunidades" loading="lazy"><figcaption><b>Caminar con las comunidades</b><span>Una presencia cercana que comparte la oración y la vida de los cristianos de Tierra Santa.</span></figcaption></figure>
-      <figure style="--z:80px"><img src="assets/franciscanos/cts_220830_1931-1.webp" alt="Cultivar el diálogo" loading="lazy"><figcaption><b>Cultivar el diálogo</b><span>El encuentro entre comunidades abre espacios de cercanía y respeto.</span></figcaption></figure>
+      <figure style="--z:60px"><img src="assets_franciscanos_procession_aux_flambeaux-20-1.webp" alt="Custodiar la memoria" loading="lazy"><figcaption><b>Custodiar la memoria</b><span>Los Santos Lugares conservan la memoria de la fe y reciben a peregrinos de todo el mundo.</span></figcaption></figure>
+      <figure style="--z:20px"><img src="assets_franciscanos_prayer_peace_school-25-1.webp" alt="Educar para el encuentro" loading="lazy"><figcaption><b>Educar para el encuentro</b><span>La formación y la educación son parte de la labor de la Custodia.</span></figcaption></figure>
+      <figure style="--z:30px"><img src="assets_franciscanos_cristiani_locali-1-1.webp" alt="Caminar con las comunidades" loading="lazy"><figcaption><b>Caminar con las comunidades</b><span>Una presencia cercana que comparte la oración y la vida de los cristianos de Tierra Santa.</span></figcaption></figure>
+      <figure style="--z:80px"><img src="assets_franciscanos_cts_220830_1931-1.webp" alt="Cultivar el diálogo" loading="lazy"><figcaption><b>Cultivar el diálogo</b><span>El encuentro entre comunidades abre espacios de cercanía y respeto.</span></figcaption></figure>
     </div>
   </section>
 
@@ -176,7 +176,7 @@
     </div>
     <div class="pie-col">
       <b>Créditos</b>
-      <p>Fotografías de monumentos: <a href="assets/monumentos/creditos.html" target="_blank" rel="noopener">autores y licencias</a>. Música de la película de entrada: «Ethereal Ascension», Sandra’s Tape. Maqueta 3D: relieve modelado a partir del mapa físico de la web original (altitudes aproximadas, con fines ilustrativos). Gráficos 3D con three.js (licencia MIT).</p>
+      <p>Fotografías de monumentos: <a href="assets_monumentos_creditos.html" target="_blank" rel="noopener">autores y licencias</a>. Música de la película de entrada: «Ethereal Ascension», Sandra’s Tape. Maqueta 3D: relieve modelado a partir del mapa físico de la web original (altitudes aproximadas, con fines ilustrativos). Gráficos 3D con three.js (licencia MIT).</p>
     </div>
     <div class="pie-col">
       <b>Aviso</b>
@@ -217,7 +217,7 @@
 <dialog class="ventana pelicula" id="pelicula" aria-label="Película de entrada">
   <div class="ventana-in">
     <button class="cerrar" type="button" data-cerrar aria-label="Cerrar">×</button>
-    <video id="pVideo" controls playsinline preload="none" poster="assets/entrada/evolucion-franciscana.webp"></video>
+    <video id="pVideo" controls playsinline preload="none" poster="assets_entrada_evolucion-franciscana.webp"></video>
     <p class="aviso-ia">Recreación animada creada con IA · Música: «Ethereal Ascension», Sandra’s Tape.</p>
   </div>
 </dialog>
@@ -232,12 +232,12 @@ if (location.protocol === 'file:') {
     'Publicada en GitHub Pages funciona directamente.</p>';
 }
 </script>
-<script src="data/contenido.js"></script>
+<script src="contenido.js"></script>
 <script type="module">
 // Acceso con contraseña sencilla (cortina de privacidad, no seguridad real).
 const CLAVE = 'yhvold';
 const resumen = t => { let h = 5381; for (const c of t) h = ((h * 33) ^ c.charCodeAt(0)) >>> 0; return h.toString(36); };
-const abrir = () => { document.getElementById('candado').remove(); import('./js/app.js'); };
+const abrir = () => { document.getElementById('candado').remove(); import('./app.js'); };
 let dentro = false; try { dentro = localStorage.getItem('hf-acceso') === CLAVE; } catch {}
 if (dentro) abrir();
 else {

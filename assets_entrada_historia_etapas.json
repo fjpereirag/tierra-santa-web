@@ -1,0 +1,42 @@
+{
+  "durationSeconds": 25,
+  "type": "Recreaciones artísticas animadas",
+  "stages": [
+    {
+      "image": "01-antiguedad.webp",
+      "name": "Era Bíblica y Antigüedad",
+      "period": "Hasta S. III",
+      "startSeconds": 0
+    },
+    {
+      "image": "02-basilicas.webp",
+      "name": "Periodo Bizantino y Cruzado",
+      "period": "SS. IV–XIII",
+      "startSeconds": 3.9
+    },
+    {
+      "image": "03-custodia.webp",
+      "name": "Nacimiento de la Custodia Franciscana",
+      "period": "SS. XIV–XVIII",
+      "startSeconds": 7.8
+    },
+    {
+      "image": "04-arqueologia.webp",
+      "name": "Renacimiento Constructivo",
+      "period": "1800–1913",
+      "startSeconds": 11.7
+    },
+    {
+      "image": "05-santuarios.webp",
+      "name": "Arquitectura Monumental",
+      "period": "1914–1999",
+      "startSeconds": 15.6
+    },
+    {
+      "image": "06-conservacion.webp",
+      "name": "Era Digital y Conservación Actual",
+      "period": "2000–Presente",
+      "startSeconds": 19.5
+    }
+  ]
+}
