@@ -1,5 +1,5 @@
 // Huellas franciscanas · Tierra Santa en 3D — interfaz y narración por scroll.
-import { crearMaqueta } from './maqueta.js?v=5';
+import { crearMaqueta } from './maqueta.js?v=6';
 
 const D = window.HF;
 const portada = (s, k, extra = '') => { const sp = D.sprites[s], col = k % sp.cols, fila = Math.floor(k / sp.cols);
@@ -384,17 +384,16 @@ function abrirSitio(id) {
 }
 function pintarSitio() {
   const s = ORDEN[sitioActual];
-  vVideo.pause(); vVideo.poster = s.poster; vVideo.src = s.video; vVideo.load();
-  $('#vLugar').textContent = (nombreLugar[s.place] || s.placeName) + ' · visita en vídeo';
+  vVideo.pause(); vVideo.loop = true; vVideo.poster = s.poster; vVideo.src = s.video; vVideo.load();
+  $('#vLugar').textContent = nombreLugar[s.place] || s.placeName;
   $('#vTitulo').textContent = s.name;
   const L = s.lesson, F = s.faith;
-  let h = `<p>${esc(s.text)}</p>`;
+  let h = '';
   if (L) h += `<h4>El lugar</h4><p>${esc(L.intro)}</p>${L.meaning ? `<h4>Qué recordamos</h4><p>${esc(L.meaning)}</p>` : ''}${L.look ? `<h4>Fíjate en</h4><p>${esc(L.look)}</p>` : ''}`;
   if (F) h += `<div class="reflexion"><b>${esc(F.title)}</b>${F.paragraphs.map(p => `<p>${esc(p)}</p>`).join('')}</div>`;
   if (s.mags?.length) h += `<h4>Este lugar en la revista · ${s.magCount} números</h4><div class="v-revistas">${s.mags.map(m => `<a href="https://revistatierrasanta.com/hemeroteca/" target="_blank" rel="noopener" title="Tierra Santa nº ${m.n}">${portada(m.s, m.k, 'role="img" aria-label="Portada nº ' + m.n + '"')}nº ${m.n}</a>`).join('')}</div>`;
   const enlaces = [L?.url && `<a href="${esc(L.url)}" target="_blank" rel="noopener">Custodia de Tierra Santa ↗</a>`, s.source && s.source.includes('custodia') && !L?.url && `<a href="${esc(s.source)}" target="_blank" rel="noopener">Ficha en custodia.org ↗</a>`].filter(Boolean);
   if (enlaces.length) h += `<div class="v-enlaces">${enlaces.join('')}</div>`;
-  h += `<p class="aviso-ia" style="text-align:left">Vídeo de recorrido con movimientos de cámara${s.nuevo ? '' : ' y música'}. Algunas imágenes pueden ser recreaciones creadas con IA.</p>`;
   $('#vTexto').innerHTML = h;
   $('.v-cuerpo').scrollTop = 0;
 }
