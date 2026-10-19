@@ -1,5 +1,5 @@
 // Huellas franciscanas · Tierra Santa en 3D — interfaz y narración por scroll.
-import { crearMaqueta } from './maqueta.js?v=4';
+import { crearMaqueta } from './maqueta.js?v=5';
 
 const D = window.HF;
 const portada = (s, k, extra = '') => { const sp = D.sprites[s], col = k % sp.cols, fila = Math.floor(k / sp.cols);
@@ -82,8 +82,8 @@ const ENCUADRES = {
 const AZ_PARADAS = [0.25, -0.35, 0.55, 0.3, -0.25];
 D.journey.forEach((p, i) => {
   ENCUADRES['parada-' + i] = () => ({
-    u: p.u, v: p.v, distancia: estrecho() ? 80 : (p.key === 'jerusalen' ? 40 : 50), polar: 0.85, azimut: AZ_PARADAS[i] || 0, giro: 0.015,
-    ox: estrecho() ? 0 : (i % 2 ? -17 : 17), oy: estrecho() ? -12 : 0
+    u: p.u, v: p.v, distancia: estrecho() ? 120 : (p.key === 'jerusalen' ? 40 : 50), polar: estrecho() ? 0.55 : 0.85, azimut: estrecho() ? 0 : (AZ_PARADAS[i] || 0), giro: estrecho() ? 0 : 0.015,
+    ox: estrecho() ? 0 : (i % 2 ? -17 : 17), oy: estrecho() ? -22 : 0
   });
 });
 
@@ -191,7 +191,8 @@ function alDesplazar() {
   animarHistoria();
 }
 addEventListener('scroll', alDesplazar, { passive: true });
-addEventListener('resize', () => { encuadre(encuadreActual); construirCarrusel(); construirTorre(); });
+let anchoPrevio = innerWidth;
+addEventListener('resize', () => { if (Math.abs(innerWidth - anchoPrevio) < 2) return; anchoPrevio = innerWidth; encuadre(encuadreActual); construirCarrusel(); construirTorre(); });
 (function lazo() {
   progresoRutaActual += (progresoRutaObjetivo - progresoRutaActual) * 0.06;
   if (maqueta) maqueta.progresoRuta(progresoRutaActual);
@@ -299,7 +300,10 @@ function animarHistoria() {
     el.style.visibility = op <= 0 ? 'hidden' : 'visible';
   });
   const act = Math.round(pos);
-  $$('#regla button').forEach((b, i) => b.classList.toggle('activo', i === act));
+  $$('#regla button').forEach((b, i) => {
+    const era = b.classList.contains('activo'); b.classList.toggle('activo', i === act);
+    if (i === act && !era) { const r = $('#regla'); r.scrollTo({ left: b.offsetLeft - (r.clientWidth - b.offsetWidth) / 2, behavior: reducido ? 'auto' : 'smooth' }); }
+  });
 }
 
 // ================= Presencia: mosaico con inclinación =================
@@ -321,6 +325,16 @@ $('#decadas').onclick = e => { const b = e.target.closest('button'); if (!b) ret
 function portadasDecada() { return D.covers.filter(c => Math.floor(c.y / 10) * 10 === decada); }
 function construirTorre() {
   const lista = portadasDecada();
+  $('#torreMarco').classList.toggle('tira', estrecho());
+  if (estrecho()) {
+    giroT = giroTObj = giroTMax = 0;
+    $('#torre').style.transform = '';
+    $('#torre').innerHTML = lista.map((c, i) => `<a class="portada-r" href="https://revistatierrasanta.com/hemeroteca/" target="_blank" rel="noopener" data-n="nº ${c.n}" data-i="${i}" draggable="false" aria-label="Tierra Santa nº ${c.n}${c.d ? ', ' + esc(c.d) : ''}. Abre la hemeroteca oficial">
+      ${portada(c.s, c.k)}</a>`).join('');
+    $('#torreMarco').scrollLeft = 0;
+    $('#torreInfo').innerHTML = `${lista.length} números en los ${decada}s · desliza para ver más`;
+    return;
+  }
   const radioT = estrecho() ? 250 : 380;
   paso = estrecho() ? 150 : 190; porVuelta = estrecho() ? 10 : 12;
   giroT = giroTObj = 0; giroTMax = Math.max(0, (lista.length - 1) * 360 / porVuelta);
@@ -334,6 +348,7 @@ function construirTorre() {
 }
 let frenteT = -1;
 function pintarTorre(forzar) {
+  if (estrecho()) return;
   const lista = portadasDecada();
   $('#torre').style.transform = `translateY(${-giroT / 360 * paso - 20}px) rotateY(${-giroT}deg)`;
   const f = Math.max(0, Math.min(lista.length - 1, Math.round(giroT / (360 / porVuelta))));
@@ -351,8 +366,8 @@ function pintarTorre(forzar) {
   pintarTorre();
   requestAnimationFrame(animTorre);
 })();
-arrastrable($('#torreMarco'), dx => { arrastreT.activo = true; giroTObj = Math.max(0, Math.min(giroTMax, giroTObj - dx * 0.35)); }, () => { arrastreT.activo = false; });
-$('#torreMarco').addEventListener('click', e => { if (arrastre.movido) e.preventDefault(); }, true);
+arrastrable($('#torreMarco'), dx => { if (estrecho()) return; arrastreT.activo = true; giroTObj = Math.max(0, Math.min(giroTMax, giroTObj - dx * 0.35)); }, () => { arrastreT.activo = false; });
+$('#torreMarco').addEventListener('click', e => { if (arrastre.movido && !estrecho()) e.preventDefault(); }, true);
 $('#torreMarco').addEventListener('keydown', e => {
   const k = 360 / porVuelta;
   if (e.key === 'ArrowRight') { giroTObj = Math.min(giroTMax, giroTObj + k); e.preventDefault(); }

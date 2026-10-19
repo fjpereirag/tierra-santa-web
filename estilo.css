@@ -382,5 +382,41 @@ body.en-recorrido:not(.explorando) #pasos{opacity:1;transform:translate(-50%,0);
   .tarjeta.abierta .chip{flex:1 1 100%}
 }
 
+/* ---------- fluidez en móvil ---------- */
+@media (max-width:700px){
+  /* tarjetas del recorrido: una cada vez, sin apilarse */
+  .parada,.parada.derecha{min-height:100vh;min-height:100svh;padding:0 12px calc(84px + env(safe-area-inset-bottom,0px))}
+  .parada .tarjeta{position:relative;bottom:auto;width:100%}
+  .tarjeta{transform:translateY(24px);transition:opacity .5s ease,transform .5s ease}
+  /* barra de paradas abajo, sin tapar el mapa */
+  #pasos{top:auto;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px)}
+  /* historia más corta y legible */
+  .historia{height:340vh}
+  .historia-pegajosa{padding-top:118px}
+  .historia .titular h2{font-size:30px}
+  .historia .titular .btn{margin-top:10px}
+  .etapa3d{top:56%}
+  .etapa3d .rotulo{left:14px;right:14px;bottom:12px}
+  .etapa3d .rotulo b{font-size:21px}
+  .etapa3d .rotulo small{font-size:10.5px}
+  .regla{left:12px;right:12px;transform:none;max-width:none;bottom:calc(40px + env(safe-area-inset-bottom,0px))}
+  .regla button{font-size:12px;padding:6px 10px}
+  /* revista: tira deslizable */
+  .torre-marco.tira{height:auto;perspective:none;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:12px 16px 18px;cursor:auto;touch-action:pan-x pan-y;scrollbar-width:none}
+  .torre-marco.tira::-webkit-scrollbar{display:none}
+  .torre-marco.tira .torre{position:static;display:flex;gap:12px;transform:none!important;width:max-content}
+  .torre-marco.tira .portada-r{position:relative;left:auto;top:auto;transform:none!important;width:42vw;max-width:180px;height:auto;aspect-ratio:3/4.15;scroll-snap-align:center;flex:none}
+  .revista{padding:110px 0 80px}
+  .decadas{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;scrollbar-width:none;padding:0 16px}
+  .decadas::-webkit-scrollbar{display:none}
+  .decadas button{flex:none}
+  .santuarios{padding-top:120px}
+}
+@media (max-width:700px){
+  .revista .acciones{padding:0 16px}
+  .historia .aviso-ia{display:none}
+  .regla{bottom:calc(18px + env(safe-area-inset-bottom,0px))}
+}
+
 .spr{display:block;width:100%;height:100%;background-repeat:no-repeat}
 .v-revistas .spr{width:62px;height:86px;border-radius:4px;margin-bottom:4px}
