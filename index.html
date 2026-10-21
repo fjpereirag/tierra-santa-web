@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="estilo.css?v=11">
+<link rel="stylesheet" href="estilo.css?v=12">
 <script type="importmap">{"imports":{"three":"./three.module.min.js"}}</script>
 </head>
 <body>
@@ -49,6 +49,7 @@
     <a href="#franciscanos">Presencia</a>
     <a href="#revista">Revista</a>
     <a href="#cien-anos">Cien años</a>
+    <a href="#objetos">Objetos</a>
   </nav>
   <button class="btn-explorar" data-explorar type="button">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="m3 13 9 5 9-5"/></svg>
@@ -171,6 +172,16 @@
     <p class="cien-nota">Fotos antiguas: revista Tierra Santa (Custodia Franciscana). Fotos actuales: Wikimedia Commons; autor y licencia en la ficha de cada santuario.</p>
   </section>
 
+  <!-- 5c · Objetos que cuentan -->
+  <section id="objetos" class="objetos" data-camara="alto">
+    <div class="titular">
+      <p class="antetitulo">Objetos que cuentan</p>
+      <h2>Mirar de cerca lo que el peregrino toca</h2>
+      <p>Cuatro detalles de los Santos Lugares en fotografía real. Acércate, recorre la imagen y descubre lo que cuenta cada parte.</p>
+    </div>
+    <div class="ob-rejilla" id="obRejilla"></div>
+  </section>
+
   <!-- 6 · Explorar -->
   <section id="explorar-cta" class="escena cierre" data-camara="final">
     <div class="cierre-in">
@@ -226,6 +237,34 @@
   </div>
 </dialog>
 
+<!-- Visor de objetos -->
+<dialog class="ventana objeto" id="objeto" aria-labelledby="obTitulo">
+  <div class="ventana-in">
+    <button class="cerrar" type="button" data-cerrar aria-label="Cerrar">×</button>
+    <div class="ob-visor" id="obVisor">
+      <div class="ob-lienzo" id="obLienzo"></div>
+      <div class="ob-zoom" role="group" aria-label="Zoom">
+        <button type="button" class="redondo" data-zoom="1" aria-label="Acercar">+</button>
+        <button type="button" class="redondo" data-zoom="-1" aria-label="Alejar">−</button>
+        <button type="button" class="redondo" data-zoom="0" aria-label="Ver la foto entera"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+      </div>
+      <p class="ob-ayuda" aria-hidden="true">Arrastra · rueda o pellizco para acercar · toca un número</p>
+    </div>
+    <div class="v-cuerpo">
+      <p class="antetitulo" id="obLugar"></p>
+      <h3 id="obTitulo"></h3>
+      <p id="obIntro"></p>
+      <ol class="ob-puntos" id="obPuntos"></ol>
+      <div class="ob-detalle" id="obDetalle" aria-live="polite"></div>
+      <p class="ob-cred" id="obCred"></p>
+      <nav class="v-nav">
+        <button type="button" class="btn vidrio" data-ob="-1">← Anterior</button>
+        <button type="button" class="btn vidrio" data-ob="1">Siguiente →</button>
+      </nav>
+    </div>
+  </div>
+</dialog>
+
 <!-- Película de entrada -->
 <dialog class="ventana pelicula" id="pelicula" aria-label="Película de entrada">
   <div class="ventana-in">
@@ -245,12 +284,12 @@ if (location.protocol === 'file:') {
     'Publicada en GitHub Pages funciona directamente.</p>';
 }
 </script>
-<script src="contenido.js?v=7"></script>
+<script src="contenido.js?v=8"></script>
 <script type="module">
 // Acceso con contraseña sencilla (cortina de privacidad, no seguridad real).
 const CLAVE = 'yhvold';
 const resumen = t => { let h = 5381; for (const c of t) h = ((h * 33) ^ c.charCodeAt(0)) >>> 0; return h.toString(36); };
-const abrir = () => { document.getElementById('candado').remove(); import('./app.js?v=11'); };
+const abrir = () => { document.getElementById('candado').remove(); import('./app.js?v=12'); };
 let dentro = false; try { dentro = localStorage.getItem('hf-acceso') === CLAVE; } catch {}
 if (dentro) abrir();
 else {

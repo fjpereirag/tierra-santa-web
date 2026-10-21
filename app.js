@@ -289,7 +289,7 @@ function alDesplazar() {
   document.body.classList.toggle('en-recorrido', enRecorrido);
   pasoActual = encuadreActual.startsWith('parada-') ? Number(encuadreActual.slice(7)) : -1;
   $$('#pasos .paso').forEach((b, i) => { b.classList.toggle('activo', i === pasoActual); b.classList.toggle('hecho', i < pasoActual); });
-  const ids = ['recorrido', 'santuarios', 'historia', 'franciscanos', 'revista', 'cien-anos'];
+  const ids = ['recorrido', 'santuarios', 'historia', 'franciscanos', 'revista', 'cien-anos', 'objetos'];
   let activo = null;
   ids.forEach(id => { const r = $('#' + id).getBoundingClientRect(); if (r.top < centro) activo = id; });
   if ($$('.parada').some(p => { const r = p.getBoundingClientRect(); return r.top < centro && r.bottom > centro; })) activo = 'recorrido';
@@ -546,6 +546,94 @@ function bloqueSiglo(s) {
   }).join('');
   montarSiglo(rej);
 })();
+// ================= Objetos que cuentan: foto con zoom y puntos =================
+const OBJ = D.objetos || [];
+let obActual = 0, obPunto = -1;
+const ob = { s: 1, x: 0, y: 0, base: 1, w: 0, h: 0 };
+(function montarObjetos() {
+  const rej = $('#obRejilla');
+  if (!rej || !OBJ.length) return;
+  rej.innerHTML = OBJ.map((o, i) => `<button type="button" class="ob-tarjeta" data-objeto="${i}">
+      <img src="assets_objeto_${o.id}-mini.webp" alt="" loading="lazy" decoding="async" width="800" height="${Math.round(800 * o.h / o.w)}">
+      <span class="ob-num" aria-hidden="true">${o.puntos.length} detalles</span>
+      <span class="ob-txt"><small>${esc(o.lugar)}</small><b>${esc(o.titulo)}</b></span>
+    </button>`).join('');
+  rej.addEventListener('click', e => { const b = e.target.closest('[data-objeto]'); if (b) abrirObjeto(Number(b.dataset.objeto)); });
+  $$('[data-ob]').forEach(b => b.onclick = () => { obActual = (obActual + Number(b.dataset.ob) + OBJ.length) % OBJ.length; pintarObjeto(); });
+  $$('[data-zoom]').forEach(b => b.onclick = () => { const z = Number(b.dataset.zoom); if (!z) return encajar(true); zoomEn(ob.s * (z > 0 ? 1.6 : 1 / 1.6), visor().clientWidth / 2, visor().clientHeight / 2, true); });
+  const v = visor();
+  // arrastrar y pellizcar
+  const ptrs = new Map(); let dist0 = 0, s0 = 1;
+  v.addEventListener('pointerdown', e => {
+    if (e.target.closest('button')) return;
+    v.setPointerCapture(e.pointerId); ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (ptrs.size === 2) { const [a, b] = [...ptrs.values()]; dist0 = Math.hypot(a.x - b.x, a.y - b.y); s0 = ob.s; }
+    v.classList.add('arrastrando');
+  });
+  v.addEventListener('pointermove', e => {
+    const p = ptrs.get(e.pointerId); if (!p) return;
+    if (ptrs.size === 1) { ob.x += e.clientX - p.x; ob.y += e.clientY - p.y; p.x = e.clientX; p.y = e.clientY; aplicar(false); return; }
+    p.x = e.clientX; p.y = e.clientY;
+    const [a, b] = [...ptrs.values()], r = v.getBoundingClientRect();
+    zoomEn(s0 * Math.hypot(a.x - b.x, a.y - b.y) / dist0, (a.x + b.x) / 2 - r.left, (a.y + b.y) / 2 - r.top, false);
+  });
+  const fin = e => { ptrs.delete(e.pointerId); if (!ptrs.size) v.classList.remove('arrastrando'); };
+  v.addEventListener('pointerup', fin); v.addEventListener('pointercancel', fin);
+  v.addEventListener('wheel', e => { e.preventDefault(); const r = v.getBoundingClientRect(); zoomEn(ob.s * Math.exp(-e.deltaY * 0.0015), e.clientX - r.left, e.clientY - r.top, false); }, { passive: false });
+  v.addEventListener('dblclick', e => { if (e.target.closest('button')) return; const r = v.getBoundingClientRect(); zoomEn(ob.s * 2, e.clientX - r.left, e.clientY - r.top, true); });
+  addEventListener('resize', () => { if ($('#objeto').open) encajar(false); });
+})();
+function visor() { return $('#obVisor'); }
+function abrirObjeto(i) {
+  obActual = i; const d = $('#objeto');
+  if (!d.open) d.showModal();
+  pintarObjeto();
+}
+function pintarObjeto() {
+  const o = OBJ[obActual]; obPunto = -1;
+  $('#obLugar').textContent = o.lugar; $('#obTitulo').textContent = o.titulo; $('#obIntro').textContent = o.intro;
+  $('#obLienzo').innerHTML = `<img src="assets_objeto_${o.id}.webp" alt="${esc(o.titulo)}" width="${o.w}" height="${o.h}" draggable="false">` +
+    o.puntos.map((p, k) => `<button type="button" class="ob-pin" style="left:${p.x}%;top:${p.y}%" data-punto="${k}" aria-label="${k + 1}. ${esc(p.t)}">${k + 1}</button>`).join('');
+  $('#obPuntos').innerHTML = o.puntos.map((p, k) => `<li><button type="button" data-punto="${k}"><span>${k + 1}</span>${esc(p.t)}</button></li>`).join('');
+  $('#obDetalle').innerHTML = '';
+  $('#obCred').innerHTML = `Foto: <a href="${esc(o.credUrl)}" target="_blank" rel="noopener">${esc(o.cred)}</a>` + (o.sitio ? ` · <button type="button" class="enlace-modo" data-ir-sitio="${esc(o.sitio)}">Abrir el santuario</button>` : '');
+  $$('#objeto [data-punto]').forEach(b => b.onclick = () => elegirPunto(Number(b.dataset.punto)));
+  const ir = $('#obCred [data-ir-sitio]'); if (ir) ir.onclick = () => { $('#objeto').close(); abrirSitio(ir.dataset.irSitio); };
+  ob.w = o.w; ob.h = o.h;
+  requestAnimationFrame(() => encajar(false));
+  $('#objeto .v-cuerpo').scrollTop = 0;
+}
+function elegirPunto(k) {
+  const o = OBJ[obActual], p = o.puntos[k]; obPunto = k;
+  $$('#objeto [data-punto]').forEach(b => b.classList.toggle('activo', Number(b.dataset.punto) === k));
+  $('#obDetalle').innerHTML = `<b>${k + 1}. ${esc(p.t)}</b><p>${esc(p.d)}</p>`;
+  const v = visor(), s = Math.max(ob.base * 2.2, Math.min(ob.s, ob.base * 4));
+  ob.s = s; ob.x = v.clientWidth / 2 - p.x / 100 * ob.w * s; ob.y = v.clientHeight / 2 - p.y / 100 * ob.h * s;
+  aplicar(true);
+}
+function encajar(animar) {
+  const v = visor(); if (!ob.w || !v.clientWidth) return;
+  ob.base = Math.min(v.clientWidth / ob.w, v.clientHeight / ob.h); ob.s = ob.base;
+  ob.x = (v.clientWidth - ob.w * ob.s) / 2; ob.y = (v.clientHeight - ob.h * ob.s) / 2;
+  aplicar(animar);
+}
+function zoomEn(s, cx, cy, animar) {
+  s = Math.max(ob.base, Math.min(ob.base * 6, s));
+  ob.x = cx - (cx - ob.x) * s / ob.s; ob.y = cy - (cy - ob.y) * s / ob.s; ob.s = s;
+  aplicar(animar);
+}
+function aplicar(animar) {
+  const v = visor(), W = ob.w * ob.s, H = ob.h * ob.s;
+  // que la foto no se escape del visor
+  ob.x = W <= v.clientWidth ? (v.clientWidth - W) / 2 : Math.min(0, Math.max(v.clientWidth - W, ob.x));
+  ob.y = H <= v.clientHeight ? (v.clientHeight - H) / 2 : Math.min(0, Math.max(v.clientHeight - H, ob.y));
+  const l = $('#obLienzo');
+  l.classList.toggle('animado', !!animar);
+  l.style.width = ob.w + 'px'; l.style.height = ob.h + 'px';
+  l.style.transform = `translate3d(${ob.x}px,${ob.y}px,0) scale(${ob.s})`;
+  l.style.setProperty('--inv', 1 / ob.s);
+  v.classList.toggle('ampliado', ob.s > ob.base * 1.05);
+}
 function montarSiglo(raiz) { $$('.siglo-cmp', raiz).forEach(montarCmp); }
 function montarCmp(cmp) {
   if (cmp.dataset.listo) return; cmp.dataset.listo = 1;

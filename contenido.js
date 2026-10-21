@@ -8,3 +8,44 @@ window.HF.siglo={
 "via-dolorosa":{"num":"Núm. 18","fecha":"15 de junio de 1922","pie":"3.ª Estación","cita":"A principios del siglo XVII, los Religiosos hacían el Vía Crucis todos los viernes del año.","hoy":"Los franciscanos siguen guiando el Vía Crucis cada viernes por estas mismas calles.","cred":"Berthold Werner · CC BY-SA 3.0","credUrl":"https://commons.wikimedia.org/wiki/File:Jerusalem_Via_dolorosa_BW_2010-09-20_09-56-43.JPG"},
 "tabor-transfiguracion":{"num":"Núms. 42-43","fecha":"junio de 1924","pie":"Fachada de la Basílica","cita":"¡Tabor! nombre de júbilo y de gloria… Se eleva sobre la llanura de Esdrelón como un altar que el Creador se erigiera.","hoy":"La basílica de Barluzzi, recién consagrada entonces, cumple ya un siglo.","cred":"Zairon · CC BY-SA 4.0","credUrl":"https://commons.wikimedia.org/wiki/File:Mount_Tabor_Verkl%C3%A4rungskirche_Fassade_7.JPG"}
 };
+
+// «Objetos que cuentan»: fotos reales que se exploran con zoom y puntos que cuentan detalles
+window.HF.objetos=[
+{"id":"piedra","titulo":"La Piedra de la Unción","lugar":"Santo Sepulcro · Jerusalén","sitio":"sepulcro","w":2400,"h":1600,
+ "intro":"Lo primero que encuentra el peregrino al entrar en la basílica: una losa a ras de suelo donde todos se arrodillan.",
+ "cred":"Beko · CC BY-SA 4.0","credUrl":"https://commons.wikimedia.org/wiki/File:Stone_of_the_Anointing,_in_the_Church_of_the_Holy_Sepulchre,_Jerusalem_01.jpg",
+ "puntos":[
+  {"x":46,"y":88,"t":"La losa","d":"Piedra caliza rojiza de unos dos metros. La actual se colocó en 1810, en la restauración que siguió al incendio de 1808. Recuerda cómo José de Arimatea y Nicodemo ungieron el cuerpo de Jesús con mirra y áloe antes de sepultarlo (Jn 19,38-40). Esta tradición se remonta a la época de los cruzados."},
+  {"x":38,"y":70,"t":"Las lámparas","d":"Cuelgan sobre la piedra y pertenecen a varias comunidades: griegos ortodoxos, católicos y armenios. En la basílica todo se reparte así, según el «Statu quo» que fija qué es de cada Iglesia."},
+  {"x":68,"y":60,"t":"El gesto de los peregrinos","d":"Se arrodillan, la besan y frotan en ella pañuelos, rosarios o cruces para llevarlos a casa, como un recuerdo bendecido."},
+  {"x":80,"y":27,"t":"El mosaico","d":"Es moderno y se lee de izquierda a derecha: el descendimiento de la cruz, la unción del cuerpo y la sepultura."}
+ ]},
+{"id":"cruces","titulo":"Las cruces de los peregrinos","lugar":"Bajada a Santa Elena · Santo Sepulcro","sitio":"sepulcro","w":2400,"h":1597,
+ "intro":"Miles de pequeñas cruces cubren los muros de la escalera que baja a la capilla de Santa Elena.",
+ "cred":"Guillaume Paumier · CC BY 3.0","credUrl":"https://commons.wikimedia.org/wiki/File:Crusader_graffiti._Church_of_the_Holy_Sepulchre,_Jerusalem_054_-_Aug_2011.jpg",
+ "puntos":[
+  {"x":15,"y":72,"t":"Una cruz cualquiera","d":"Cuatro brazos que se ensanchan en los extremos, grabados a cincel en la piedra. Se repiten hasta cubrir el muro, una junto a otra, a veces encima de otras más antiguas."},
+  {"x":72,"y":28,"t":"La cruz del círculo","d":"Distinta de todas: una cruz dentro de un círculo, rodeada de pequeñas marcas. No se sabe quién la hizo ni qué quiso decir."},
+  {"x":45,"y":82,"t":"¿Quién las grabó?","d":"Durante siglos se pensó que eran «grafitos» de los cruzados. Un estudio de 2018 propone que las tallaron unos pocos canteros, quizá por encargo de los peregrinos, que se llevaban el polvo de la piedra como reliquia. Algunas son de los siglos XIV y XV."},
+  {"x":30,"y":18,"t":"Una oración en piedra","d":"Cada cruz es la huella de alguien que llegó hasta aquí después de un viaje de meses. Hoy los peregrinos pasan la mano por ellas al bajar."}
+ ]},
+{"id":"estrella","titulo":"La estrella de Belén","lugar":"Gruta de la Natividad · Belén","sitio":"natividad","w":2400,"h":1800,
+ "intro":"Bajo el altar de la Gruta, una estrella de plata marca el lugar donde, según la tradición, nació Jesús.",
+ "cred":"Mark87 · dominio público","credUrl":"https://commons.wikimedia.org/wiki/File:Nativity_Grotto_Star.jpg",
+ "puntos":[
+  {"x":50,"y":62,"t":"El hueco central","d":"Por la abertura del centro se toca la roca de la gruta. Los peregrinos se agachan, casi tumbados, para besarla."},
+  {"x":33,"y":64,"t":"Catorce puntas","d":"Se suele explicar por la genealogía de Jesús en el Evangelio de Mateo: tres series de catorce generaciones, de Abrahán a David, de David al destierro y del destierro a Cristo (Mt 1,17)."},
+  {"x":62,"y":54,"t":"La inscripción","d":"Alrededor del hueco se lee en latín «Hic de Virgine Maria Iesus Christus natus est»: aquí nació Jesucristo de la Virgen María. Y la fecha: 1717."},
+  {"x":70,"y":46,"t":"Robada en 1847","d":"La estrella desapareció en 1847 y el sultán otomano mandó reponerla hacia 1852-1853. La disputa por los Santos Lugares fue uno de los motivos de la guerra de Crimea."},
+  {"x":20,"y":24,"t":"Quince lámparas","d":"Alrededor de la estrella arden quince lámparas de plata: seis de los griegos ortodoxos, cinco de los armenios y cuatro de los católicos. A pocos pasos, los franciscanos custodian la gruta del Pesebre."}
+ ]},
+{"id":"cruz","titulo":"La cruz de Jerusalén","lugar":"Insignia de la Custodia de Tierra Santa","sitio":"san-salvador","w":2400,"h":1800,
+ "intro":"Una insignia de solapa reúne los dos escudos que firman la presencia franciscana en Tierra Santa.",
+ "cred":"Abraham · CC BY-SA 4.0","credUrl":"https://commons.wikimedia.org/wiki/File:Pin_with_Jerusalem_cross_and_the_Franciscan_coat_of_arms_01.jpg",
+ "puntos":[
+  {"x":50,"y":22,"t":"Los brazos cruzados","d":"Es el escudo franciscano: el brazo de Cristo y el de san Francisco se cruzan ante la cruz, los dos con las llagas. Dice en una imagen lo que fue Francisco: un hombre configurado con Cristo crucificado."},
+  {"x":50,"y":56,"t":"La cruz grande","d":"La cruz de Jerusalén fue el escudo del reino cruzado de Jerusalén desde 1099. Hoy la llevan la Custodia, el Patriarcado latino y la Orden del Santo Sepulcro."},
+  {"x":43,"y":52,"t":"Las cuatro cruces pequeñas","d":"Se leen de varias maneras: las cinco llagas de Cristo con la cruz grande, Cristo y los cuatro evangelistas, o el Evangelio que sale de Jerusalén hacia los cuatro puntos del mundo."},
+  {"x":82,"y":80,"t":"Dos escudos, una misión","d":"Unidos, forman el emblema de la Custodia: los franciscanos custodian los Santos Lugares desde el siglo XIV, cuando el papa Clemente VI les confió esta tarea en 1342."}
+ ]}
+];
