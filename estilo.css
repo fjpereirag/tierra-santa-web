@@ -424,3 +424,22 @@ body.en-recorrido:not(.explorando) #pasos{opacity:1;transform:translate(-50%,0);
 
 .spr{display:block;width:100%;height:100%;background-repeat:no-repeat}
 .v-revistas .spr{width:62px;height:86px;border-radius:4px;margin-bottom:4px}
+
+/* ---------- modo ligero (sin WebGL) ---------- */
+#plano{position:fixed;inset:0;z-index:0;overflow:hidden;background:radial-gradient(120% 90% at 50% 0%,#3a2a1b 0%,#1d1610 45%,#0d0907 100%);pointer-events:none}
+#plano .plano-in{position:absolute;left:0;top:0;width:1842px;height:2809px;transform-origin:0 0;will-change:transform;transition:transform 1.6s cubic-bezier(.2,.8,.2,1)}
+#plano img{display:block;width:100%;height:100%;max-width:none;filter:saturate(.9) brightness(.85)}
+.plano-pt{position:absolute;width:0;height:0;transform:scale(var(--inv,1));transform-origin:0 0;transition:transform 1.6s cubic-bezier(.2,.8,.2,1)}
+.plano-pt i{position:absolute;left:-15px;top:-15px;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font:700 14px var(--sans);font-style:normal;background:var(--oro);color:var(--noche);border:3px solid var(--noche);box-shadow:0 0 0 0 rgba(240,211,148,.6)}
+.plano-pt b{position:absolute;left:22px;top:-11px;white-space:nowrap;font:600 13px var(--sans);color:var(--marfil);background:rgba(20,15,11,.8);border:1px solid rgba(240,211,148,.35);padding:3px 9px;border-radius:999px}
+.plano-pt.activo i{box-shadow:0 0 0 8px rgba(240,211,148,.25)}
+body.ligero .cifras{z-index:1}
+.aviso-modo{position:fixed;right:16px;bottom:16px;z-index:60;max-width:440px;display:flex;align-items:center;gap:12px;padding:14px 14px 14px 18px;border-radius:16px;background:rgba(20,15,11,.94);border:1px solid var(--vidrio-borde);box-shadow:var(--sombra);font-size:14px;color:var(--marfil-2);opacity:0;transform:translateY(12px);transition:opacity .4s,transform .4s}
+.aviso-modo.visible{opacity:1;transform:none}
+.aviso-modo .btn{padding:8px 14px;font-size:13px;flex:none}
+.aviso-modo .cerrar-aviso{flex:none;width:32px;height:32px;border-radius:50%;border:0;background:rgba(244,234,216,.08);color:var(--marfil);font-size:18px}
+.enlace-modo{background:none;border:0;padding:0;color:var(--oro-2);text-decoration:underline;font:inherit;cursor:pointer}
+@media (max-width:700px){.aviso-modo{left:16px;right:16px;max-width:none;bottom:12px;flex-wrap:wrap}}
+@media (prefers-reduced-motion:reduce){#plano .plano-in,.plano-pt{transition:none}}
+
+[data-explorar][hidden]{display:none!important}

@@ -41,7 +41,9 @@ Abre `http://localhost:8000`. No funciona con doble clic sobre `index.html` (los
 
 - Las fuentes tipográficas se cargan de Google Fonts; sin conexión se usan fuentes del sistema.
 - El relieve es una **aproximación ilustrativa**: las altitudes se han modelado a partir del mapa físico, no de un modelo digital de elevación.
-- Navegadores sin WebGL ven una imagen fija y el resto del contenido funciona igual.
+- **Modo ligero**: en equipos sin tarjeta gráfica (o si la maqueta va a menos de ~20 fps) la maqueta 3D se sustituye
+  por el mapa en relieve ilustrado, que se mueve con CSS. Se puede forzar con `?modo=ligero` o `?modo=3d`,
+  y desde el pie de página («Usar el modo ligero» / «Ver la maqueta en 3D»); la elección se recuerda en el navegador.
 - Se mantienen los créditos fotográficos (`assets/monumentos/creditos.html`) y los avisos de imágenes creadas con IA.
 
 ## Versión para Vercel (gratis)

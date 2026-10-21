@@ -1,5 +1,5 @@
 // Huellas franciscanas · Tierra Santa en 3D — interfaz y narración por scroll.
-import { crearMaqueta } from './maqueta.js?v=6';
+import { crearMaqueta } from './maqueta.js?v=9';
 
 const D = window.HF;
 const portada = (s, k, extra = '') => { const sp = D.sprites[s], col = k % sp.cols, fila = Math.floor(k / sp.cols);
@@ -92,19 +92,124 @@ function encuadre(nombre, instantaneo = false) {
   encuadreActual = nombre;
   $$('.pin.ruta').forEach(b => b.classList.toggle('activo', nombre === 'parada-' + b.dataset.parada));
   if (maqueta && !document.body.classList.contains('explorando')) maqueta.irA({ ...ENCUADRES[nombre](), instantaneo });
+  else if (plano) colocarPlano(objetivoPlano(nombre), instantaneo);
   const ocultar = ['inicio', 'cenital', 'historia', 'alto', 'jerusalen-cerca', 'final'].includes(nombre);
   document.body.classList.toggle('oculta-etiquetas', ocultar);
 }
 
+
+// ================= Modo ligero =================
+// En equipos sin tarjeta gráfica la maqueta 3D se sustituye por el mapa en relieve
+// ilustrado, que se desplaza con CSS (sin WebGL). Se puede forzar con ?modo=ligero o ?modo=3d.
+const MODO_KEY = 'hf-modo';
+const modoPedido = (() => { const q = new URLSearchParams(location.search).get('modo'); if (q) return q; try { return localStorage.getItem(MODO_KEY); } catch (e) { return null; } })();
+function graficosDebiles() {
+  try {
+    const c = document.createElement('canvas');
+    const gl = c.getContext('webgl2', { failIfMajorPerformanceCaveat: true }) || c.getContext('webgl', { failIfMajorPerformanceCaveat: true });
+    if (!gl) return true;
+    const ext = gl.getExtension('WEBGL_debug_renderer_info');
+    const r = ext ? String(gl.getParameter(ext.UNMASKED_RENDERER_WEBGL)) : '';
+    gl.getExtension('WEBGL_lose_context')?.loseContext();
+    return /swiftshader|llvmpipe|softpipe|software|basic render/i.test(r);
+  } catch (e) { return true; }
+}
+let ligero = modoPedido === 'ligero' || (modoPedido !== '3d' && graficosDebiles());
+const guardarModo = m => { try { localStorage.setItem(MODO_KEY, m); } catch (e) {} };
+const MAPA = { src: movil ? 'assets3d_relieve-mapa-movil.jpg' : 'assets3d_relieve-mapa.jpg', w: 1842, h: 2809 };
+let plano = null, planoObjetivo = { u: 0.5, v: 0.5, z: 1, px: 0.5, py: 0.5 };
+function montarPlano() {
+  if (plano) return;
+  plano = document.createElement('div');
+  plano.id = 'plano'; plano.setAttribute('aria-hidden', 'true');
+  plano.innerHTML = `<div class="plano-in"><img src="${MAPA.src}" alt="" width="${MAPA.w}" height="${MAPA.h}" decoding="async">` +
+    D.journey.map((p, i) => `<span class="plano-pt" style="left:${p.u * 100}%;top:${p.v * 100}%"><i>${i + 1}</i><b>${esc(p.name)}</b></span>`).join('') + '</div>';
+  $('#escena').after(plano);
+  $('#escena').style.display = 'none';
+}
+function objetivoPlano(nombre) {
+  const e = estrecho(), J = D.groups[0];
+  if (nombre.startsWith('parada-')) {
+    const i = Number(nombre.slice(7)), p = D.journey[i];
+    return { u: p.u, v: p.v, z: e ? 1.9 : 2.6, px: e ? 0.5 : (i % 2 ? 0.33 : 0.67), py: e ? 0.32 : 0.5, activo: i };
+  }
+  if (nombre === 'jerusalen-cerca') return { u: J.u, v: J.v, z: e ? 2.2 : 3, px: e ? 0.5 : 0.34, py: e ? 0.32 : 0.5 };
+  if (nombre === 'historia') return { u: J.u, v: J.v, z: 2.2, px: 0.5, py: 0.5 };
+  if (nombre === 'inicio' || nombre === 'vista') return { u: 0.5, v: 0.5, z: 1, px: e ? 0.5 : 0.68, py: 0.5 };
+  return { u: 0.5, v: 0.5, z: 1, px: 0.5, py: 0.5 };
+}
+function colocarPlano(o = planoObjetivo, instantaneo = false) {
+  if (!plano) return;
+  planoObjetivo = o;
+  const W = innerWidth, H = innerHeight;
+  const base = Math.max(H / MAPA.h, (estrecho() ? W : W * 0.42) / MAPA.w) * 1.04;
+  const s = base * o.z;
+  const x = o.px * W - o.u * MAPA.w * s, y = o.py * H - o.v * MAPA.h * s;
+  const inn = plano.firstElementChild;
+  inn.style.transition = instantaneo || reducido ? 'none' : '';
+  inn.style.transform = `translate3d(${x}px,${y}px,0) scale(${s})`;
+  inn.style.setProperty('--inv', (1 / s).toFixed(4));
+  $$('.plano-pt', inn).forEach((el, i) => el.classList.toggle('activo', i === o.activo));
+}
+addEventListener('resize', () => { if (plano) colocarPlano(objetivoPlano(encuadreActual), true); });
+function avisoModo(texto, boton, accion) {
+  const a = document.createElement('div');
+  a.className = 'aviso-modo'; a.setAttribute('role', 'status');
+  a.innerHTML = `<span>${texto}</span><button type="button" class="btn vidrio">${boton}</button><button type="button" class="cerrar-aviso" aria-label="Cerrar aviso">×</button>`;
+  a.querySelector('.btn').onclick = accion;
+  a.querySelector('.cerrar-aviso').onclick = () => a.remove();
+  document.body.append(a);
+  setTimeout(() => a.classList.add('visible'), 50);
+  setTimeout(() => { a.classList.remove('visible'); setTimeout(() => a.remove(), 600); }, 12000);
+}
+function activarLigero(motivo) {
+  ligero = true;
+  if (maqueta) { maqueta.detener(); maqueta = null; }
+  document.body.classList.add('ligero', 'sin-3d');
+  etiquetas.innerHTML = ''; pines.length = 0;
+  $$('[data-explorar]').forEach(b => b.hidden = true);
+  montarPlano();
+  colocarPlano(objetivoPlano(encuadreActual), true);
+  $('#carga').classList.add('listo');
+  actualizarBotonModo();
+  if (motivo) avisoModo(motivo, 'Ver en 3D', () => { guardarModo('3d'); location.reload(); });
+}
+function actualizarBotonModo() {
+  const b = $('[data-modo]'); if (!b) return;
+  b.textContent = ligero ? 'Ver la maqueta en 3D' : 'Usar el modo ligero (equipos sin tarjeta gráfica)';
+}
+document.addEventListener('click', e => {
+  if (!e.target.closest('[data-modo]')) return;
+  guardarModo(ligero ? '3d' : 'ligero'); location.reload();
+});
+// Vigilancia de fluidez: si la maqueta va a menos de ~20 fotogramas por segundo, pasa a modo ligero.
+function vigilarFluidez() {
+  if (modoPedido === '3d') return;
+  let lentos = 0;
+  const medir = () => {
+    if (!maqueta) return;
+    if (document.hidden) { setTimeout(medir, 2000); return; }
+    let n = 0; const t0 = performance.now();
+    const cuenta = () => { n++; if (performance.now() - t0 < 2500) requestAnimationFrame(cuenta); else fin(); };
+    const fin = () => {
+      const fps = n * 1000 / (performance.now() - t0);
+      if (fps < 20) lentos++; else lentos = 0;
+      if (lentos >= 2) activarLigero('Este equipo mueve la maqueta 3D con dificultad. Hemos activado el modo ligero para que la web vaya fluida.');
+      else if (lentos) medir();
+    };
+    requestAnimationFrame(cuenta);
+  };
+  setTimeout(medir, 1500);
+}
+
 async function iniciar3D() {
+  actualizarBotonModo();
+  if (ligero) { activarLigero(modoPedido === 'ligero' ? null : 'Este equipo no tiene aceleración gráfica: se muestra el mapa ilustrado en lugar de la maqueta 3D.'); return; }
   try {
     maqueta = await crearMaqueta($('#escena'), { movil, alProgreso: p => { barra.style.width = Math.round(p * 100) + '%'; } });
   } catch (e) {
     console.warn('No se pudo iniciar la maqueta 3D', e);
-    document.body.classList.add('sin-3d');
-    $('#escena').style.background = 'center/cover no-repeat url(assets_jerusalen-realista.webp)';
-    $('#carga').classList.add('listo');
-    $$('[data-explorar]').forEach(b => b.hidden = true);
+    activarLigero(null);
     return;
   }
   // faros y etiquetas
@@ -137,6 +242,7 @@ async function iniciar3D() {
   maqueta.alFotograma = actualizarPines;
   encuadre(encuadreActual);
   setTimeout(() => $('#carga').classList.add('listo'), 250);
+  vigilarFluidez();
 }
 
 function actualizarPines() {

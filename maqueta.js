@@ -266,7 +266,9 @@ export async function crearMaqueta(canvas, { movil = false, alProgreso = () => {
   // ---------- bucle ----------
   const reloj = new THREE.Clock();
   let alFotograma = () => {};
+  let parado = false;
   function bucle() {
+    if (parado) return;
     const dt = Math.min(reloj.getDelta(), 0.25), t = reloj.elapsedTime;
     uniformes.uTiempo.value = t;
     if (modoLibre) {
@@ -299,6 +301,7 @@ export async function crearMaqueta(canvas, { movil = false, alProgreso = () => {
 
   return {
     puntoUV, faro, crearRuta, progresoRuta, irA, libre, volarLibre, proyectar,
+    detener() { parado = true; try { renderer.dispose(); renderer.forceContextLoss(); } catch (e) {} },
     get camara() { return camara; },
     set alFotograma(fn) { alFotograma = fn; },
     encuadreGeneral() { if (modoLibre) { vuelo = null; const ini = controles.target.clone(), fin = new THREE.Vector3(0, 0, 0); const t0 = performance.now(); const posIni = camara.position.clone(), posFin = new THREE.Vector3(0, 120, 120); vuelo = now => { const k = Math.min(1, (now - t0) / 1400), e = 1 - Math.pow(1 - k, 3); controles.target.lerpVectors(ini, fin, e); camara.position.lerpVectors(posIni, posFin, e); if (k >= 1) vuelo = null; }; } }
