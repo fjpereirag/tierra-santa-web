@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="estilo.css?v=10">
+<link rel="stylesheet" href="estilo.css?v=11">
 <script type="importmap">{"imports":{"three":"./three.module.min.js"}}</script>
 </head>
 <body>
@@ -48,6 +48,7 @@
     <a href="#historia">Historia</a>
     <a href="#franciscanos">Presencia</a>
     <a href="#revista">Revista</a>
+    <a href="#cien-anos">Cien años</a>
   </nav>
   <button class="btn-explorar" data-explorar type="button">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="m3 13 9 5 9-5"/></svg>
@@ -159,6 +160,17 @@
     </div>
   </section>
 
+  <!-- 5b · Cien años de la revista -->
+  <section id="cien-anos" class="cien" data-camara="alto">
+    <div class="titular">
+      <p class="antetitulo">Cien años de la revista</p>
+      <h2>El mismo lugar, un siglo después</h2>
+      <p>Fotografías que publicó la revista Tierra Santa entre 1922 y 1932, frente a cómo es hoy cada santuario. Desliza cada imagen para pasar de entonces a ahora.</p>
+    </div>
+    <div class="cien-rejilla" id="cienRejilla"></div>
+    <p class="cien-nota">Fotos antiguas: revista Tierra Santa (Custodia Franciscana). Fotos actuales: Wikimedia Commons; autor y licencia en la ficha de cada santuario.</p>
+  </section>
+
   <!-- 6 · Explorar -->
   <section id="explorar-cta" class="escena cierre" data-camara="final">
     <div class="cierre-in">
@@ -238,7 +250,7 @@ if (location.protocol === 'file:') {
 // Acceso con contraseña sencilla (cortina de privacidad, no seguridad real).
 const CLAVE = 'yhvold';
 const resumen = t => { let h = 5381; for (const c of t) h = ((h * 33) ^ c.charCodeAt(0)) >>> 0; return h.toString(36); };
-const abrir = () => { document.getElementById('candado').remove(); import('./app.js?v=10'); };
+const abrir = () => { document.getElementById('candado').remove(); import('./app.js?v=11'); };
 let dentro = false; try { dentro = localStorage.getItem('hf-acceso') === CLAVE; } catch {}
 if (dentro) abrir();
 else {

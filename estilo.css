@@ -466,3 +466,18 @@ body.ligero .cifras{z-index:1}
 .siglo-hoy b{color:var(--marfil)}
 .siglo-hoy a{display:block;margin-top:4px;font-size:12px;color:var(--gris)}
 @media (prefers-reduced-motion:reduce){.siglo-linea::after{transition:none}}
+
+/* ---------- sección de portada «Cien años de la revista» ---------- */
+.cien{position:relative;z-index:2;padding:120px clamp(16px,5vw,64px) 110px;background:linear-gradient(180deg,rgba(13,9,7,.55),rgba(13,9,7,.95) 90px,rgba(13,9,7,.95) calc(100% - 90px),rgba(13,9,7,.55))}
+.cien-rejilla{max-width:1180px;margin:48px auto 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px}
+.cien-tarjeta{display:flex;flex-direction:column;background:var(--vidrio);border:1px solid var(--vidrio-borde);border-radius:20px;overflow:hidden;box-shadow:var(--sombra)}
+.cien-tarjeta .siglo-cmp{border-radius:0;box-shadow:none;aspect-ratio:4/3}
+.cien-tarjeta .siglo-cmp>img{height:100%;object-fit:cover}
+.cien-cuerpo{display:flex;flex-direction:column;gap:8px;padding:18px 20px 22px;flex:1}
+.cien-fecha{margin:0;font:600 11px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--oro)}
+.cien-cuerpo h3{margin:0;font-size:clamp(24px,2.2vw,30px);line-height:1.1;text-wrap:balance}
+.cien-cita{margin:0;font:italic 500 17px/1.4 var(--serif);color:var(--marfil-2);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.cien-cuerpo .btn{margin-top:auto;align-self:flex-start;padding:9px 16px;font-size:14px}
+.cien-nota{max-width:760px;margin:30px auto 0;text-align:center;font-size:13px;color:var(--gris)}
+@media (max-width:1000px){.cien-rejilla{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.cien{padding-top:90px}.cien-rejilla{grid-template-columns:1fr;gap:20px}}

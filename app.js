@@ -289,7 +289,7 @@ function alDesplazar() {
   document.body.classList.toggle('en-recorrido', enRecorrido);
   pasoActual = encuadreActual.startsWith('parada-') ? Number(encuadreActual.slice(7)) : -1;
   $$('#pasos .paso').forEach((b, i) => { b.classList.toggle('activo', i === pasoActual); b.classList.toggle('hecho', i < pasoActual); });
-  const ids = ['recorrido', 'santuarios', 'historia', 'franciscanos', 'revista'];
+  const ids = ['recorrido', 'santuarios', 'historia', 'franciscanos', 'revista', 'cien-anos'];
   let activo = null;
   ids.forEach(id => { const r = $('#' + id).getBoundingClientRect(); if (r.top < centro) activo = id; });
   if ($$('.parada').some(p => { const r = p.getBoundingClientRect(); return r.top < centro && r.bottom > centro; })) activo = 'recorrido';
@@ -507,27 +507,48 @@ function pintarSitio() {
 }
 
 // ================= Hace un siglo: revista de entonces frente a hoy =================
-function bloqueSiglo(s) {
-  const c = D.siglo?.[s.id];
-  if (!c) return '';
-  const img = (lado, alt) => `<img src="assets_siglo_${s.id}_${lado}.webp" alt="${esc(alt)}" loading="lazy" decoding="async">`;
-  return `<section class="siglo" aria-label="Hace un siglo en la revista">
-    <h4>Hace un siglo · ${esc(c.num)}, ${esc(c.fecha)}</h4>
-    <div class="siglo-cmp" style="--corte:50%">
-      ${img('hoy', 'Hoy: ' + s.name)}
+function compSiglo(id, nombre, c) {
+  const img = (lado, alt) => `<img src="assets_siglo_${id}_${lado}.webp" alt="${esc(alt)}" loading="lazy" decoding="async">`;
+  return `<div class="siglo-cmp" style="--corte:50%">
+      ${img('hoy', 'Hoy: ' + nombre)}
       <div class="siglo-antes">${img('antes', c.pie + ' · revista Tierra Santa, ' + c.fecha)}</div>
       <span class="siglo-et e1" aria-hidden="true">${esc(c.fecha.replace(/.* /, ''))}</span><span class="siglo-et e2" aria-hidden="true">Hoy</span>
       <span class="siglo-linea" aria-hidden="true"></span>
-      <input type="range" min="0" max="100" value="50" aria-label="Deslizar entre la foto de la revista y la de hoy">
-    </div>
+      <input type="range" min="0" max="100" value="50" aria-label="${esc(nombre)}: deslizar entre la foto de la revista y la de hoy">
+    </div>`;
+}
+function bloqueSiglo(s) {
+  const c = D.siglo?.[s.id];
+  if (!c) return '';
+  return `<section class="siglo" aria-label="Hace un siglo en la revista">
+    <h4>Hace un siglo · ${esc(c.num)}, ${esc(c.fecha)}</h4>
+    ${compSiglo(s.id, s.name, c)}
     <p class="siglo-pie">«${esc(c.pie)}», tal como la publicó la revista. Desliza para ver el lugar hoy.</p>
     <blockquote><p>«${esc(c.cita)}»</p><cite>${c.citaNota ? esc(c.citaNota) + ' · ' : ''}Tierra Santa, ${esc(c.num)} · ${esc(c.fecha)}</cite></blockquote>
     <p class="siglo-hoy"><b>Hoy.</b> ${esc(c.hoy)} <a href="${esc(c.credUrl)}" target="_blank" rel="noopener">Foto: ${esc(c.cred)}</a></p>
   </section>`;
 }
-function montarSiglo(raiz) {
-  const cmp = $('.siglo-cmp', raiz);
-  if (!cmp) return;
+// sección de portada «Cien años de la revista»
+(function montarCien() {
+  const rej = $('#cienRejilla');
+  if (!rej || !D.siglo) return;
+  rej.innerHTML = ORDEN.filter(s => D.siglo[s.id]).map(s => {
+    const c = D.siglo[s.id];
+    return `<article class="cien-tarjeta">
+      ${compSiglo(s.id, s.name, c)}
+      <div class="cien-cuerpo">
+        <p class="cien-fecha">Tierra Santa · ${esc(c.num)} · ${esc(c.fecha)}</p>
+        <h3>${esc(s.name)}</h3>
+        <p class="cien-cita">«${esc(c.cita)}»</p>
+        <button type="button" class="btn vidrio" data-sitio="${esc(s.id)}">Abrir el santuario</button>
+      </div>
+    </article>`;
+  }).join('');
+  montarSiglo(rej);
+})();
+function montarSiglo(raiz) { $$('.siglo-cmp', raiz).forEach(montarCmp); }
+function montarCmp(cmp) {
+  if (cmp.dataset.listo) return; cmp.dataset.listo = 1;
   const r = $('input', cmp);
   const poner = v => cmp.style.setProperty('--corte', v + '%');
   r.addEventListener('input', () => poner(r.value));
