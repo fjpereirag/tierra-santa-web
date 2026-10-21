@@ -289,7 +289,7 @@ function alDesplazar() {
   document.body.classList.toggle('en-recorrido', enRecorrido);
   pasoActual = encuadreActual.startsWith('parada-') ? Number(encuadreActual.slice(7)) : -1;
   $$('#pasos .paso').forEach((b, i) => { b.classList.toggle('activo', i === pasoActual); b.classList.toggle('hecho', i < pasoActual); });
-  const ids = ['recorrido', 'santuarios', 'historia', 'franciscanos', 'revista', 'cien-anos', 'objetos'];
+  const ids = ['recorrido', 'santuarios', 'historia', 'franciscanos', 'revista', 'cien-anos', 'objetos', 'escucha'];
   let activo = null;
   ids.forEach(id => { const r = $('#' + id).getBoundingClientRect(); if (r.top < centro) activo = id; });
   if ($$('.parada').some(p => { const r = p.getBoundingClientRect(); return r.top < centro && r.bottom > centro; })) activo = 'recorrido';
@@ -496,6 +496,7 @@ function pintarSitio() {
   const L = s.lesson, F = s.faith;
   let h = '';
   if (L) h += `<h4>El lugar</h4><p>${esc(L.intro)}</p>${L.meaning ? `<h4>Qué recordamos</h4><p>${esc(L.meaning)}</p>` : ''}${L.look ? `<h4>Fíjate en</h4><p>${esc(L.look)}</p>` : ''}`;
+  h = botonSonido(s.id) + h;
   h += bloqueSiglo(s);
   if (F) h += `<div class="reflexion"><b>${esc(F.title)}</b>${F.paragraphs.map(p => `<p>${esc(p)}</p>`).join('')}</div>`;
   if (s.mags?.length) h += `<h4>Este lugar en la revista · ${s.magCount} números</h4><div class="v-revistas">${s.mags.map(m => `<a href="https://revistatierrasanta.com/hemeroteca/" target="_blank" rel="noopener" title="Tierra Santa nº ${m.n}">${portada(m.s, m.k, 'role="img" aria-label="Portada nº ' + m.n + '"')}nº ${m.n}</a>`).join('')}</div>`;
@@ -633,6 +634,57 @@ function aplicar(animar) {
   l.style.transform = `translate3d(${ob.x}px,${ob.y}px,0) scale(${ob.s})`;
   l.style.setProperty('--inv', 1 / ob.s);
   v.classList.toggle('ampliado', ob.s > ob.base * 1.05);
+}
+// ================= Escucha Tierra Santa =================
+const SON = D.sonidos || [];
+const audio = new Audio(); audio.preload = 'none';
+let sonActual = null;
+const ico = play => play ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>' : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>';
+function tarjetaSonido(o) {
+  const sitio = o.sitio && ORDEN.find(s => s.id === o.sitio);
+  return `<article class="es-tarjeta" data-son="${esc(o.id)}">
+    <div class="es-cabeza">
+      <button type="button" class="es-play" data-son-play="${esc(o.id)}" aria-label="Escuchar: ${esc(o.titulo)}">${ico(true)}</button>
+      <div><small>${esc(o.lugar)}</small><h3>${esc(o.titulo)}</h3></div>
+    </div>
+    <div class="es-onda" aria-hidden="true">${o.picos.map(v => `<i style="--h:${v}"></i>`).join('')}</div>
+    <p class="es-tiempo" aria-live="off"><span data-t>0:00</span> · ${o.bucle ? 'en bucle' : '1 min'}${o.binaural ? ' · mejor con cascos' : ''}</p>
+    <p class="es-oyes">${esc(o.oyes)}</p>
+    <p class="es-cred">Grabación${o.fecha ? ' de ' + esc(o.fecha) : ''}: <a href="${esc(o.url)}" target="_blank" rel="noopener">${esc(o.autor)} · ${esc(o.lic)}</a>${sitio ? ` · <button type="button" class="enlace-modo" data-sitio="${esc(sitio.id)}">Abrir el santuario</button>` : ''}</p>
+  </article>`;
+}
+(function montarEscucha() {
+  const rej = $('#esRejilla');
+  if (rej && SON.length) rej.innerHTML = SON.map(tarjetaSonido).join('');
+  document.addEventListener('click', e => { const b = e.target.closest('[data-son-play]'); if (b) alternarSonido(b.dataset.sonPlay); });
+  const mm = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
+  audio.addEventListener('timeupdate', () => {
+    if (!sonActual) return;
+    const p = audio.duration ? audio.currentTime / audio.duration : 0;
+    $$(`[data-son="${sonActual}"]`).forEach(t => { const s = $('[data-t]', t); if (s) s.textContent = mm(audio.currentTime); const ba = $$('.es-onda i', t); ba.forEach((b, k) => b.classList.toggle('on', k < p * ba.length)); });
+  });
+  const pintar = () => $$('[data-son-play]').forEach(b => {
+    const on = b.dataset.sonPlay === sonActual && !audio.paused;
+    b.innerHTML = b.classList.contains('sonido-mini') ? `${ico(!on)}<span>${on ? 'Pausar' : 'Escuchar este lugar'}</span>` : ico(!on);
+    b.setAttribute('aria-pressed', on);
+    b.closest('[data-son]')?.classList.toggle('sonando', on);
+  });
+  audio.addEventListener('play', pintar); audio.addEventListener('pause', pintar);
+  audio.addEventListener('ended', () => { pintar(); });
+  document.addEventListener('play', e => { if (e.target.tagName === 'VIDEO' && !e.target.muted) audio.pause(); }, true);
+})();
+function alternarSonido(id) {
+  const o = SON.find(x => x.id === id); if (!o) return;
+  if (sonActual === id && !audio.paused) { audio.pause(); return; }
+  if (sonActual !== id) { audio.src = `assets_sonido_${id}.mp3`; audio.loop = !!o.bucle; sonActual = id; }
+  $$('video').forEach(v => v.pause());
+  audio.play().catch(() => {});
+}
+function botonSonido(sitioId) {
+  const o = SON.find(x => x.sitio === sitioId);
+  if (!o) return '';
+  const on = sonActual === o.id && !audio.paused;
+  return `<div class="sonido-sitio${on ? ' sonando' : ''}" data-son="${esc(o.id)}"><button type="button" class="sonido-mini" data-son-play="${esc(o.id)}" aria-pressed="${on}">${ico(!on)}<span>${on ? 'Pausar' : 'Escuchar este lugar'}</span></button><small>${esc(o.titulo)} · grabación real</small></div>`;
 }
 function montarSiglo(raiz) { $$('.siglo-cmp', raiz).forEach(montarCmp); }
 function montarCmp(cmp) {

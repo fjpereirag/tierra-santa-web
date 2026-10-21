@@ -526,3 +526,33 @@ body.ligero .cifras{z-index:1}
 .ob-cred a{color:var(--gris)}
 .ob-cred .enlace-modo{font-size:12.5px}
 @media (max-width:880px){.objeto .ventana-in{grid-template-columns:1fr}.ob-visor{position:sticky;top:0;z-index:2;height:46vh;height:46svh;min-height:260px}.ob-ayuda{display:none}.objeto .cerrar{z-index:3}}
+
+/* ---------- Escucha Tierra Santa ---------- */
+.escucha{position:relative;z-index:2;padding:110px clamp(16px,5vw,64px) 120px;background:linear-gradient(180deg,rgba(13,9,7,.95),rgba(13,9,7,.95) calc(100% - 90px),rgba(13,9,7,.55))}
+.es-rejilla{max-width:1180px;margin:48px auto 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.es-tarjeta{--p:0;display:flex;flex-direction:column;gap:12px;padding:20px 20px 18px;background:var(--vidrio);border:1px solid var(--vidrio-borde);border-radius:20px;box-shadow:var(--sombra);transition:border-color .3s,background .3s}
+.es-tarjeta.sonando{border-color:rgba(240,211,148,.55);background:rgba(42,32,24,.75)}
+.es-cabeza{display:flex;align-items:center;gap:14px}
+.es-cabeza small{display:block;font:600 11px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--oro)}
+.es-cabeza h3{margin:2px 0 0;font-size:24px;line-height:1.1;text-wrap:balance}
+.es-play{flex:none;width:52px;height:52px;border-radius:50%;border:0;background:var(--oro);color:var(--noche);display:grid;place-items:center;transition:transform .2s;position:relative}
+.es-play svg{width:22px;height:22px;fill:currentColor;stroke:none}
+.es-play:hover{transform:scale(1.06)}
+.sonando .es-play::after{content:'';position:absolute;inset:-6px;border-radius:50%;border:2px solid rgba(240,211,148,.5);animation:respira 2.6s ease-in-out infinite}
+@keyframes respira{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.18);opacity:.2}}
+.es-onda{display:flex;align-items:center;gap:2px;height:46px}
+.es-onda i{flex:1;height:calc(var(--h) * 100%);min-height:3px;border-radius:2px;background:rgba(240,211,148,.22)}
+.es-onda i.on{background:var(--oro)}
+.es-tiempo{margin:-4px 0 0;font:500 12px var(--sans);color:var(--gris);font-variant-numeric:tabular-nums}
+.v-cuerpo .es-oyes,.es-oyes{margin:0;font:italic 500 17px/1.4 var(--serif);color:var(--marfil-2)}
+.es-cred{margin:auto 0 0;font-size:12.5px;color:var(--gris)}
+.es-cred a{color:var(--gris)}
+.es-cred .enlace-modo{font-size:12.5px}
+@media (max-width:1000px){.es-rejilla{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.es-rejilla{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.sonando .es-play::after{animation:none}}
+.sonido-sitio{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:4px 0 6px}
+.sonido-mini{display:inline-flex;align-items:center;gap:8px;padding:8px 14px 8px 10px;border-radius:999px;border:1px solid rgba(240,211,148,.4);background:rgba(217,178,106,.12);color:var(--oro-2);font:600 14px var(--sans)}
+.sonido-mini svg{width:16px;height:16px;fill:currentColor;stroke:none}
+.sonido-sitio small{color:var(--gris);font-size:12.5px}
+.sonido-sitio.sonando .sonido-mini{background:var(--oro);color:var(--noche)}
