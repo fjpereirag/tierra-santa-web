@@ -556,3 +556,6 @@ body.ligero .cifras{z-index:1}
 .sonido-mini svg{width:16px;height:16px;fill:currentColor;stroke:none}
 .sonido-sitio small{color:var(--gris);font-size:12.5px}
 .sonido-sitio.sonando .sonido-mini{background:var(--oro);color:var(--noche)}
+
+/* cabecera legible sobre el mapa claro del modo ligero */
+body.ligero .cabecera{background:rgba(20,15,11,.84);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(240,211,148,.1)}
