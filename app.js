@@ -92,7 +92,7 @@ function encuadre(nombre, instantaneo = false) {
   encuadreActual = nombre;
   $$('.pin.ruta').forEach(b => b.classList.toggle('activo', nombre === 'parada-' + b.dataset.parada));
   if (maqueta && !document.body.classList.contains('explorando')) maqueta.irA({ ...ENCUADRES[nombre](), instantaneo });
-  const ocultar = ['inicio', 'cenital', 'historia', 'alto', 'jerusalen-cerca'].includes(nombre);
+  const ocultar = ['inicio', 'cenital', 'historia', 'alto', 'jerusalen-cerca', 'final'].includes(nombre);
   document.body.classList.toggle('oculta-etiquetas', ocultar);
 }
 
