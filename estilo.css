@@ -443,3 +443,26 @@ body.ligero .cifras{z-index:1}
 @media (prefers-reduced-motion:reduce){#plano .plano-in,.plano-pt{transition:none}}
 
 [data-explorar][hidden]{display:none!important}
+
+/* ---------- Hace un siglo: revista de entonces frente a hoy ---------- */
+.siglo{margin:22px 0 4px;padding-top:4px;border-top:1px solid var(--vidrio-borde)}
+.siglo-cmp{position:relative;border-radius:14px;overflow:hidden;background:#0d0907;touch-action:pan-y;cursor:ew-resize;user-select:none;-webkit-user-select:none;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.siglo-cmp img{width:100%;height:auto;pointer-events:none;-webkit-user-drag:none}
+.siglo-antes{position:absolute;inset:0;clip-path:inset(0 calc(100% - var(--corte)) 0 0)}
+.siglo-antes img{width:100%;height:100%;object-fit:cover}
+.siglo-linea{position:absolute;top:0;bottom:0;left:var(--corte);width:2px;margin-left:-1px;background:var(--oro-2);box-shadow:0 0 0 1px rgba(13,9,7,.35)}
+.siglo-linea::after{content:'';position:absolute;top:50%;left:50%;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;background:var(--oro) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23140f0b' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 6l-6 6 6 6M15 6l6 6-6 6'/%3E%3C/svg%3E") center/18px no-repeat;border:2px solid var(--noche);transition:transform .15s ease}
+.siglo-cmp.arrastrando .siglo-linea::after{transform:scale(1.12)}
+.siglo-et{position:absolute;top:10px;padding:3px 9px;border-radius:999px;font:700 11px var(--sans);letter-spacing:.14em;text-transform:uppercase;background:rgba(13,9,7,.72);color:var(--marfil)}
+.siglo-et.e1{left:10px;color:var(--oro-2)}
+.siglo-et.e2{right:10px}
+.siglo-cmp input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;pointer-events:none}
+.siglo-cmp:has(input:focus-visible){outline:2px solid var(--oro-2);outline-offset:3px}
+.v-cuerpo .siglo-pie{margin:8px 0 0;font-size:13px;color:var(--gris)}
+.siglo blockquote{margin:14px 0 0;padding:14px 18px;border-left:3px solid var(--oro-3);background:rgba(217,178,106,.06);border-radius:0 14px 14px 0}
+.v-cuerpo .siglo blockquote p{margin:0;font:italic 500 19px/1.4 var(--serif);color:var(--marfil)}
+.siglo cite{display:block;margin-top:8px;font:500 12px var(--sans);font-style:normal;color:var(--oro)}
+.v-cuerpo .siglo-hoy{margin:12px 0 0;font-size:14px}
+.siglo-hoy b{color:var(--marfil)}
+.siglo-hoy a{display:block;margin-top:4px;font-size:12px;color:var(--gris)}
+@media (prefers-reduced-motion:reduce){.siglo-linea::after{transition:none}}

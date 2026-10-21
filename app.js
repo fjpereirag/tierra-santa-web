@@ -496,12 +496,47 @@ function pintarSitio() {
   const L = s.lesson, F = s.faith;
   let h = '';
   if (L) h += `<h4>El lugar</h4><p>${esc(L.intro)}</p>${L.meaning ? `<h4>Qué recordamos</h4><p>${esc(L.meaning)}</p>` : ''}${L.look ? `<h4>Fíjate en</h4><p>${esc(L.look)}</p>` : ''}`;
+  h += bloqueSiglo(s);
   if (F) h += `<div class="reflexion"><b>${esc(F.title)}</b>${F.paragraphs.map(p => `<p>${esc(p)}</p>`).join('')}</div>`;
   if (s.mags?.length) h += `<h4>Este lugar en la revista · ${s.magCount} números</h4><div class="v-revistas">${s.mags.map(m => `<a href="https://revistatierrasanta.com/hemeroteca/" target="_blank" rel="noopener" title="Tierra Santa nº ${m.n}">${portada(m.s, m.k, 'role="img" aria-label="Portada nº ' + m.n + '"')}nº ${m.n}</a>`).join('')}</div>`;
   const enlaces = [L?.url && `<a href="${esc(L.url)}" target="_blank" rel="noopener">Custodia de Tierra Santa ↗</a>`, s.source && s.source.includes('custodia') && !L?.url && `<a href="${esc(s.source)}" target="_blank" rel="noopener">Ficha en custodia.org ↗</a>`].filter(Boolean);
   if (enlaces.length) h += `<div class="v-enlaces">${enlaces.join('')}</div>`;
   $('#vTexto').innerHTML = h;
+  montarSiglo($('#vTexto'));
   $('.v-cuerpo').scrollTop = 0;
+}
+
+// ================= Hace un siglo: revista de entonces frente a hoy =================
+function bloqueSiglo(s) {
+  const c = D.siglo?.[s.id];
+  if (!c) return '';
+  const img = (lado, alt) => `<img src="assets_siglo_${s.id}_${lado}.webp" alt="${esc(alt)}" loading="lazy" decoding="async">`;
+  return `<section class="siglo" aria-label="Hace un siglo en la revista">
+    <h4>Hace un siglo · ${esc(c.num)}, ${esc(c.fecha)}</h4>
+    <div class="siglo-cmp" style="--corte:50%">
+      ${img('hoy', 'Hoy: ' + s.name)}
+      <div class="siglo-antes">${img('antes', c.pie + ' · revista Tierra Santa, ' + c.fecha)}</div>
+      <span class="siglo-et e1" aria-hidden="true">${esc(c.fecha.replace(/.* /, ''))}</span><span class="siglo-et e2" aria-hidden="true">Hoy</span>
+      <span class="siglo-linea" aria-hidden="true"></span>
+      <input type="range" min="0" max="100" value="50" aria-label="Deslizar entre la foto de la revista y la de hoy">
+    </div>
+    <p class="siglo-pie">«${esc(c.pie)}», tal como la publicó la revista. Desliza para ver el lugar hoy.</p>
+    <blockquote><p>«${esc(c.cita)}»</p><cite>${c.citaNota ? esc(c.citaNota) + ' · ' : ''}Tierra Santa, ${esc(c.num)} · ${esc(c.fecha)}</cite></blockquote>
+    <p class="siglo-hoy"><b>Hoy.</b> ${esc(c.hoy)} <a href="${esc(c.credUrl)}" target="_blank" rel="noopener">Foto: ${esc(c.cred)}</a></p>
+  </section>`;
+}
+function montarSiglo(raiz) {
+  const cmp = $('.siglo-cmp', raiz);
+  if (!cmp) return;
+  const r = $('input', cmp);
+  const poner = v => cmp.style.setProperty('--corte', v + '%');
+  r.addEventListener('input', () => poner(r.value));
+  // mover con el dedo o el ratón sobre toda la foto, no solo sobre el tirador
+  const desde = e => { const b = cmp.getBoundingClientRect(); r.value = Math.round(Math.min(100, Math.max(0, (e.clientX - b.left) / b.width * 100))); poner(r.value); };
+  cmp.addEventListener('pointerdown', e => { desde(e); cmp.setPointerCapture(e.pointerId); cmp.classList.add('arrastrando'); });
+  cmp.addEventListener('pointermove', e => { if (cmp.hasPointerCapture(e.pointerId)) desde(e); });
+  const fin = e => { cmp.classList.remove('arrastrando'); try { cmp.releasePointerCapture(e.pointerId); } catch (_) {} };
+  cmp.addEventListener('pointerup', fin); cmp.addEventListener('pointercancel', fin);
 }
 $$('[data-v]').forEach(b => b.onclick = () => { sitioActual = (sitioActual + Number(b.dataset.v) + ORDEN.length) % ORDEN.length; pintarSitio(); });
 document.addEventListener('click', e => {
