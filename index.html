@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="estilo.css?v=15">
+<link rel="stylesheet" href="estilo.css?v=16">
 <script type="importmap">{"imports":{"three":"./three.module.min.js"}}</script>
 </head>
 <body>
@@ -48,6 +48,7 @@
     <a href="#historia">Historia</a>
     <a href="#franciscanos">Presencia</a>
     <a href="#revista">Revista</a>
+    <a href="#frailes">Frailes</a>
     <a href="#cien-anos">Cien años</a>
     <a href="#objetos">Objetos</a>
     <a href="#escucha">Escucha</a>
@@ -169,6 +170,19 @@
       <a class="btn oro" href="https://revistatierrasanta.com/hemeroteca/" target="_blank" rel="noopener">Ir a la hemeroteca oficial ↗</a>
       <a class="btn vidrio" href="https://revistatierrasanta.com/" target="_blank" rel="noopener">Revista Tierra Santa ↗</a>
     </div>
+  </section>
+
+  <!-- 5a · Frailes de la revista -->
+  <section id="frailes" class="frailes" data-camara="alto">
+    <div class="titular">
+      <p class="antetitulo">Un siglo de nombres</p>
+      <h2>Los frailes que pasaron por la revista</h2>
+      <p>Custodios, arqueólogos, redactores, mártires y cronistas: los franciscanos que más aparecen en cien años de Tierra Santa, con los números donde puedes encontrarlos.</p>
+    </div>
+    <div class="fr-grupos" id="frGrupos" role="tablist" aria-label="Grupos de frailes"></div>
+    <p class="fr-gdesc" id="frGDesc"></p>
+    <div class="fr-rejilla" id="frRejilla" aria-live="polite"></div>
+    <p class="fr-nota">Recuento automático sobre el texto completo de 807 números; cada portada abre ese número en la hemeroteca oficial.</p>
   </section>
 
   <!-- 5b · Cien años de la revista -->
@@ -310,7 +324,7 @@ if (location.protocol === 'file:') {
 // Acceso con contraseña sencilla (cortina de privacidad, no seguridad real).
 const CLAVE = 'yhvold';
 const resumen = t => { let h = 5381; for (const c of t) h = ((h * 33) ^ c.charCodeAt(0)) >>> 0; return h.toString(36); };
-const abrir = () => { document.getElementById('candado').remove(); import('./app.js?v=14'); };
+const abrir = () => { document.getElementById('candado').remove(); import('./app.js?v=15'); };
 let dentro = false; try { dentro = localStorage.getItem('hf-acceso') === CLAVE; } catch {}
 if (dentro) abrir();
 else {
