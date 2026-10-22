@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="estilo.css?v=14">
+<link rel="stylesheet" href="estilo.css?v=15">
 <script type="importmap">{"imports":{"three":"./three.module.min.js"}}</script>
 </head>
 <body>
@@ -150,6 +150,15 @@
       <p class="antetitulo">Revista Tierra Santa · desde 1921</p>
       <h2>Un siglo de revista, en una torre de portadas</h2>
       <p>Elige una década y gira la torre. Cada portada es una puerta a la hemeroteca oficial, donde puedes seguir leyendo.</p>
+    </div>
+    <div class="br" id="buscaRev">
+      <form class="br-form" id="brForm" role="search" aria-label="Buscar en la revista">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="brQ" type="search" name="q" placeholder="Busca un lugar, una persona, un tema…" autocomplete="off" enterkeyhint="search" aria-label="Palabras a buscar en la revista">
+        <button class="btn oro" type="submit">Buscar</button>
+      </form>
+      <p class="br-ayuda" id="brAyuda">Busca en el texto completo de 807 números (1921–2025). Verás en qué revistas aparece; cada portada te lleva a la hemeroteca oficial para leerla. <span class="br-ej">Prueba: <button type="button" data-br="Getsemaní">Getsemaní</button> <button type="button" data-br="Custodio">Custodio</button> <button type="button" data-br="Magdala">Magdala</button> <button type="button" data-br="Belén 1948">Belén 1948</button></span></p>
+      <div class="br-res" id="brRes" aria-live="polite"></div>
     </div>
     <div class="decadas" id="decadas" role="tablist" aria-label="Décadas"></div>
     <div class="torre-marco" id="torreMarco" tabindex="0" aria-label="Torre de portadas. Arrastra o usa las flechas para girarla.">
@@ -301,7 +310,7 @@ if (location.protocol === 'file:') {
 // Acceso con contraseña sencilla (cortina de privacidad, no seguridad real).
 const CLAVE = 'yhvold';
 const resumen = t => { let h = 5381; for (const c of t) h = ((h * 33) ^ c.charCodeAt(0)) >>> 0; return h.toString(36); };
-const abrir = () => { document.getElementById('candado').remove(); import('./app.js?v=13'); };
+const abrir = () => { document.getElementById('candado').remove(); import('./app.js?v=14'); };
 let dentro = false; try { dentro = localStorage.getItem('hf-acceso') === CLAVE; } catch {}
 if (dentro) abrir();
 else {

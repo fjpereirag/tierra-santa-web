@@ -422,6 +422,97 @@ if (!reducido && matchMedia('(pointer: fine)').matches) {
   mosaico.addEventListener('pointerleave', () => $$('figure', mosaico).forEach(f => { f.style.setProperty('--ry', 0); f.style.setProperty('--rx', 0); }));
 }
 
+// ================= Revista: buscador en el texto completo (solo muestra portadas) =================
+const BR = { cat: null, shards: {}, pagina: 0, lista: [], filtro: null, orden: 'relevancia', ultima: null };
+const brNorm = s => String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+const BR_STOP = new Set('que los las del por con una para como mas pero sus este esta estos estas ese esa eso esos esas entre cuando muy sin sobre tambien hasta hay donde quien desde todo todos todas toda nos durante uno unos unas les contra otros otras otra otro ante ellos ella ellas esto antes algo tanto mucho muchos muchas nada poco cual cuales sido ser son fue fueron era eran han habia haber siempre ademas asi aqui alli solo cada mismo misma tan bien puede pues porque segun sea sino tras vez veces dicho dicha mientras luego entonces aun'.split(' '));
+async function brCatalogo() {
+  if (!BR.cat) BR.cat = fetch('assets_buscador_catalogo.json').then(r => { if (!r.ok) throw 0; return r.json(); });
+  return BR.cat;
+}
+function brShard(cat, w) {
+  const p = w.slice(0, 2); let lo = 0;
+  for (let i = 0; i < cat.starts.length; i++) if (cat.starts[i] <= p) lo = i; else break;
+  if (!BR.shards[lo]) BR.shards[lo] = fetch(`assets_buscador_i${String(lo).padStart(2, '0')}.json`).then(r => { if (!r.ok) throw 0; return r.json(); });
+  return BR.shards[lo];
+}
+function brDecod(s) { // lista «delta[.menciones]» en base 36 → Map(número → menciones)
+  const m = new Map(); let d = -1;
+  for (const t of s.split(',')) { const [a, b] = t.split('.'); d += parseInt(a, 36) + 1; m.set(d, b ? parseInt(b, 36) : 1); }
+  return m;
+}
+function brVariantes(w) { // singular / plural sencillos, y comodín final «*»
+  if (w.endsWith('*')) return { pref: w.slice(0, -1) };
+  const v = new Set([w, w + 's', w + 'es']);
+  if (w.endsWith('es') && w.length > 4) v.add(w.slice(0, -2));
+  if (w.endsWith('s') && w.length > 3) v.add(w.slice(0, -1));
+  return { set: v };
+}
+async function brBuscar(q) {
+  const res = $('#brRes');
+  const palabras = [...new Set((brNorm(q).match(/[a-zñ0-9*]+/g) || []).filter(w => (w.length >= 3 || /^\d{4}$/.test(w)) && !BR_STOP.has(w)))].slice(0, 6);
+  if (!palabras.length) { res.innerHTML = `<p class="br-nada">Escribe al menos una palabra de tres letras o más.</p>`; return; }
+  res.innerHTML = `<p class="br-cargando">Buscando en un siglo de revista…</p>`;
+  let cat;
+  try {
+    cat = await brCatalogo();
+    const porPalabra = await Promise.all(palabras.map(async w => {
+      const sh = await brShard(cat, w.replace('*', '')), v = brVariantes(w), tot = new Map();
+      const claves = v.pref ? (v.pref.length >= 3 ? Object.keys(sh).filter(k => k.startsWith(v.pref)) : []) : [...v.set].filter(k => sh[k]);
+      for (const k of claves) for (const [d, n] of brDecod(sh[k])) tot.set(d, (tot.get(d) || 0) + n);
+      return tot;
+    }));
+    const N = cat.docs.length, idf = porPalabra.map(m => Math.log(1 + N / (1 + m.size)));
+    const todos = new Map();
+    porPalabra.forEach((m, i) => m.forEach((n, d) => { const t = todos.get(d) || { d, n: 0, k: 0, s: 0 }; t.n += n; t.k++; t.s += Math.log(1 + n) * idf[i]; todos.set(d, t); }));
+    let lista = [...todos.values()].filter(t => t.k === palabras.length), parcial = false;
+    if (!lista.length && palabras.length > 1) { lista = [...todos.values()]; parcial = true; }
+    BR.lista = lista; BR.filtro = null; BR.pagina = 1; BR.ultima = { palabras, parcial, texto: q.trim().replace(/\s+/g, ' ') };
+    brPintar(cat);
+  } catch (e) {
+    res.innerHTML = `<p class="br-nada">No se ha podido cargar el buscador. Comprueba la conexión e inténtalo de nuevo.</p>`;
+  }
+}
+function brTarjeta(cat, t) {
+  const [num, fecha, , slug, s, k] = cat.docs[t.d], sp = cat.sprites[s], col = k % sp.cols, fila = Math.floor(k / sp.cols);
+  return `<a class="br-tarjeta" href="https://revistatierrasanta.com/revistas/revista-${esc(slug)}/" target="_blank" rel="noopener" aria-label="Tierra Santa nº ${esc(num)}, ${esc(fecha)}: ${t.n} menciones. Abre la revista en la hemeroteca oficial">
+    <span class="br-port" style="background-image:url(${sp.f});background-size:${sp.cols * 100}% ${sp.rows * 100}%;background-position:${col / (sp.cols - 1) * 100}% ${sp.rows > 1 ? fila / (sp.rows - 1) * 100 : 0}%"></span>
+    <span class="br-dato"><b>nº ${esc(num)}</b><small>${esc(fecha)}</small><em>${t.n} ${t.n === 1 ? 'mención' : 'menciones'}</em></span>
+    <span class="br-ir" aria-hidden="true">Hemeroteca oficial ↗</span></a>`;
+}
+function brPintar(cat) {
+  const res = $('#brRes'), { parcial, texto } = BR.ultima;
+  if (!BR.lista.length) {
+    res.innerHTML = `<p class="br-nada">Ninguna revista contiene «${esc(texto)}». Prueba con otra forma de la palabra, sin tildes o con un asterisco al final (por ejemplo <b>francisc*</b>).</p>`; return;
+  }
+  const dec = new Map(); BR.lista.forEach(t => { const d = Math.floor(cat.docs[t.d][2] / 10) * 10; dec.set(d, (dec.get(d) || 0) + 1); });
+  const decs = [...new Set(cat.docs.map(x => Math.floor(x[2] / 10) * 10))].sort((a, b) => a - b), max = Math.max(...dec.values());
+  let lista = BR.filtro == null ? BR.lista : BR.lista.filter(t => Math.floor(cat.docs[t.d][2] / 10) * 10 === BR.filtro);
+  lista = [...lista].sort(BR.orden === 'fecha' ? (a, b) => a.d - b.d : (a, b) => b.s - a.s || a.d - b.d);
+  const ver = lista.slice(0, BR.pagina * 24);
+  const total = BR.lista.length;
+  res.innerHTML = `<div class="br-cabeza">
+      <p class="br-resumen">${parcial ? `Ningún número reúne todas las palabras; <b>${total}</b> ${total === 1 ? 'tiene' : 'tienen'} alguna de ellas.` : `«${esc(texto)}» aparece en <b>${total}</b> ${total === 1 ? 'número' : 'números'} de la revista.`}</p>
+      <div class="br-orden" role="group" aria-label="Ordenar resultados"><button type="button" data-br-orden="relevancia" aria-pressed="${BR.orden === 'relevancia'}">Más menciones</button><button type="button" data-br-orden="fecha" aria-pressed="${BR.orden === 'fecha'}">Por fecha</button></div>
+    </div>
+    <div class="br-decadas" role="group" aria-label="Filtrar por década">${decs.map(d => { const n = dec.get(d) || 0; return `<button type="button" data-br-dec="${d}" aria-pressed="${BR.filtro === d}" ${n ? '' : 'disabled'} title="${n} ${n === 1 ? 'número' : 'números'} en los ${d}s"><i><b style="--h:${n / max}"></b></i><span>${String(d).slice(2)}s</span><small>${n || ''}</small></button>`; }).join('')}</div>
+    ${BR.filtro != null ? `<p class="br-filtro">Solo los ${BR.filtro}s · <button type="button" class="enlace-modo" data-br-dec="todas">ver todas las décadas</button></p>` : ''}
+    <div class="br-rejilla">${ver.map(t => brTarjeta(cat, t)).join('')}</div>
+    ${lista.length > ver.length ? `<div class="acciones centro"><button type="button" class="btn vidrio" data-br-mas>Ver ${Math.min(24, lista.length - ver.length)} más (quedan ${lista.length - ver.length})</button></div>` : ''}
+    <p class="br-nota">El buscador solo indica en qué números aparece cada palabra; el texto de la revista se lee en la <a href="https://revistatierrasanta.com/hemeroteca/" target="_blank" rel="noopener">hemeroteca oficial</a>. El texto se ha obtenido por reconocimiento automático y puede tener erratas.</p>`;
+}
+(function montarBuscador() {
+  const f = $('#brForm'), q = $('#brQ'); if (!f) return;
+  f.addEventListener('submit', e => { e.preventDefault(); brBuscar(q.value); });
+  q.addEventListener('focus', () => brCatalogo().catch(() => { BR.cat = null; }), { once: true });
+  $('#buscaRev').addEventListener('click', e => {
+    const ej = e.target.closest('[data-br]'); if (ej) { q.value = ej.dataset.br; brBuscar(q.value); return; }
+    const o = e.target.closest('[data-br-orden]'); if (o) { BR.orden = o.dataset.brOrden; BR.pagina = 1; brCatalogo().then(brPintar); return; }
+    const d = e.target.closest('[data-br-dec]'); if (d) { const v = d.dataset.brDec; BR.filtro = v === 'todas' || BR.filtro === +v ? null : +v; BR.pagina = 1; brCatalogo().then(brPintar); return; }
+    if (e.target.closest('[data-br-mas]')) { BR.pagina++; brCatalogo().then(brPintar); }
+  });
+})();
+
 // ================= Revista: torre helicoidal de portadas =================
 const decadas = [...new Set(D.covers.map(c => Math.floor(c.y / 10) * 10))].sort();
 const arrastreT = { activo: false };
