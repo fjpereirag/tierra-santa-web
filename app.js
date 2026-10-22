@@ -289,7 +289,7 @@ function alDesplazar() {
   document.body.classList.toggle('en-recorrido', enRecorrido);
   pasoActual = encuadreActual.startsWith('parada-') ? Number(encuadreActual.slice(7)) : -1;
   $$('#pasos .paso').forEach((b, i) => { b.classList.toggle('activo', i === pasoActual); b.classList.toggle('hecho', i < pasoActual); });
-  const ids = ['recorrido', 'santuarios', 'historia', 'franciscanos', 'revista', 'frailes', 'cien-anos', 'objetos', 'escucha'];
+  const ids = ['recorrido', 'santuarios', 'historia', 'franciscanos', 'revista', 'cien-anos', 'objetos', 'escucha'];
   let activo = null;
   ids.forEach(id => { const r = $('#' + id).getBoundingClientRect(); if (r.top < centro) activo = id; });
   if ($$('.parada').some(p => { const r = p.getBoundingClientRect(); return r.top < centro && r.bottom > centro; })) activo = 'recorrido';
@@ -510,39 +510,6 @@ function brPintar(cat) {
     const o = e.target.closest('[data-br-orden]'); if (o) { BR.orden = o.dataset.brOrden; BR.pagina = 1; brCatalogo().then(brPintar); return; }
     const d = e.target.closest('[data-br-dec]'); if (d) { const v = d.dataset.brDec; BR.filtro = v === 'todas' || BR.filtro === +v ? null : +v; BR.pagina = 1; brCatalogo().then(brPintar); return; }
     if (e.target.closest('[data-br-mas]')) { BR.pagina++; brCatalogo().then(brPintar); }
-  });
-})();
-
-// ================= Frailes que pasaron por la revista =================
-const FR = { d: null, g: null };
-function frTarjeta(f) {
-  const sp = FR.d.sprite;
-  const port = f.rev.map(([num, fecha, slug, k]) => { const col = k % sp.cols, fila = Math.floor(k / sp.cols);
-    return `<a class="fr-port" href="https://revistatierrasanta.com/revistas/revista-${esc(slug)}/" target="_blank" rel="noopener" title="nº ${esc(num)} · ${esc(fecha)}" aria-label="Tierra Santa nº ${esc(num)}, ${esc(fecha)}. Abre la revista en la hemeroteca oficial"><span style="background-image:url(${sp.f});background-size:${sp.cols * 100}% ${sp.rows * 100}%;background-position:${col / (sp.cols - 1) * 100}% ${sp.rows > 1 ? fila / (sp.rows - 1) * 100 : 0}%"></span><small>nº ${esc(num)}</small></a>`; }).join('');
-  return `<article class="fr-tarjeta"><h3>${esc(f.n)}</h3><p class="fr-rol">${esc(f.r)}</p>
-    <p class="fr-cifra">En <b>${f.num}</b> ${f.num === 1 ? 'número' : 'números'}${f.y0 ? ` · ${f.y0 === f.y1 ? f.y0 : f.y0 + '–' + f.y1}` : ''}</p>
-    <div class="fr-ports">${port}</div>
-    <button type="button" class="enlace-modo fr-buscar" data-fr-buscar="${esc(f.n)}">Ver todos los números en el buscador</button></article>`;
-}
-function frPintar() {
-  const g = FR.d.grupos.find(x => x.id === FR.g);
-  $$('#frGrupos button').forEach(b => b.setAttribute('aria-selected', String(b.dataset.g === FR.g)));
-  $('#frGDesc').textContent = g.d;
-  $('#frRejilla').innerHTML = FR.d.frailes.filter(f => f.g === FR.g).sort((a, b) => (a.y0 || 0) - (b.y0 || 0)).map(frTarjeta).join('');
-}
-(function montarFrailes() {
-  const sec = $('#frailes'); if (!sec) return;
-  const cargar = () => fetch('assets_frailes.json').then(r => r.json()).then(d => {
-    FR.d = d; FR.g = d.grupos[0].id;
-    $('#frGrupos').innerHTML = d.grupos.map(g => `<button type="button" role="tab" data-g="${g.id}">${esc(g.t)} <small>${d.frailes.filter(f => f.g === g.id).length}</small></button>`).join('');
-    frPintar();
-  }).catch(() => { $('#frRejilla').innerHTML = '<p class="br-nada">No se ha podido cargar la lista.</p>'; });
-  const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); cargar(); } }, { rootMargin: '600px' });
-  io.observe(sec);
-  sec.addEventListener('click', e => {
-    const b = e.target.closest('#frGrupos button'); if (b) { FR.g = b.dataset.g; frPintar(); return; }
-    const q = e.target.closest('[data-fr-buscar]');
-    if (q) { $('#brQ').value = q.dataset.frBuscar; $('#buscaRev').scrollIntoView({ behavior: reducido ? 'auto' : 'smooth', block: 'start' }); brBuscar(q.dataset.frBuscar); }
   });
 })();
 
