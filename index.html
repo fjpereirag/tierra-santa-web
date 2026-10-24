@@ -324,7 +324,7 @@ if (location.protocol === 'file:') {
 // Acceso con contraseña sencilla (cortina de privacidad, no seguridad real).
 const CLAVE = 'yhvold';
 const resumen = t => { let h = 5381; for (const c of t) h = ((h * 33) ^ c.charCodeAt(0)) >>> 0; return h.toString(36); };
-const abrir = () => { document.getElementById('candado').remove(); import('./app.js?v=15'); };
+const abrir = () => { document.getElementById('candado').remove(); import('./app.js?v=16'); };
 let dentro = false; try { dentro = localStorage.getItem('hf-acceso') === CLAVE; } catch {}
 if (dentro) abrir();
 else {

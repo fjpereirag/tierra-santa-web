@@ -555,17 +555,8 @@ $('#decadas').onclick = e => { const b = e.target.closest('button'); if (!b) ret
 function portadasDecada() { return D.covers.filter(c => Math.floor(c.y / 10) * 10 === decada); }
 function construirTorre() {
   const lista = portadasDecada();
-  $('#torreMarco').classList.toggle('tira', estrecho());
-  if (estrecho()) {
-    giroT = giroTObj = giroTMax = 0;
-    $('#torre').style.transform = '';
-    $('#torre').innerHTML = lista.map((c, i) => `<a class="portada-r" href="https://revistatierrasanta.com/hemeroteca/" target="_blank" rel="noopener" data-n="nº ${c.n}" data-i="${i}" draggable="false" aria-label="Tierra Santa nº ${c.n}${c.d ? ', ' + esc(c.d) : ''}. Abre la hemeroteca oficial">
-      ${portada(c.s, c.k)}</a>`).join('');
-    $('#torreMarco').scrollLeft = 0;
-    $('#torreInfo').innerHTML = `${lista.length} números en los ${decada}s · desliza para ver más`;
-    return;
-  }
-  const radioT = estrecho() ? 250 : 380;
+  $('#torreMarco').classList.remove('tira');
+  const radioT = estrecho() ? 190 : 380;
   paso = estrecho() ? 150 : 190; porVuelta = estrecho() ? 10 : 12;
   giroT = giroTObj = 0; giroTMax = Math.max(0, (lista.length - 1) * 360 / porVuelta);
   $('#torre').innerHTML = lista.map((c, i) => {
@@ -578,7 +569,6 @@ function construirTorre() {
 }
 let frenteT = -1;
 function pintarTorre(forzar) {
-  if (estrecho()) return;
   const lista = portadasDecada();
   $('#torre').style.transform = `translateY(${-giroT / 360 * paso - 20}px) rotateY(${-giroT}deg)`;
   const f = Math.max(0, Math.min(lista.length - 1, Math.round(giroT / (360 / porVuelta))));
@@ -596,8 +586,8 @@ function pintarTorre(forzar) {
   pintarTorre();
   requestAnimationFrame(animTorre);
 })();
-arrastrable($('#torreMarco'), dx => { if (estrecho()) return; arrastreT.activo = true; giroTObj = Math.max(0, Math.min(giroTMax, giroTObj - dx * 0.35)); }, () => { arrastreT.activo = false; });
-$('#torreMarco').addEventListener('click', e => { if (arrastre.movido && !estrecho()) e.preventDefault(); }, true);
+arrastrable($('#torreMarco'), dx => { arrastreT.activo = true; giroTObj = Math.max(0, Math.min(giroTMax, giroTObj - dx * 0.35)); }, () => { arrastreT.activo = false; });
+$('#torreMarco').addEventListener('click', e => { if (arrastre.movido) e.preventDefault(); }, true);
 $('#torreMarco').addEventListener('keydown', e => {
   const k = 360 / porVuelta;
   if (e.key === 'ArrowRight') { giroTObj = Math.min(giroTMax, giroTObj + k); e.preventDefault(); }
