@@ -659,8 +659,6 @@ body.ligero .cabecera{background:rgba(20,15,11,.84);backdrop-filter:blur(14px);-
 @media (max-width:700px){
   .menu a{font-size:17px;padding:14px}
   .grupo{position:relative}
-  .grupo > .panel{display:none}
-  .grupo > .panel.activo{display:block}
   .subtabs{display:flex;gap:6px;position:sticky;top:62px;z-index:15;margin:0;padding:10px 16px;overflow-x:auto;scrollbar-width:none;
     background:rgba(20,15,11,.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(240,211,148,.1)}
   .subtabs::-webkit-scrollbar{display:none}
