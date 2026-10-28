@@ -289,10 +289,8 @@ function alDesplazar() {
   document.body.classList.toggle('en-recorrido', enRecorrido);
   pasoActual = encuadreActual.startsWith('parada-') ? Number(encuadreActual.slice(7)) : -1;
   $$('#pasos .paso').forEach((b, i) => { b.classList.toggle('activo', i === pasoActual); b.classList.toggle('hecho', i < pasoActual); });
-  const ids = ['recorrido', 'santuarios', 'historia', 'franciscanos', 'revista', 'frailes', 'cien-anos', 'objetos', 'escucha'];
   let activo = null;
-  ids.forEach(id => { const r = $('#' + id).getBoundingClientRect(); if (r.top < centro) activo = id; });
-  if ($$('.parada').some(p => { const r = p.getBoundingClientRect(); return r.top < centro && r.bottom > centro; })) activo = 'recorrido';
+  $$('.grupo').forEach(g => { const r = g.getBoundingClientRect(); if (r.top < centro) activo = g.id; });
   $$('.menu a').forEach(a => a.classList.toggle('actual', a.getAttribute('href') === '#' + activo));
   animarHistoria();
 }
@@ -873,3 +871,71 @@ construirCarrusel();
 construirTorre();
 alDesplazar();
 iniciar3D();
+
+
+// ================= Grupos, pestañas internas y menú móvil =================
+// Cuatro grupos (Recorrido, Santuarios, Franciscanos, Revista). En pantallas
+// estrechas cada grupo enseña un apartado y unas pestañas para cambiar; en
+// escritorio todo sigue a la vista, uno tras otro.
+(() => {
+  const cab = $('.cabecera'), menu = $('#menu'), btnMenu = $('.btn-menu');
+  const altoCab = () => cab.getBoundingClientRect().height;
+  const cerrarMenu = () => { cab.classList.remove('menu-abierto'); btnMenu.setAttribute('aria-expanded', 'false'); btnMenu.setAttribute('aria-label', 'Abrir el menú'); };
+  btnMenu.addEventListener('click', () => {
+    const abierto = cab.classList.toggle('menu-abierto');
+    btnMenu.setAttribute('aria-expanded', String(abierto));
+    btnMenu.setAttribute('aria-label', abierto ? 'Cerrar el menú' : 'Abrir el menú');
+  });
+  addEventListener('keydown', e => { if (e.key === 'Escape') cerrarMenu(); });
+  document.addEventListener('click', e => { if (!cab.contains(e.target)) cerrarMenu(); });
+
+  const activar = (grupo, i, foco = false) => {
+    const paneles = $$(':scope > .panel', grupo);
+    paneles.forEach((p, k) => p.classList.toggle('activo', k === i));
+    $$('.subtab', grupo).forEach((b, k) => { b.classList.toggle('activo', k === i); b.setAttribute('aria-selected', String(k === i)); b.tabIndex = k === i ? 0 : -1; });
+    if (foco) $$('.subtab', grupo)[i]?.focus();
+    alDesplazar();
+  };
+  const irA = (el, comportamiento) => {
+    const y = el.getBoundingClientRect().top + scrollY - altoCab() - 4;
+    scrollTo({ top: Math.max(0, y), behavior: comportamiento || (reducido ? 'auto' : 'smooth') });
+  };
+
+  $$('.grupo').forEach(grupo => {
+    const paneles = $$(':scope > .panel', grupo);
+    paneles[0].classList.add('activo');
+    if (paneles.length < 2) return;
+    const barra = document.createElement('div');
+    barra.className = 'subtabs'; barra.setAttribute('role', 'tablist'); barra.setAttribute('aria-label', grupo.dataset.titulo);
+    barra.innerHTML = paneles.map((p, k) => `<button type="button" role="tab" class="subtab${k ? '' : ' activo'}" aria-selected="${!k}" tabindex="${k ? -1 : 0}">${esc(p.dataset.panel)}</button>`).join('');
+    grupo.prepend(barra);
+    barra.addEventListener('click', e => {
+      const b = e.target.closest('.subtab'); if (!b) return;
+      activar(grupo, $$('.subtab', barra).indexOf(b));
+      if (grupo.getBoundingClientRect().top < altoCab()) irA(grupo, 'auto');
+    });
+    barra.addEventListener('keydown', e => {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      const n = paneles.length, i = paneles.findIndex(p => p.classList.contains('activo'));
+      activar(grupo, (i + (e.key === 'ArrowRight' ? 1 : -1) + n) % n, true);
+    });
+  });
+
+  // cualquier enlace interno (#frailes, #escucha…) abre su pestaña antes de bajar
+  const abrirDestino = id => {
+    const el = id && document.getElementById(id); if (!el) return null;
+    const panel = el.closest('.panel'), grupo = el.closest('.grupo');
+    if (panel && grupo && !panel.classList.contains('activo')) activar(grupo, $$(':scope > .panel', grupo).indexOf(panel));
+    return el;
+  };
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="#"]'); if (!a) return;
+    const el = abrirDestino(a.getAttribute('href').slice(1)); if (!el) return;
+    e.preventDefault(); cerrarMenu(); irA(el);
+    history.replaceState(null, '', a.getAttribute('href'));
+  });
+  const alHash = () => { const el = abrirDestino(decodeURIComponent(location.hash.slice(1))); if (el) setTimeout(() => irA(el, 'auto'), 60); };
+  if (location.hash) alHash();
+  addEventListener('hashchange', alHash);
+  menu.addEventListener('click', e => { if (e.target.closest('a')) cerrarMenu(); });
+})();

@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="estilo.css?v=16">
+<link rel="stylesheet" href="estilo.css?v=17">
 <script type="importmap">{"imports":{"three":"./three.module.min.js"}}</script>
 </head>
 <body>
@@ -42,16 +42,14 @@
     <svg viewBox="0 0 40 40" class="marca-ic" aria-hidden="true"><circle cx="20" cy="20" r="18"/><path d="M20 10v21M13 15h14"/></svg>
     <span><b>Huellas franciscanas</b><small>Tierra Santa · 3D</small></span>
   </a>
-  <nav class="menu" aria-label="Secciones">
-    <a href="#recorrido">Recorrido</a>
-    <a href="#santuarios">Santuarios</a>
-    <a href="#historia">Historia</a>
-    <a href="#franciscanos">Presencia</a>
-    <a href="#revista">Revista</a>
-    <a href="#frailes">Frailes</a>
-    <a href="#cien-anos">Cien años</a>
-    <a href="#objetos">Objetos</a>
-    <a href="#escucha">Escucha</a>
+  <button class="btn-menu" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir el menú">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+  <nav class="menu" id="menu" aria-label="Secciones">
+    <a href="#grupo-recorrido">Recorrido</a>
+    <a href="#grupo-santuarios">Santuarios</a>
+    <a href="#grupo-franciscanos">Franciscanos</a>
+    <a href="#grupo-revista">Revista</a>
   </nav>
   <button class="btn-explorar" data-explorar type="button">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="m3 13 9 5 9-5"/></svg>
@@ -82,140 +80,170 @@
     </ul>
   </section>
 
-  <!-- 1 · Recorrido: se rellena desde datos -->
-  <section id="recorrido" class="bloque-intro" data-camara="vista">
-    <div class="intro-tarjeta">
-      <p class="antetitulo">El recorrido</p>
-      <h2>Cinco paradas en la vida de Jesús</h2>
-      <p>De Belén a Jerusalén, sigue la ruta sobre la maqueta en relieve. En cada lugar descubrirás qué recordamos allí y cómo lo cuidan hoy los franciscanos.</p>
+  <!-- ===== Grupo · Recorrido ===== -->
+  <div class="grupo" id="grupo-recorrido" data-titulo="Recorrido">
+    <div class="panel" data-panel="El recorrido">
+      <!-- 1 · Recorrido: se rellena desde datos -->
+      <section id="recorrido" class="bloque-intro" data-camara="vista">
+        <div class="intro-tarjeta">
+          <p class="antetitulo">El recorrido</p>
+          <h2>Cinco paradas en la vida de Jesús</h2>
+          <p>De Belén a Jerusalén, sigue la ruta sobre la maqueta en relieve. En cada lugar descubrirás qué recordamos allí y cómo lo cuidan hoy los franciscanos.</p>
+        </div>
+      </section>
+      <div id="paradas"></div>
     </div>
-  </section>
-  <div id="paradas"></div>
 
-  <!-- 2 · Santuarios -->
-  <section id="santuarios" class="escena santuarios" data-camara="cenital">
-    <div class="titular">
-      <p class="antetitulo">Visitas en vídeo</p>
-      <h2>Veintiocho santuarios para recorrer</h2>
-      <p>Gira el carrusel y entra en cada santuario: un vídeo con música, una explicación sencilla y una reflexión para llevar contigo.</p>
+    <div class="panel" data-panel="Escucha">
+      <!-- 5d · Escucha Tierra Santa -->
+      <section id="escucha" class="escucha" data-camara="alto">
+        <div class="titular">
+          <p class="antetitulo">Escucha Tierra Santa</p>
+          <h2>Cierra los ojos un minuto</h2>
+          <p>Grabaciones reales hechas por viajeros en los Santos Lugares. Ponte los cascos, pulsa y escucha cómo suena cada sitio.</p>
+        </div>
+        <div class="es-rejilla" id="esRejilla"></div>
+        <p class="cien-nota">Grabaciones de Freesound con licencias libres; autor y licencia en cada tarjeta. ¿Vas a peregrinar? Graba un minuto en silencio en cada santuario y lo añadimos.</p>
+      </section>
     </div>
-    <div class="carrusel" id="carrusel" tabindex="0" aria-roledescription="carrusel" aria-label="Santuarios en vídeo. Usa las flechas para girar.">
-      <div class="anillo" id="anillo"></div>
-    </div>
-    <div class="carrusel-ctl">
-      <button type="button" class="redondo" data-giro="-1" aria-label="Santuario anterior"><svg viewBox="0 0 24 24"><path d="m15 6-6 6 6 6"/></svg></button>
-      <div class="carrusel-nombre" id="carruselNombre" aria-live="polite"></div>
-      <button type="button" class="redondo" data-giro="1" aria-label="Santuario siguiente"><svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></button>
-    </div>
-    <div class="filtros" id="filtros" role="tablist" aria-label="Filtrar por lugar"></div>
-  </section>
+  </div>
 
-  <!-- 3 · Historia -->
-  <section id="historia" class="historia" data-camara="historia">
-    <div class="historia-pegajosa">
-      <div class="titular">
-        <p class="antetitulo">Línea del tiempo</p>
-        <h2>De la antigüedad a hoy</h2>
-        <p>Seis etapas en la historia de los Santos Lugares. Desliza: el tiempo avanza en profundidad.</p>
-        <button class="btn vidrio" type="button" data-pelicula><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg> Ver la película (25 s)</button>
-      </div>
-      <div class="tunel" id="tunel"></div>
-      <ol class="regla" id="regla"></ol>
-      <p class="aviso-ia">Recreaciones visuales creadas con IA; no son fotografías documentales exactas.</p>
+  <!-- ===== Grupo · Santuarios ===== -->
+  <div class="grupo" id="grupo-santuarios" data-titulo="Santuarios">
+    <div class="panel" data-panel="Santuarios">
+      <!-- 2 · Santuarios -->
+      <section id="santuarios" class="escena santuarios" data-camara="cenital">
+        <div class="titular">
+          <p class="antetitulo">Visitas en vídeo</p>
+          <h2>Veintiocho santuarios para recorrer</h2>
+          <p>Gira el carrusel y entra en cada santuario: un vídeo con música, una explicación sencilla y una reflexión para llevar contigo.</p>
+        </div>
+        <div class="carrusel" id="carrusel" tabindex="0" aria-roledescription="carrusel" aria-label="Santuarios en vídeo. Usa las flechas para girar.">
+          <div class="anillo" id="anillo"></div>
+        </div>
+        <div class="carrusel-ctl">
+          <button type="button" class="redondo" data-giro="-1" aria-label="Santuario anterior"><svg viewBox="0 0 24 24"><path d="m15 6-6 6 6 6"/></svg></button>
+          <div class="carrusel-nombre" id="carruselNombre" aria-live="polite"></div>
+          <button type="button" class="redondo" data-giro="1" aria-label="Santuario siguiente"><svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></button>
+        </div>
+        <div class="filtros" id="filtros" role="tablist" aria-label="Filtrar por lugar"></div>
+      </section>
     </div>
-  </section>
 
-  <!-- 4 · Presencia franciscana -->
-  <section id="franciscanos" class="escena franciscanos" data-camara="jerusalen-cerca">
-    <div class="fr-texto">
-      <p class="antetitulo">Custodia de Tierra Santa</p>
-      <h2>Una presencia que cuida, acoge y reza</h2>
-      <p>Desde hace ocho siglos, los hermanos de san Francisco custodian los Santos Lugares. Rezan en ellos, reciben a los peregrinos, acompañan a las comunidades cristianas locales y sostienen escuelas y obras sociales.</p>
-      <ul class="fr-puntos">
-        <li><b>Oración</b> en los santuarios, día tras día.</li>
-        <li><b>Acogida</b> de peregrinos de todo el mundo.</li>
-        <li><b>Servicio</b> a los cristianos de la tierra de Jesús.</li>
-      </ul>
+    <div class="panel" data-panel="Cien años">
+      <!-- 5b · Cien años de la revista -->
+      <section id="cien-anos" class="cien" data-camara="alto">
+        <div class="titular">
+          <p class="antetitulo">Cien años de la revista</p>
+          <h2>El mismo lugar, un siglo después</h2>
+          <p>Fotografías que publicó la revista Tierra Santa entre 1922 y 1932, frente a cómo es hoy cada santuario. Desliza cada imagen para pasar de entonces a ahora.</p>
+        </div>
+        <div class="cien-rejilla" id="cienRejilla"></div>
+        <p class="cien-nota">Fotos antiguas: revista Tierra Santa (Custodia Franciscana). Fotos actuales: Wikimedia Commons; autor y licencia en la ficha de cada santuario.</p>
+      </section>
     </div>
-    <div class="fr-mosaico" id="frMosaico">
-      <figure style="--z:60px"><img src="assets_franciscanos_procession_aux_flambeaux-20-1.webp" alt="Custodiar la memoria" loading="lazy"><figcaption><b>Custodiar la memoria</b><span>Los Santos Lugares conservan la memoria de la fe y reciben a peregrinos de todo el mundo.</span></figcaption></figure>
-      <figure style="--z:20px"><img src="assets_franciscanos_prayer_peace_school-25-1.webp" alt="Educar para el encuentro" loading="lazy"><figcaption><b>Educar para el encuentro</b><span>La formación y la educación son parte de la labor de la Custodia.</span></figcaption></figure>
-      <figure style="--z:30px"><img src="assets_franciscanos_cristiani_locali-1-1.webp" alt="Caminar con las comunidades" loading="lazy"><figcaption><b>Caminar con las comunidades</b><span>Una presencia cercana que comparte la oración y la vida de los cristianos de Tierra Santa.</span></figcaption></figure>
-      <figure style="--z:80px"><img src="assets_franciscanos_cts_220830_1931-1.webp" alt="Cultivar el diálogo" loading="lazy"><figcaption><b>Cultivar el diálogo</b><span>El encuentro entre comunidades abre espacios de cercanía y respeto.</span></figcaption></figure>
-    </div>
-  </section>
 
-  <!-- 5 · Revista -->
-  <section id="revista" class="revista" data-camara="alto">
-    <div class="titular">
-      <p class="antetitulo">Revista Tierra Santa · desde 1921</p>
-      <h2>Un siglo de revista, en una torre de portadas</h2>
-      <p>Elige una década y gira la torre. Cada portada es una puerta a la hemeroteca oficial, donde puedes seguir leyendo.</p>
+    <div class="panel" data-panel="Objetos">
+      <!-- 5c · Objetos que cuentan -->
+      <section id="objetos" class="objetos" data-camara="alto">
+        <div class="titular">
+          <p class="antetitulo">Objetos que cuentan</p>
+          <h2>Mirar de cerca lo que el peregrino toca</h2>
+          <p>Cuatro detalles de los Santos Lugares en fotografía real. Acércate, recorre la imagen y descubre lo que cuenta cada parte.</p>
+        </div>
+        <div class="ob-rejilla" id="obRejilla"></div>
+      </section>
     </div>
-    <div class="br" id="buscaRev">
-      <form class="br-form" id="brForm" role="search" aria-label="Buscar en la revista">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-        <input id="brQ" type="search" name="q" placeholder="Busca un lugar, una persona, un tema…" autocomplete="off" enterkeyhint="search" aria-label="Palabras a buscar en la revista">
-        <button class="btn oro" type="submit">Buscar</button>
-      </form>
-      <p class="br-ayuda" id="brAyuda">Busca en el texto completo de 807 números (1921–2025). Verás en qué revistas aparece; cada portada te lleva a la hemeroteca oficial para leerla. <span class="br-ej">Prueba: <button type="button" data-br="Getsemaní">Getsemaní</button> <button type="button" data-br="Custodio">Custodio</button> <button type="button" data-br="Magdala">Magdala</button> <button type="button" data-br="Belén 1948">Belén 1948</button></span></p>
-      <div class="br-res" id="brRes" aria-live="polite"></div>
-    </div>
-    <div class="decadas" id="decadas" role="tablist" aria-label="Décadas"></div>
-    <div class="torre-marco" id="torreMarco" tabindex="0" aria-label="Torre de portadas. Arrastra o usa las flechas para girarla.">
-      <div class="torre" id="torre"></div>
-    </div>
-    <p class="torre-info" id="torreInfo" aria-live="polite"></p>
-    <div class="acciones centro">
-      <a class="btn oro" href="https://revistatierrasanta.com/hemeroteca/" target="_blank" rel="noopener">Ir a la hemeroteca oficial ↗</a>
-      <a class="btn vidrio" href="https://revistatierrasanta.com/" target="_blank" rel="noopener">Revista Tierra Santa ↗</a>
-    </div>
-  </section>
+  </div>
 
-  <!-- 5a · Frailes de la revista -->
-  <section id="frailes" class="frailes" data-camara="alto">
-    <div class="titular">
-      <p class="antetitulo">Un siglo de nombres</p>
-      <h2>Los frailes que pasaron por la revista</h2>
-      <p>Custodios, arqueólogos, redactores, mártires y cronistas: los franciscanos que más aparecen en cien años de Tierra Santa, con los números donde puedes encontrarlos.</p>
+  <!-- ===== Grupo · Franciscanos ===== -->
+  <div class="grupo" id="grupo-franciscanos" data-titulo="Franciscanos">
+    <div class="panel" data-panel="Historia">
+      <!-- 3 · Historia -->
+      <section id="historia" class="historia" data-camara="historia">
+        <div class="historia-pegajosa">
+          <div class="titular">
+            <p class="antetitulo">Línea del tiempo</p>
+            <h2>De la antigüedad a hoy</h2>
+            <p>Seis etapas en la historia de los Santos Lugares. Desliza: el tiempo avanza en profundidad.</p>
+            <button class="btn vidrio" type="button" data-pelicula><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg> Ver la película (25 s)</button>
+          </div>
+          <div class="tunel" id="tunel"></div>
+          <ol class="regla" id="regla"></ol>
+          <p class="aviso-ia">Recreaciones visuales creadas con IA; no son fotografías documentales exactas.</p>
+        </div>
+      </section>
     </div>
-    <div class="fr-grupos" id="frGrupos" role="tablist" aria-label="Grupos de frailes"></div>
-    <p class="fr-gdesc" id="frGDesc"></p>
-    <div class="fr-rejilla" id="frRejilla" aria-live="polite"></div>
-    <p class="fr-nota">Recuento automático sobre el texto completo de 807 números; cada portada abre ese número en la hemeroteca oficial.</p>
-  </section>
 
-  <!-- 5b · Cien años de la revista -->
-  <section id="cien-anos" class="cien" data-camara="alto">
-    <div class="titular">
-      <p class="antetitulo">Cien años de la revista</p>
-      <h2>El mismo lugar, un siglo después</h2>
-      <p>Fotografías que publicó la revista Tierra Santa entre 1922 y 1932, frente a cómo es hoy cada santuario. Desliza cada imagen para pasar de entonces a ahora.</p>
+    <div class="panel" data-panel="Presencia">
+      <!-- 4 · Presencia franciscana -->
+      <section id="franciscanos" class="escena franciscanos" data-camara="jerusalen-cerca">
+        <div class="fr-texto">
+          <p class="antetitulo">Custodia de Tierra Santa</p>
+          <h2>Una presencia que cuida, acoge y reza</h2>
+          <p>Desde hace ocho siglos, los hermanos de san Francisco custodian los Santos Lugares. Rezan en ellos, reciben a los peregrinos, acompañan a las comunidades cristianas locales y sostienen escuelas y obras sociales.</p>
+          <ul class="fr-puntos">
+            <li><b>Oración</b> en los santuarios, día tras día.</li>
+            <li><b>Acogida</b> de peregrinos de todo el mundo.</li>
+            <li><b>Servicio</b> a los cristianos de la tierra de Jesús.</li>
+          </ul>
+        </div>
+        <div class="fr-mosaico" id="frMosaico">
+          <figure style="--z:60px"><img src="assets_franciscanos_procession_aux_flambeaux-20-1.webp" alt="Custodiar la memoria" loading="lazy"><figcaption><b>Custodiar la memoria</b><span>Los Santos Lugares conservan la memoria de la fe y reciben a peregrinos de todo el mundo.</span></figcaption></figure>
+          <figure style="--z:20px"><img src="assets_franciscanos_prayer_peace_school-25-1.webp" alt="Educar para el encuentro" loading="lazy"><figcaption><b>Educar para el encuentro</b><span>La formación y la educación son parte de la labor de la Custodia.</span></figcaption></figure>
+          <figure style="--z:30px"><img src="assets_franciscanos_cristiani_locali-1-1.webp" alt="Caminar con las comunidades" loading="lazy"><figcaption><b>Caminar con las comunidades</b><span>Una presencia cercana que comparte la oración y la vida de los cristianos de Tierra Santa.</span></figcaption></figure>
+          <figure style="--z:80px"><img src="assets_franciscanos_cts_220830_1931-1.webp" alt="Cultivar el diálogo" loading="lazy"><figcaption><b>Cultivar el diálogo</b><span>El encuentro entre comunidades abre espacios de cercanía y respeto.</span></figcaption></figure>
+        </div>
+      </section>
     </div>
-    <div class="cien-rejilla" id="cienRejilla"></div>
-    <p class="cien-nota">Fotos antiguas: revista Tierra Santa (Custodia Franciscana). Fotos actuales: Wikimedia Commons; autor y licencia en la ficha de cada santuario.</p>
-  </section>
 
-  <!-- 5c · Objetos que cuentan -->
-  <section id="objetos" class="objetos" data-camara="alto">
-    <div class="titular">
-      <p class="antetitulo">Objetos que cuentan</p>
-      <h2>Mirar de cerca lo que el peregrino toca</h2>
-      <p>Cuatro detalles de los Santos Lugares en fotografía real. Acércate, recorre la imagen y descubre lo que cuenta cada parte.</p>
+    <div class="panel" data-panel="Frailes">
+      <!-- 5a · Frailes de la revista -->
+      <section id="frailes" class="frailes" data-camara="alto">
+        <div class="titular">
+          <p class="antetitulo">Un siglo de nombres</p>
+          <h2>Los frailes que pasaron por la revista</h2>
+          <p>Custodios, arqueólogos, redactores, mártires y cronistas: los franciscanos que más aparecen en cien años de Tierra Santa, con los números donde puedes encontrarlos.</p>
+        </div>
+        <div class="fr-grupos" id="frGrupos" role="tablist" aria-label="Grupos de frailes"></div>
+        <p class="fr-gdesc" id="frGDesc"></p>
+        <div class="fr-rejilla" id="frRejilla" aria-live="polite"></div>
+        <p class="fr-nota">Recuento automático sobre el texto completo de 807 números; cada portada abre ese número en la hemeroteca oficial.</p>
+      </section>
     </div>
-    <div class="ob-rejilla" id="obRejilla"></div>
-  </section>
+  </div>
 
-  <!-- 5d · Escucha Tierra Santa -->
-  <section id="escucha" class="escucha" data-camara="alto">
-    <div class="titular">
-      <p class="antetitulo">Escucha Tierra Santa</p>
-      <h2>Cierra los ojos un minuto</h2>
-      <p>Grabaciones reales hechas por viajeros en los Santos Lugares. Ponte los cascos, pulsa y escucha cómo suena cada sitio.</p>
+  <!-- ===== Grupo · Revista ===== -->
+  <div class="grupo" id="grupo-revista" data-titulo="Revista">
+    <div class="panel" data-panel="Revista">
+      <!-- 5 · Revista -->
+      <section id="revista" class="revista" data-camara="alto">
+        <div class="titular">
+          <p class="antetitulo">Revista Tierra Santa · desde 1921</p>
+          <h2>Un siglo de revista, en una torre de portadas</h2>
+          <p>Elige una década y gira la torre. Cada portada es una puerta a la hemeroteca oficial, donde puedes seguir leyendo.</p>
+        </div>
+        <div class="br" id="buscaRev">
+          <form class="br-form" id="brForm" role="search" aria-label="Buscar en la revista">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input id="brQ" type="search" name="q" placeholder="Busca un lugar, una persona, un tema…" autocomplete="off" enterkeyhint="search" aria-label="Palabras a buscar en la revista">
+            <button class="btn oro" type="submit">Buscar</button>
+          </form>
+          <p class="br-ayuda" id="brAyuda">Busca en el texto completo de 807 números (1921–2025). Verás en qué revistas aparece; cada portada te lleva a la hemeroteca oficial para leerla. <span class="br-ej">Prueba: <button type="button" data-br="Getsemaní">Getsemaní</button> <button type="button" data-br="Custodio">Custodio</button> <button type="button" data-br="Magdala">Magdala</button> <button type="button" data-br="Belén 1948">Belén 1948</button></span></p>
+          <div class="br-res" id="brRes" aria-live="polite"></div>
+        </div>
+        <div class="decadas" id="decadas" role="tablist" aria-label="Décadas"></div>
+        <div class="torre-marco" id="torreMarco" tabindex="0" aria-label="Torre de portadas. Arrastra o usa las flechas para girarla.">
+          <div class="torre" id="torre"></div>
+        </div>
+        <p class="torre-info" id="torreInfo" aria-live="polite"></p>
+        <div class="acciones centro">
+          <a class="btn oro" href="https://revistatierrasanta.com/hemeroteca/" target="_blank" rel="noopener">Ir a la hemeroteca oficial ↗</a>
+          <a class="btn vidrio" href="https://revistatierrasanta.com/" target="_blank" rel="noopener">Revista Tierra Santa ↗</a>
+        </div>
+      </section>
     </div>
-    <div class="es-rejilla" id="esRejilla"></div>
-    <p class="cien-nota">Grabaciones de Freesound con licencias libres; autor y licencia en cada tarjeta. ¿Vas a peregrinar? Graba un minuto en silencio en cada santuario y lo añadimos.</p>
-  </section>
+  </div>
 
   <!-- 6 · Explorar -->
   <section id="explorar-cta" class="escena cierre" data-camara="final">
@@ -324,7 +352,7 @@ if (location.protocol === 'file:') {
 // Acceso con contraseña sencilla (cortina de privacidad, no seguridad real).
 const CLAVE = 'yhvold';
 const resumen = t => { let h = 5381; for (const c of t) h = ((h * 33) ^ c.charCodeAt(0)) >>> 0; return h.toString(36); };
-const abrir = () => { document.getElementById('candado').remove(); import('./app.js?v=16'); };
+const abrir = () => { document.getElementById('candado').remove(); import('./app.js?v=17'); };
 let dentro = false; try { dentro = localStorage.getItem('hf-acceso') === CLAVE; } catch {}
 if (dentro) abrir();
 else {
