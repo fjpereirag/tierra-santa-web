@@ -66,7 +66,13 @@ pasos.addEventListener('click', e => {
 
 // ================= Escena 3D =================
 let maqueta = null;
-const barra = $('#carga .barra i');
+const cargaCirculo = $('#carga .carga-circulo-barra');
+const cargaPct = $('#carga .carga-pct');
+const CARGA_CIRC = 2 * Math.PI * 52;
+const marcarProgreso = p => {
+  cargaCirculo.style.strokeDashoffset = CARGA_CIRC * (1 - Math.max(0, Math.min(1, p)));
+  cargaPct.textContent = Math.round(Math.max(0, Math.min(1, p)) * 100) + '%';
+};
 const etiquetas = $('#etiquetas');
 const pines = [];
 
@@ -206,10 +212,14 @@ async function iniciar3D() {
   actualizarBotonModo();
   if (ligero) { activarLigero(modoPedido === 'ligero' ? null : 'Este equipo no tiene aceleración gráfica: se muestra el mapa ilustrado en lugar de la maqueta 3D.'); return; }
   try {
-    maqueta = await crearMaqueta($('#escena'), { movil, alProgreso: p => { barra.style.width = Math.round(p * 100) + '%'; } });
+    const espera = ms => new Promise((_, rj) => setTimeout(() => rj(new Error('tiempo agotado cargando la maqueta 3D')), ms));
+    maqueta = await Promise.race([
+      crearMaqueta($('#escena'), { movil, alProgreso: marcarProgreso }),
+      espera(18000)
+    ]);
   } catch (e) {
     console.warn('No se pudo iniciar la maqueta 3D', e);
-    activarLigero(null);
+    activarLigero(modoPedido === '3d' ? 'La maqueta 3D ha tardado demasiado en cargar. Se muestra el mapa ilustrado en su lugar.' : null);
     return;
   }
   // faros y etiquetas

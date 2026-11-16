@@ -388,15 +388,24 @@ if (location.protocol === 'file:') {
 const CLAVE = 'yhvold';
 const resumen = t => { let h = 5381; for (const c of t) h = ((h * 33) ^ c.charCodeAt(0)) >>> 0; return h.toString(36); };
 const abrir = () => {
-  document.getElementById('candado').remove();
+  const candado = document.getElementById('candado');
+  if (candado) candado.remove();
   const portal = document.getElementById('portal');
-  portal.hidden = false;
-  document.body.classList.add('portal-abierto');
-  portal.querySelector('#portalEntrar').onclick = () => {
-    portal.classList.add('portal-oculto');
-    document.body.classList.remove('portal-abierto');
-  };
-  import('./app.js?v=18');
+  if (portal) {
+    portal.hidden = false;
+    document.body.classList.add('portal-abierto');
+    const btnEntrar = portal.querySelector('#portalEntrar');
+    if (btnEntrar) btnEntrar.onclick = () => {
+      portal.classList.add('portal-oculto');
+      document.body.classList.remove('portal-abierto');
+    };
+  }
+  import('./app.js?v=18').catch(e => {
+    console.warn('No se pudo cargar app.js', e);
+    const texto = document.querySelector('#carga .carga-texto');
+    if (texto) texto.innerHTML = '<span class="carga-nombre">No se pudo cargar.<br>Revisa tu conexión.</span>' +
+      '<button type="button" style="margin-top:10px;border:1px solid rgba(240,211,148,.4);background:rgba(217,178,106,.12);color:inherit;border-radius:999px;padding:8px 16px;font:500 13px var(--sans);cursor:pointer" onclick="location.reload()">Reintentar</button>';
+  });
 };
 let dentro = false; try { dentro = localStorage.getItem('hf-acceso') === CLAVE; } catch {}
 if (dentro) abrir();
