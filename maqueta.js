@@ -23,7 +23,7 @@ export async function crearMaqueta(canvas, { movil = false, alProgreso = () => {
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
   const escena = new THREE.Scene();
-  escena.fog = new THREE.Fog(0x1a130d, 160, 420);
+  escena.fog = new THREE.Fog(0xf8f2e4, 160, 420); // antes 0x1a130d, para que el terreno se desvanezca en el fondo claro
   const camara = new THREE.PerspectiveCamera(38, 1, 0.5, 1200);
 
   // ---------- carga de recursos ----------
@@ -87,7 +87,7 @@ export async function crearMaqueta(canvas, { movil = false, alProgreso = () => {
   // ---------- zócalo (paredes laterales) ----------
   function pared(puntos) {
     const n = puntos.length, p = new Float32Array(n * 2 * 3), col = new Float32Array(n * 2 * 3), idx = [];
-    const arriba = new THREE.Color(0x7a5a3c), abajo = new THREE.Color(0x150f0a);
+    const arriba = new THREE.Color(0x9c7b4e), abajo = new THREE.Color(0x3b2a18);
     puntos.forEach((q, k) => {
       p.set([q.x, q.y, q.z], k * 6); p.set([q.x, BASE, q.z], k * 6 + 3);
       col.set([arriba.r, arriba.g, arriba.b], k * 6); col.set([abajo.r, abajo.g, abajo.b], k * 6 + 3);
@@ -106,7 +106,7 @@ export async function crearMaqueta(canvas, { movil = false, alProgreso = () => {
   ];
   const matPared = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 1, side: THREE.DoubleSide });
   lados.forEach(l => escena.add(new THREE.Mesh(pared(l), matPared)));
-  const losa = new THREE.Mesh(new THREE.BoxGeometry(ANCHO + 0.02, 0.5, FONDO + 0.02), new THREE.MeshStandardMaterial({ color: 0x0f0b08, roughness: 1 }));
+  const losa = new THREE.Mesh(new THREE.BoxGeometry(ANCHO + 0.02, 0.5, FONDO + 0.02), new THREE.MeshStandardMaterial({ color: 0x3b2a18, roughness: 1 }));
   losa.position.y = BASE - 0.25; escena.add(losa);
   // filo dorado del zócalo
   const filoGeo = new THREE.EdgesGeometry(new THREE.BoxGeometry(ANCHO + 0.6, 0.02, FONDO + 0.6));
