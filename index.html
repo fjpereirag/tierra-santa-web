@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Huellas franciscanas · Tierra Santa en 3D</title>
 <meta name="description" content="Un viaje en 3D por Tierra Santa: la maqueta en relieve, veintiocho santuarios en vídeo, ocho siglos de presencia franciscana y un siglo de Revista Tierra Santa.">
-<meta name="theme-color" content="#140f0b">
+<meta name="theme-color" content="#F8F2E4">
 <meta name="robots" content="noindex,nofollow">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23140f0b'/%3E%3Cpath d='M32 14v38M19 24h26' stroke='%23d9b26a' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,11 +29,46 @@
 <div id="velo" aria-hidden="true"></div>
 <div id="etiquetas" aria-label="Lugares en la maqueta"></div>
 
+<div id="portal" aria-label="Tres webs sobre Tierra Santa" hidden>
+  <div class="portal-cab">
+    <div class="portal-eyebrow">Custodia Franciscana de Tierra Santa</div>
+    <h1>Un mismo amor a los <em>Santos Lugares</em>,<br>contado de tres maneras</h1>
+  </div>
+  <nav class="portal-caminos">
+    <a class="portal-camino" href="https://revistatierrasanta.com/">
+      <span class="portal-tag">Revista</span>
+      <span class="portal-num">I.</span>
+      <h2>Revista Tierra Santa</h2>
+      <p>Más de cien años de crónicas desde los Santos Lugares, número a número, desde 1921 hasta hoy.</p>
+      <span class="portal-ir">Entrar <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
+    <a class="portal-camino" href="https://fjpereirag.github.io/peregrinar-por-dentro/">
+      <span class="portal-tag">Oración</span>
+      <span class="portal-num">II.</span>
+      <h2>Peregrinar por dentro</h2>
+      <p>Un lugar santo al día, para rezar desde lo que vivimos: reflexión, oración y un mapa 3D que te lleva hasta allí.</p>
+      <span class="portal-ir">Entrar <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
+    <button type="button" class="portal-camino portal-aqui" id="portalEntrar">
+      <span class="portal-tag">3D</span>
+      <span class="portal-num">III.</span>
+      <h2>Huellas franciscanas</h2>
+      <p>Un viaje visual por Tierra Santa: la maqueta 3D de la Custodia, los santuarios y los franciscanos.</p>
+      <span class="portal-ir">Entrar <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </button>
+  </nav>
+</div>
+
 <div id="carga" role="status" aria-live="polite">
   <div class="carga-in">
-    <svg viewBox="0 0 64 64" class="tau" aria-hidden="true"><path d="M32 12v40M17 22h30"/></svg>
-    <p>Preparando la maqueta de Tierra Santa…</p>
-    <div class="barra"><i></i></div>
+    <svg viewBox="0 0 120 120" class="carga-circulo" aria-hidden="true">
+      <circle class="carga-circulo-fondo" cx="60" cy="60" r="52"/>
+      <circle class="carga-circulo-barra" cx="60" cy="60" r="52"/>
+    </svg>
+    <div class="carga-texto">
+      <span class="carga-nombre">Tierra<br>Santa</span>
+      <span class="carga-pct">0%</span>
+    </div>
   </div>
 </div>
 
@@ -340,10 +375,10 @@
 <script>
 if (location.protocol === 'file:') {
   var c = document.querySelector('#carga .carga-in');
-  c.innerHTML = '<p style="font-size:20px;color:#f0d394;margin:0 0 12px">La web debe abrirse desde un servidor</p>' +
+  c.innerHTML = '<p style="font-size:20px;color:#8A5A2B;margin:0 0 12px">La web debe abrirse desde un servidor</p>' +
     '<p style="max-width:520px;line-height:1.6;margin:0 auto">El navegador no permite cargar la maqueta 3D con doble clic.<br>' +
-    'Abre PowerShell en esta carpeta y escribe <code style="color:#f0d394">py -m http.server 8000</code>,<br>' +
-    'después visita <a href="http://localhost:8000" style="color:#f0d394">http://localhost:8000</a>.<br>' +
+    'Abre PowerShell en esta carpeta y escribe <code style="color:#8A5A2B">py -m http.server 8000</code>,<br>' +
+    'después visita <a href="http://localhost:8000" style="color:#8A5A2B">http://localhost:8000</a>.<br>' +
     'Publicada en GitHub Pages funciona directamente.</p>';
 }
 </script>
@@ -352,7 +387,17 @@ if (location.protocol === 'file:') {
 // Acceso con contraseña sencilla (cortina de privacidad, no seguridad real).
 const CLAVE = 'yhvold';
 const resumen = t => { let h = 5381; for (const c of t) h = ((h * 33) ^ c.charCodeAt(0)) >>> 0; return h.toString(36); };
-const abrir = () => { document.getElementById('candado').remove(); import('./app.js?v=18'); };
+const abrir = () => {
+  document.getElementById('candado').remove();
+  const portal = document.getElementById('portal');
+  portal.hidden = false;
+  document.body.classList.add('portal-abierto');
+  portal.querySelector('#portalEntrar').onclick = () => {
+    portal.classList.add('portal-oculto');
+    document.body.classList.remove('portal-abierto');
+  };
+  import('./app.js?v=18');
+};
 let dentro = false; try { dentro = localStorage.getItem('hf-acceso') === CLAVE; } catch {}
 if (dentro) abrir();
 else {
