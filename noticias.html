@@ -1,0 +1,734 @@
+<!doctype html>
+<html lang="es" data-variant="pastoral">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Actualidad · Revista Tierra Santa</title>
+<meta name="description" content="Las noticias de la revista Tierra Santa, lomo a lomo: gira, desliza o teclea para recorrer el archivo y abrir cada noticia en su fuente.">
+<link rel="icon" href="wp-content/uploads/2023/03/1200px-Croix_de_l_Ordre_du_Saint-Sepulcre.svg.png">
+<style>
+@font-face {font-family: 'Montserrat'; font-style: normal; font-weight: 400; unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;font-display:swap; src: url(wp-content/themes/yootheme/fonts/montserrat-dade07bd.woff2) format('woff2'); }
+@font-face {font-family: 'Montserrat'; font-style: normal; font-weight: 400; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;font-display:swap; src: url(wp-content/themes/yootheme/fonts/montserrat-ab105b20.woff2) format('woff2'); }
+@font-face {font-family: 'Montserrat'; font-style: normal; font-weight: 500; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;font-display:swap; src: url(wp-content/themes/yootheme/fonts/montserrat-552d3dce.woff2) format('woff2'); }
+@font-face {font-family: 'Montserrat'; font-style: normal; font-weight: 600; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;font-display:swap; src: url(wp-content/themes/yootheme/fonts/montserrat-a77dae9d.woff2) format('woff2'); }
+@font-face {font-family: 'Taviraj'; font-style: normal; font-weight: 200; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;font-display:swap; src: url(wp-content/themes/yootheme/fonts/taviraj-bd1da705.woff2) format('woff2'); }
+@font-face {font-family: 'Taviraj'; font-style: normal; font-weight: 300; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;font-display:swap; src: url(wp-content/themes/yootheme/fonts/taviraj-24c3961e.woff2) format('woff2'); }
+:root{
+  --font-display:Taviraj,"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --font-body:Montserrat,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --step-hero:clamp(2.6rem,6vw,5.2rem);
+  --step-h2:clamp(1.6rem,3.2vw,2.6rem);
+  --step-body:clamp(1rem,.3vw + .95rem,1.125rem);
+  --step-small:.74rem;
+  --bg:#F8F2E4; --bg-2:#EDE0C3; --fg:#3B2A18; --muted:#7C6447; --accent:#9C6B30; --accent-2:#6E3B23;
+  --paper:#F7F2E6; --ink:#201A12; --ink-soft:#4b4030;
+  --line:color-mix(in srgb,var(--accent) 30%,transparent);
+  --line-soft:color-mix(in srgb,var(--fg) 12%,transparent);
+  --space-1:.5rem;--space-2:1rem;--space-3:1.5rem;--space-4:2.5rem;--space-5:4rem;--space-6:6.5rem;
+  --gutter:clamp(1.25rem,4vw,4rem); --maxw:1440px;
+  --ease-out:cubic-bezier(.22,1,.36,1); --ease-sheet:cubic-bezier(.76,0,.18,1);
+  --dur-micro:180ms; --dur-ui:380ms;
+  --head-h:76px;
+  --H:min(46vh,32vw);
+}
+*{box-sizing:border-box}
+html{overflow-x:clip;background:var(--bg);color:var(--fg);font-family:var(--font-body);-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;font-size:var(--step-body);line-height:1.55;min-height:100vh;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit;color:inherit;background:none}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+::selection{background:var(--accent);color:var(--bg)}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter)}
+.caps{font-size:var(--step-small);font-weight:600;letter-spacing:.18em;text-transform:uppercase}
+.skip{position:fixed;left:-999px;top:1rem;z-index:99;background:var(--fg);color:var(--bg);padding:.75rem 1rem}
+.skip:focus{left:1rem}
+
+/* ---------- Cabecera ---------- */
+.top{position:fixed;inset:0 0 auto 0;z-index:60;height:var(--head-h);display:flex;align-items:center;
+  background:linear-gradient(var(--bg),color-mix(in srgb,var(--bg) 0%,transparent))}
+.top .wrap{width:100%;display:flex;align-items:center;justify-content:space-between;gap:var(--space-3)}
+.brand{display:flex;align-items:center;gap:.7rem;min-height:44px;font-family:var(--font-display);font-weight:300;font-size:1.45rem;letter-spacing:-.01em;white-space:nowrap}
+.brand img{width:26px;height:26px;display:block}
+.brand small{font-family:var(--font-body);font-size:.62rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);align-self:flex-end;padding-bottom:.35rem}
+.nav{display:flex;align-items:center;gap:clamp(1rem,2.4vw,2.5rem)}
+.nav a{white-space:nowrap;font-size:var(--step-small);font-weight:500;letter-spacing:.14em;text-transform:uppercase;min-height:44px;display:inline-flex;align-items:center;color:var(--fg);
+  background:linear-gradient(var(--accent),var(--accent)) 0 72%/0 1px no-repeat;transition:background-size var(--dur-ui) var(--ease-out),color var(--dur-micro) var(--ease-out)}
+.nav a:hover{color:var(--accent);background-size:100% 1px}
+.nav a.give{background:var(--accent-2);color:#FBF7EE;padding:0 1.1rem;min-height:44px;background-image:none;border-radius:999px}
+.nav a.give:hover{background:var(--accent);color:var(--bg)}
+.give .g-s{display:none}
+@media (max-width:980px){.nav a:not(.give){display:none}}
+@media (max-width:480px){
+  .give .g-l{display:none}.give .g-s{display:inline}
+  .nav a.give{padding:0 .8rem}
+  .brand{font-size:1.1rem;gap:.5rem}
+  .brand small{display:none}
+  .top .wrap{gap:.6rem}
+}
+
+/* ---------- Encabezado de la sección ---------- */
+main{padding-top:calc(var(--head-h) + clamp(1.5rem,4vh,3rem))}
+.intro-h{padding:0 0 clamp(1rem,2.5vh,2rem)}
+.intro-h h1{margin:.4rem 0 0;font-family:var(--font-display);font-weight:300;font-size:var(--step-hero);line-height:1.02;letter-spacing:-.01em;max-width:16ch}
+.intro-h p{margin:.9rem 0 0;color:var(--muted);max-width:46ch}
+.caps.eyebrow{color:var(--accent)}
+
+/* ---------- Línea del tiempo ---------- */
+.timeline{padding:clamp(1rem,2.5vh,1.6rem) 0 0;position:relative;z-index:5}
+.time-row{display:flex;align-items:center;gap:1rem}
+.time-end{color:var(--muted);white-space:nowrap;font-size:.72rem}
+#yearRange{flex:1;min-width:0;height:44px;margin:0;background:transparent;-webkit-appearance:none;appearance:none;cursor:pointer}
+#yearRange::-webkit-slider-runnable-track{height:1px;background:var(--line)}
+#yearRange::-moz-range-track{height:1px;background:var(--line)}
+#yearRange::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:12px;height:28px;margin-top:-13.5px;border:0;border-radius:0;background:var(--accent);box-shadow:0 0 0 6px color-mix(in srgb,var(--accent) 18%,transparent)}
+#yearRange::-moz-range-thumb{width:12px;height:28px;border:0;border-radius:0;background:var(--accent);box-shadow:0 0 0 6px color-mix(in srgb,var(--accent) 18%,transparent)}
+#yearRange:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.yearticks{list-style:none;margin:.3rem 0 0;padding:0 .2rem;display:flex;justify-content:space-between}
+.yearticks button{background:transparent;border:0;cursor:pointer;min-height:40px;min-width:40px;padding:0 .25rem;font-size:.78rem;font-weight:600;letter-spacing:.06em;color:var(--muted);font-variant-numeric:tabular-nums;
+  transition:color .2s}
+.yearticks button:hover,.yearticks button[aria-selected="true"]{color:var(--accent)}
+.yearticks button[aria-selected="true"]{box-shadow:inset 0 1px 0 var(--accent)}
+@media (max-width:480px){.time-end{font-size:.64rem}.yearticks button{font-size:.7rem;min-width:32px}}
+
+/* ---------- Estantería ---------- */
+.shelfwrap{position:relative;margin-top:clamp(1rem,3vh,2rem);display:flex;align-items:center;gap:.5rem}
+.stage{position:relative;flex:1 1 auto;height:calc(var(--H) * 1.6);min-height:300px;overflow:hidden;perspective:2200px}
+.stage::before,.stage::after{content:"";position:absolute;top:0;bottom:0;width:min(10vw,90px);z-index:8;pointer-events:none}
+.stage::before{left:0;background:linear-gradient(90deg,var(--bg),transparent)}
+.stage::after{right:0;background:linear-gradient(270deg,var(--bg),transparent)}
+.rig{position:absolute;left:50%;top:50%;width:0;height:0;transform-style:preserve-3d}
+.book{position:absolute;top:calc(var(--H) * -0.5);left:0;height:var(--H);transform-style:preserve-3d;transform-origin:0% 50%;cursor:pointer;
+  touch-action:pan-y;-webkit-tap-highlight-color:transparent}
+.book:focus-visible .spine{outline:2px solid var(--fg);outline-offset:2px}
+.spine,.cover{position:absolute;left:0;top:0;height:100%;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:3px 3px 1px 1px;
+  box-shadow:0 20px 40px -18px rgba(0,0,0,.7),inset 0 0 0 1px rgba(255,255,255,.05)}
+.spine{width:var(--ws);display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:.9rem 0;overflow:hidden}
+.spine .mark{width:16px;height:16px;border-radius:50%;border:1px solid currentColor;opacity:.55;display:grid;place-items:center;font-size:9px;margin-bottom:.6rem;flex:none}
+.spine .vt{writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--font-display);font-weight:300;font-size:clamp(.74rem,1.1vw,.95rem);line-height:1.2;
+  max-height:100%;overflow:hidden;text-overflow:ellipsis;letter-spacing:.01em;text-wrap:balance}
+.spine .yr{writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--font-body);font-size:.62rem;font-weight:600;letter-spacing:.14em;opacity:.7;margin-top:.5rem;flex:none}
+.cover{width:var(--d);transform:rotateY(90deg);background-size:cover;background-position:center;display:flex;align-items:flex-end}
+.cover .fallback{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:.9rem 1rem;overflow:hidden}
+.cover .fallback .motif{position:absolute;inset:0;opacity:.5}
+.cover .cfx{position:relative;z-index:1;font-family:var(--font-display);font-weight:300;font-size:clamp(.95rem,1.6vw,1.3rem);line-height:1.15;text-wrap:balance}
+.cover::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.72) 0%,rgba(0,0,0,.08) 55%,transparent 75%);pointer-events:none}
+.book.activo .spine,.book.activo .cover{box-shadow:0 34px 70px -24px rgba(0,0,0,.85),inset 0 0 0 1px rgba(255,255,255,.08)}
+
+.arrow{flex:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--line-soft);display:grid;place-items:center;font-size:1.3rem;color:var(--fg);transition:border-color .2s,background .2s,transform .2s}
+.arrow:hover{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent);transform:scale(1.06)}
+
+/* ---------- Ficha activa debajo de la estantería ---------- */
+.activeinfo{margin-top:clamp(1.4rem,3.2vh,2.2rem);display:grid;grid-template-columns:1fr auto;gap:1.2rem;align-items:end}
+.ai-tag{margin:0 0 .4rem;color:var(--accent)}
+.ai-titlemask{overflow:hidden;position:relative}
+.ai-title{margin:0;font-family:var(--font-display);font-weight:300;font-size:var(--step-h2);line-height:1.1;max-width:34ch;text-wrap:balance;
+  transition:transform .46s var(--ease-out);display:block}
+.ai-meta{margin:.6rem 0 0;color:var(--muted);font-size:.9rem}
+.ai-desc{margin:.5rem 0 0;color:var(--muted);max-width:60ch;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.ai-slide-up{animation:slideUp .46s var(--ease-out)}
+.ai-slide-down{animation:slideDown .46s var(--ease-out)}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+@keyframes slideDown{from{transform:translateY(-100%)}to{transform:translateY(0)}}
+@media (prefers-reduced-motion:reduce){.ai-slide-up,.ai-slide-down{animation:none}}
+.ver{display:inline-flex;align-items:center;gap:.5rem;border:1px solid var(--accent);color:var(--accent);border-radius:999px;padding:.8rem 1.3rem;font-weight:600;font-size:.85rem;letter-spacing:.05em;white-space:nowrap;
+  transition:background .2s,color .2s}
+.ver:hover{background:var(--accent);color:var(--bg)}
+.counter{font-family:var(--font-body);font-size:.68rem;letter-spacing:.14em;color:var(--muted);white-space:nowrap}
+
+/* ---------- Pie ---------- */
+.foot{display:block;padding:clamp(3rem,7vh,5rem) 0 2.5rem;border-top:1px solid var(--line);background:var(--bg);color:var(--fg);font-size:1rem;margin-top:clamp(2.5rem,6vh,4.5rem)}
+.foot .wrap.foot-g{display:grid;grid-template-columns:minmax(9rem,13rem) 2fr 1.3fr 1fr;column-gap:var(--space-5);row-gap:var(--space-4);align-items:start}
+.foot-x{display:block;align-self:center}
+.foot-x img{width:100%;max-width:140px;height:auto;display:block;transition:transform 1s var(--ease-out)}
+.foot-x:hover img{transform:rotate(90deg)}
+.foot-c h2{margin:0 0 var(--space-3);color:var(--accent);font-family:var(--font-body);font-size:.78rem;font-weight:600;letter-spacing:.18em}
+.foot-c ul{list-style:none;margin:0;padding:0;display:grid;gap:.6rem}
+.foot-c a{color:var(--muted);transition:color .2s}
+.foot-c a:hover{color:var(--fg)}
+.foot-n{margin:var(--space-4) 0 0;color:var(--muted);font-size:.8rem}
+@media (max-width:860px){.foot .wrap.foot-g{grid-template-columns:1fr 1fr}}
+
+/* ---------- Ficha animada (detalle) ---------- */
+.sheet{position:fixed;inset:0;z-index:90;background:var(--paper);color:var(--ink);clip-path:inset(50% 50% 50% 50% round 8px);
+  transition:clip-path .9s var(--ease-sheet);overflow:hidden}
+.sheet[data-open="true"]{clip-path:inset(0 0 0 0 round 0px)}
+.sheet[hidden]{display:none}
+@media (prefers-reduced-motion:reduce){.sheet{transition:none}}
+.sheet-scroll{position:absolute;inset:0;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.sheet-in{max-width:1180px;margin:0 auto;padding:clamp(1.4rem,5vw,4rem) clamp(1.2rem,4vw,3rem) 4rem;display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(1.5rem,4vw,4rem);align-items:start;min-height:100%}
+@media (max-width:860px){.sheet-in{grid-template-columns:1fr;padding-top:5.5rem}}
+.sheet-close{position:fixed;top:1.2rem;right:1.2rem;z-index:5;width:46px;height:46px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-size:1.1rem;
+  box-shadow:0 10px 24px rgba(0,0,0,.25)}
+.sheet-close:hover{background:var(--accent-2)}
+.sheet-text{padding-top:clamp(3rem,8vh,5.5rem)}
+.sheet-tag{margin:0;color:var(--accent-2);font-weight:700}
+.sheet-text h2{font-family:var(--font-display);font-weight:300;font-size:clamp(1.8rem,4vw,3.4rem);line-height:1.08;margin:.6rem 0 0;text-wrap:balance}
+.sheet-meta{margin:1rem 0 0;color:var(--ink-soft);font-size:.9rem;display:flex;gap:1rem;flex-wrap:wrap}
+.sheet-desc{margin:1.4rem 0 0;font-size:1.08rem;line-height:1.65;max-width:52ch}
+.sheet-note{margin:1rem 0 0;color:var(--ink-soft);font-style:italic}
+.sheet-ver{margin-top:2rem;display:inline-flex;align-items:center;gap:.6rem;background:var(--ink);color:var(--paper);border-radius:999px;padding:1rem 1.6rem;font-weight:700;letter-spacing:.03em}
+.sheet-ver:hover{background:var(--accent-2)}
+.sheet-cover{position:relative;aspect-ratio:3/4;border-radius:10px;overflow:hidden;box-shadow:0 40px 80px -30px rgba(0,0,0,.4);margin-top:clamp(3rem,8vh,5.5rem)}
+.sheet-cover img{width:100%;height:100%;object-fit:cover;display:block}
+.sheet-cover .fb{width:100%;height:100%;display:flex;align-items:flex-end;padding:2rem;position:relative}
+.sheet-cover .fb .cfx{position:relative;z-index:1;font-family:var(--font-display);font-weight:300;font-size:1.8rem;line-height:1.15}
+
+/* ---------- Cursor ---------- */
+.cursor{position:fixed;left:0;top:0;width:34px;height:34px;border:1.5px solid var(--fg);border-radius:50%;pointer-events:none;z-index:200;
+  transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s,border-color .2s;mix-blend-mode:difference;display:none}
+body.cursor-fino .cursor{display:block}
+body.cursor-fino,body.cursor-fino .book,body.cursor-fino .arrow,body.cursor-fino .yearticks button{cursor:none}
+.cursor.sobre-libro{width:20px;height:20px}
+.cursor.sobre-activo{width:64px;height:64px;background:var(--accent);border-color:var(--accent);display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-body);font-size:.6rem;font-weight:700;letter-spacing:.1em;color:var(--bg);mix-blend-mode:normal}
+.cursor.sobre-activo::after{content:"ABRIR"}
+
+@media (max-width:767px){
+  :root{--H:min(42vw,30svh)}
+  .top{height:64px}
+  .brand{font-size:1.2rem}
+  .intro-h h1{font-size:clamp(2rem,8vw,2.8rem)}
+  .activeinfo{grid-template-columns:1fr;gap:.8rem}
+  .ver{justify-self:start}
+  .ai-title{max-width:none;font-size:clamp(1.4rem,6vw,2rem)}
+  .ai-desc{display:none}
+  body.cursor-fino .cursor{display:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="portada-3d-ventana.html" aria-label="Tierra Santa · inicio">
+      <img src="wp-content/uploads/2023/03/1200px-Croix_de_l_Ordre_du_Saint-Sepulcre.svg.png" alt="" width="26" height="26">
+      Tierra Santa <small>Revista</small>
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <a class="opt" href="portada-3d-ventana.html#archivo">Hemeroteca</a>
+      <a class="opt" href="noticias.html" aria-current="page">Actualidad</a>
+      <a class="opt" href="portada-3d-ventana.html#suscripciones">Suscripciones</a>
+      <a class="opt" href="portada-3d-ventana.html#quienes-somos">Quiénes somos</a>
+      <a class="opt" href="portada-3d-ventana.html#contacto">Contacto</a>
+      <a class="keep give" href="donaciones/index.html"><span class="g-l">Haz una donación</span><span class="g-s">Donar</span></a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <div class="intro-h">
+      <p class="caps eyebrow">Actualidad</p>
+      <h1>Cada noticia, en su propio lomo</h1>
+      <p>Gira la estantería, desliza con el dedo o el ratón, o usa las flechas y el teclado: recorre el archivo de la revista Tierra Santa y abre cada noticia en su fuente original.</p>
+    </div>
+
+    <div class="timeline" id="timeline">
+      <div class="time-row">
+        <span class="caps time-end" id="timeOld"></span>
+        <input type="range" id="yearRange" min="0" max="1" step="1" value="1" aria-label="Línea del tiempo: desliza para recorrer las noticias por fecha">
+        <span class="caps time-end" id="timeNew">Hoy</span>
+      </div>
+      <ul class="yearticks" id="yearTicks" role="tablist" aria-label="Filtrar por año"></ul>
+    </div>
+
+    <div class="shelfwrap">
+      <button type="button" class="arrow" id="prevBtn" aria-label="Noticia anterior">‹</button>
+      <div class="stage" id="stage" aria-label="Estantería de noticias" aria-roledescription="carrusel 3D">
+        <div class="rig" id="rig"></div>
+      </div>
+      <button type="button" class="arrow" id="nextBtn" aria-label="Noticia siguiente">›</button>
+    </div>
+
+    <div class="activeinfo">
+      <div>
+        <p class="caps ai-tag" id="aiTag"></p>
+        <div class="ai-titlemask"><h2 class="ai-title" id="aiTitle"></h2></div>
+        <p class="ai-meta" id="aiMeta"></p>
+        <p class="ai-desc" id="aiDesc"></p>
+        <a class="ai-ver" id="aiVer" href="#" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin-top:.6rem;text-decoration:underline;font-family:var(--font-body);font-size:.95rem">Leer la noticia completa ↗</a>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:.6rem">
+        <span class="counter" id="counter" aria-live="polite"></span>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="foot" id="pie">
+  <div class="wrap foot-g">
+    <a class="foot-x" href="portada-3d-ventana.html#archivo" aria-label="Volver arriba, a las portadas"><img src="wp-content/uploads/2023/03/1200px-Croix_de_l_Ordre_du_Saint-Sepulcre.svg.png" alt="" width="140" height="140" loading="lazy"></a>
+    <nav class="foot-c" aria-labelledby="ft-1">
+      <h2 class="caps" id="ft-1">Enlaces</h2>
+      <ul>
+        <li><a href="portada-3d-ventana.html#suscripciones">Suscripciones</a></li>
+        <li><a href="noticias.html">Actualidad</a></li>
+        <li><a href="portada-3d-ventana.html#archivo">Hemeroteca</a></li>
+        <li><a href="portada-3d-ventana.html#contacto">Contacta</a></li>
+        <li><a href="portada-3d-ventana.html#quienes-somos">Quiénes somos</a></li>
+      </ul>
+    </nav>
+    <nav class="foot-c" aria-labelledby="ft-2">
+      <h2 class="caps" id="ft-2">Legal</h2>
+      <ul>
+        <li><a href="politica-de-privacidad/index.html">Aviso legal</a></li>
+        <li><a href="politica-de-cookies/index.html">Política de cookies</a></li>
+        <li><a href="politica-de-privacidad/index.html">Política de privacidad</a></li>
+      </ul>
+    </nav>
+    <nav class="foot-c" aria-labelledby="ft-3">
+      <h2 class="caps" id="ft-3">Síguenos</h2>
+      <ul>
+        <li><a href="https://www.facebook.com/groups/587737163281903" target="_blank" rel="noopener">Facebook ↗</a></li>
+        <li><a href="https://www.instagram.com/r_tierrasanta/" target="_blank" rel="noopener">Instagram ↗</a></li>
+        <li><a href="https://twitter.com/R_TierraSanta" target="_blank" rel="noopener">Twitter ↗</a></li>
+      </ul>
+    </nav>
+  </div>
+  <p class="foot-n">© 2026 Revista Tierra Santa</p>
+</footer>
+
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle" hidden>
+  <button type="button" class="sheet-close" id="sheetClose" aria-label="Cerrar la ficha">✕</button>
+  <div class="sheet-scroll">
+    <div class="sheet-in">
+      <div class="sheet-text">
+        <p class="caps sheet-tag" id="sheetTag"></p>
+        <h2 id="sheetTitle"></h2>
+        <p class="sheet-meta"><span id="sheetAuthor"></span><span id="sheetDate"></span></p>
+        <p class="sheet-desc" id="sheetDesc"></p>
+        <p class="sheet-note" id="sheetNote"></p>
+        <a class="sheet-ver" id="sheetVer" target="_blank" rel="noopener noreferrer">Ver la noticia completa ↗</a>
+      </div>
+      <div class="sheet-cover" id="sheetCover"></div>
+    </div>
+  </div>
+</div>
+
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+
+<script src="noticias-cache.js"></script>
+<script>
+(async function(){
+'use strict';
+
+var PALETAS=[["#14120E","#C9A35B","#B5322B","sun"],["#EADFC4","#241B10","#9C6B30","orbit"],["#B5322B","#F6E9C7","#241B10","wave"],["#2A3B3A","#E8DFC4","#C9A35B","steps"],["#6E3B23","#F2EBDD","#D9BF8C","split"],["#D9C9A3","#2A1D0E","#6E3B23","grid"],["#C9A35B","#241B10","#1E2A22","orbit"],["#1E2A22","#F2EBDD","#C9A35B","sun"]];
+var MESN=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+function hashSlug(s){var h=5381;for(var i=0;i<s.length;i++)h=((h*33)^s.charCodeAt(i))>>>0;return h}
+function decodeHtml(h){var t=document.createElement('textarea');t.innerHTML=h;return t.value}
+function textoPlano(html){var d=decodeHtml(String(html||'').replace(/<[^>]+>/g,' '));return d.replace(/\s+/g,' ').trim()}
+async function cargarNoticias(){
+  var base='https://www.revistatierrasanta.com/wp-json/wp/v2/posts';
+  var qs='?per_page=100&orderby=date&order=desc&_embed=1';
+  var primera=await fetch(base+qs+'&page=1',{mode:'cors'});
+  var total=+primera.headers.get('X-WP-TotalPages')||1;
+  var paginas=[primera.json()];
+  for(var p=2;p<=total;p++)paginas.push(fetch(base+qs+'&page='+p,{mode:'cors'}).then(function(r){return r.json()}));
+  var listas=await Promise.all(paginas);
+  var posts=[].concat.apply([],listas);
+  var items=posts.map(function(post){
+    var fecha=new Date(post.date);
+    var anio=fecha.getFullYear();
+    var media=post._embedded&&post._embedded['wp:featuredmedia']&&post._embedded['wp:featuredmedia'][0];
+    var autor=post._embedded&&post._embedded.author&&post._embedded.author[0]&&post._embedded.author[0].name;
+    var portada=media&&media.media_details&&media.media_details.sizes&&
+      (media.media_details.sizes.large||media.media_details.sizes.medium_large||media.media_details.sizes.full);
+    var pal=PALETAS[hashSlug(post.slug)%PALETAS.length];
+    return{
+      id:post.slug,
+      title:decodeHtml(post.title.rendered),
+      author:autor||'Revista Tierra Santa',
+      year:anio,
+      category:String(anio),
+      summary:textoPlano(post.excerpt.rendered).replace(/\[?…?\]?$/,'').trim(),
+      note:'Publicado el '+MESN[fecha.getMonth()]+' '+fecha.getDate()+', '+anio,
+      url:post.link,
+      cover:(portada&&portada.source_url)||(media&&media.source_url)||'',
+      color:pal[0],type:pal[1],art:pal[2],motif:pal[3]
+    };
+  });
+  items.sort(function(a,b){return b.year-a.year||(b.id<a.id?-1:1)});
+  return items;
+}
+var CACHE_KEY_NOT='rts_noticias_v1';
+function leerCacheNoticias(){
+  try{
+    var raw=localStorage.getItem(CACHE_KEY_NOT);
+    if(!raw)return null;
+    var o=JSON.parse(raw);
+    return (o&&Array.isArray(o.data)&&o.data.length)?o.data:null;
+  }catch(e){return null}
+}
+function guardarCacheNoticias(data){
+  try{localStorage.setItem(CACHE_KEY_NOT,JSON.stringify({ts:Date.now(),data:data}))}catch(e){}
+}
+var stageEl0=document.getElementById('stage');
+/* en pruebas: siempre se mira primero la caché cargada por <script src="noticias-cache.js"> (instantánea, sin red, funciona también abriendo el archivo con doble clic) */
+var ITEMS=[];
+try{
+  var jCacheN=window.__RTS_NOTICIAS_CACHE;
+  if(jCacheN&&Array.isArray(jCacheN.data)&&jCacheN.data.length)ITEMS=jCacheN.data;
+}catch(e){}
+if(!ITEMS.length)ITEMS=leerCacheNoticias()||[];
+if(!ITEMS.length&&stageEl0)stageEl0.insertAdjacentHTML('afterbegin','<p class="wrap" id="cargandoNoticias" style="padding:3rem 1rem;text-align:center;opacity:.75">Cargando la actualidad en vivo desde revistatierrasanta.com…</p>');
+if(!ITEMS.length){
+  try{
+    ITEMS=await cargarNoticias();
+    if(ITEMS.length)guardarCacheNoticias(ITEMS);
+  }catch(e){console.warn('No se pudieron cargar las noticias en vivo',e)}
+}
+var cargando=document.getElementById('cargandoNoticias');
+if(cargando)cargando.remove();
+if(!ITEMS.length){
+  var st=document.getElementById('stage');
+  if(st)st.insertAdjacentHTML('afterbegin','<p class="wrap" style="padding:3rem 1rem;text-align:center"><a href="https://revistatierrasanta.com/actualidad/" target="_blank" rel="noopener" style="text-decoration:underline">No se pudo cargar la actualidad en vivo — ábrela directamente en revistatierrasanta.com</a></p>');
+  return;
+}
+var YEARS=[];ITEMS.forEach(function(it){if(YEARS.indexOf(it.year)<0)YEARS.push(it.year)});
+var CAT_FIRST={};YEARS.forEach(function(y){CAT_FIRST[String(y)]=ITEMS.findIndex(function(it){return it.year===y})});
+var N = ITEMS.length;
+var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+var fino = matchMedia('(pointer: fine)').matches && !('ontouchstart' in window);
+
+function $(id){return document.getElementById(id)}
+function esc(t){return String(t==null?'':t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+
+/* ---------- geometría ---------- */
+var H=0, ws=0, d=0, gap=0, RANGE=9;
+function medir(){
+  var vw=innerWidth, vh=innerHeight;
+  H = Math.min(vh*.46, vw*.32);
+  if(vw<=767) H = Math.min(vw*.42, vh*.3);
+  H = Math.max(140, H);
+  ws = 0.145*H; d = 0.92*H; gap = 0.026*H;
+  document.documentElement.style.setProperty('--H', H+'px');
+  document.documentElement.style.setProperty('--ws', ws+'px');
+  document.documentElement.style.setProperty('--d', d+'px');
+  var stageW = stage.clientWidth || vw;
+  RANGE = Math.max(6, Math.ceil(stageW/( (ws+gap)*2 )) + 4);
+}
+
+/* ---------- estado ---------- */
+var stage=$('stage'), rig=$('rig');
+var s=0, T=0;           /* posición continua y objetivo */
+var dragging=false, dragStartX=0, dragStartS=0, dragMoved=false;
+var lastTime=null;
+var nodes=new Map();     /* índice virtual v -> {el, spineEl, coverEl} */
+var activeNearest=-1;
+var lastFocusBeforeSheet=null;
+
+function wrap(v){ return ((v % N) + N) % N }
+
+function smoothstep(x){ x = Math.max(0, Math.min(1, x)); return x*x*(3-2*x) }
+function B(r){
+  if(Math.abs(r) < 1) return (r + Math.sin(Math.PI*r)/Math.PI) / 2;
+  return (r > 0 ? 1 : -1) * 0.5;
+}
+
+var MOTIFS = {
+  orbit: '<svg viewBox="0 0 100 100" preserveAspectRatio="none"><circle cx="50" cy="38" r="26" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="76" cy="38" r="3" fill="currentColor"/></svg>',
+  sun: '<svg viewBox="0 0 100 100" preserveAspectRatio="none"><circle cx="50" cy="34" r="16" fill="currentColor" opacity=".9"/><g stroke="currentColor" stroke-width="1.4"><line x1="50" y1="2" x2="50" y2="12"/><line x1="50" y1="56" x2="50" y2="66"/><line x1="18" y1="34" x2="28" y2="34"/><line x1="72" y1="34" x2="82" y2="34"/></g></svg>',
+  wave: '<svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 40 Q 25 20 50 40 T 100 40" fill="none" stroke="currentColor" stroke-width="2"/><path d="M0 56 Q 25 36 50 56 T 100 56" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".6"/></svg>',
+  grid: '<svg viewBox="0 0 100 100" preserveAspectRatio="none"><g stroke="currentColor" stroke-width="1"><line x1="0" y1="25" x2="100" y2="25"/><line x1="0" y1="50" x2="100" y2="50"/><line x1="33" y1="0" x2="33" y2="75"/><line x1="66" y1="0" x2="66" y2="75"/></g></svg>',
+  steps: '<svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M10 70 h20 v-15 h20 v-15 h20 v-15 h20" fill="none" stroke="currentColor" stroke-width="2"/></svg>',
+  split: '<svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="50" y1="0" x2="50" y2="75" stroke="currentColor" stroke-width="1.5"/><circle cx="50" cy="38" r="4" fill="currentColor"/></svg>'
+};
+
+function abrirNoticia(url){
+  if(!url)return;
+  /* un <a> real en vez de window.open(): Chrome puede bloquear window.open() como pop-up sin avisar, mientras que el clic de un enlace nunca se bloquea */
+  var a=document.createElement('a');
+  a.href=url; a.target='_blank'; a.rel='noopener noreferrer';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+}
+function buildBook(v){
+  var it = ITEMS[wrap(v)];
+  var book=document.createElement('div'); book.className='book'; book.tabIndex=-1;
+  book.setAttribute('role','button');
+  book.setAttribute('aria-label', it.title + (it.year? (', '+it.year) : ''));
+
+  var spine=document.createElement('div'); spine.className='spine';
+  spine.style.background=it.color; spine.style.color=it.type;
+  spine.innerHTML='<span class="mark">✛</span><span class="vt"></span><span class="yr"></span>';
+  spine.querySelector('.vt').textContent=it.title;
+  spine.querySelector('.yr').textContent=it.year||'';
+
+  var cover=document.createElement('div'); cover.className='cover';
+  if(it.cover){
+    cover.style.backgroundImage='url("'+it.cover.replace(/"/g,'')+'")';
+    cover.addEventListener('error', function(){}, true);
+    var img=new Image();
+    img.onerror=function(){ cover.style.backgroundImage=''; cover.appendChild(fallbackEl(it)) };
+    img.src=it.cover;
+  } else {
+    cover.appendChild(fallbackEl(it));
+  }
+  var cfx=document.createElement('div'); cfx.className='cfx'; cfx.style.position='relative'; cfx.style.zIndex='1';
+  cfx.style.padding='0 1rem .9rem'; cfx.style.color='#F2EBDD'; cfx.textContent=it.title;
+  cover.appendChild(cfx);
+
+  book.appendChild(spine); book.appendChild(cover);
+  rig.appendChild(book);
+
+  book.addEventListener('click', function(ev){
+    if(dragMoved){ dragMoved=false; return }
+    var nearest = wrap(Math.round(s));
+    if(wrap(v)===nearest){ abrirNoticia(it.url) } else { irA(v) }
+  });
+  book.addEventListener('keydown', function(ev){
+    if(ev.key==='Enter' || ev.key===' '){ ev.preventDefault();
+      var nearest = wrap(Math.round(s));
+      if(wrap(v)===nearest){ abrirNoticia(it.url) } else { irA(v) }
+    }
+  });
+  book.addEventListener('mouseenter', function(){ book.classList.add('hover') });
+  book.addEventListener('mouseleave', function(){ book.classList.remove('hover') });
+
+  return {el:book, spine:spine, cover:cover, it:it};
+}
+function fallbackEl(it){
+  var w=document.createElement('div'); w.className='fallback';
+  w.style.color=it.type;
+  var m=document.createElement('div'); m.className='motif'; m.style.color=it.art; m.innerHTML=MOTIFS[it.motif]||MOTIFS.orbit;
+  w.appendChild(m);
+  w.style.background=it.color;
+  return w;
+}
+
+function sync(){
+  var center=Math.round(s);
+  var want=new Set();
+  for(var o=-RANGE;o<=RANGE;o++) want.add(center+o);
+  /* quitar los que sobran */
+  nodes.forEach(function(node,v){ if(!want.has(v)){ node.el.remove(); nodes.delete(v) } });
+  /* añadir los que faltan */
+  want.forEach(function(v){ if(!nodes.has(v)) nodes.set(v, buildBook(v)) });
+}
+
+function render(){
+  nodes.forEach(function(node,v){
+    var r = v - s;
+    var o = reduced ? (Math.round(r)===0?1:0) : smoothstep(Math.max(0, 1-Math.abs(r)));
+    var x = r*(ws+gap) + (d-ws+1.6*gap)*B(r) + 0.5*(d-ws)*o;
+    var rz = -4.5*o, ty = -0.01*H*o, tz=0.32*H*o;
+    var scl = 1 + 0.22*o;
+    var hoverLift = node.el.classList.contains('hover') && Math.abs(r)>0.02 ? -6 : 0;
+    node.el.style.transform = 'translateX('+(x-ws/2)+'px) translateY('+(ty+hoverLift)+'px) rotateY('+(-90*o)+'deg) rotateZ('+rz+'deg) translateZ('+tz+'px) scale('+scl+')';
+    node.el.style.zIndex = String(2000-Math.round(Math.abs(r)*10));
+    node.el.classList.toggle('activo', Math.abs(r)<0.02);
+    /* qué cara se ve (lomo o portada) se decide aquí explícitamente, en vez de confiar solo en backface-visibility: con dos planos en 3D anidado (rig + book) puede quedar ambiguo cerca de los 90°, y eso es lo que hacía que a veces se viera la portada en vez del lomo */
+    var mostrarPortada = o > 0.5;
+    if(node._mostrarPortada !== mostrarPortada){
+      node._mostrarPortada = mostrarPortada;
+      node.cover.style.visibility = mostrarPortada ? 'visible' : 'hidden';
+      node.spine.style.visibility = mostrarPortada ? 'hidden' : 'visible';
+    }
+  });
+  var nearest = wrap(Math.round(s));
+  if(nearest!==activeNearest){ activeNearest=nearest; actualizarInfo(ITEMS[nearest], s - Math.round(s)) }
+}
+
+function loop(ts){
+  if(lastTime==null) lastTime=ts;
+  var dt=Math.min(.05,(ts-lastTime)/1000); lastTime=ts;
+  if(!dragging){
+    if(reduced){ s=T } else { var k = 5.2; s += (T-s)*(1-Math.exp(-k*dt)) }
+  }
+  sync(); render();
+  requestAnimationFrame(loop);
+}
+
+/* ---------- navegación ---------- */
+function irA(vIndex){ T = vIndex }
+function siguiente(){ T = Math.round(T)+1 }
+function anterior(){ T = Math.round(T)-1 }
+function irAIndiceBase(base){
+  var cands=[base-N, base, base+N], best=cands[0], bd=Infinity;
+  cands.forEach(function(c){ var dd=Math.abs(c-s); if(dd<bd){bd=dd; best=c} });
+  T = best;
+}
+
+var prevDir=0;
+function actualizarInfo(it, frac){
+  var dir = frac<0 ? 1 : (frac>0 ? -1 : prevDir);
+  $('aiTag').textContent = it.year ? ('Actualidad · '+it.year) : 'Actualidad';
+  var titleEl=$('aiTitle');
+  titleEl.textContent = it.title;
+  if(!reduced){
+    titleEl.classList.remove('ai-slide-up','ai-slide-down');
+    void titleEl.offsetWidth;
+    titleEl.classList.add(dir>=0 ? 'ai-slide-up' : 'ai-slide-down');
+  }
+  $('aiMeta').textContent = it.note || '';
+  $('aiDesc').textContent = it.summary || '';
+  var verEl=$('aiVer');
+  if(verEl){ if(it.url){ verEl.href=it.url; verEl.style.display='' } else { verEl.style.display='none' } }
+  $('counter').textContent = (wrap(Math.round(s))+1) + ' / ' + N;
+  prevDir=dir;
+  syncTimeline(it.year, wrap(Math.round(s)));
+}
+
+/* ---------- línea del tiempo ---------- */
+var yearRangeEl=$('yearRange'), yearTicksEl=$('yearTicks');
+var tickButtons=[];
+var draggingRange=false;
+function buildTimeline(){
+  yearRangeEl.min=0; yearRangeEl.max=N-1; yearRangeEl.value=N-1;
+  $('timeOld').textContent = YEARS[YEARS.length-1];
+  var h='';
+  YEARS.forEach(function(y){ h+='<li><button type="button" role="tab" aria-selected="false" data-cat="'+y+'">'+y+'</button></li>' });
+  yearTicksEl.innerHTML=h;
+  tickButtons=[].slice.call(yearTicksEl.querySelectorAll('button'));
+  tickButtons.forEach(function(b){
+    b.addEventListener('click', function(){ irAIndiceBase(CAT_FIRST[b.dataset.cat]) });
+  });
+  yearRangeEl.addEventListener('input', function(){
+    draggingRange=true;
+    var idx = (N-1) - (+yearRangeEl.value);
+    var cands=[idx-N, idx, idx+N], best=cands[0], bd=Infinity;
+    cands.forEach(function(c){ var dd=Math.abs(c-s); if(dd<bd){bd=dd; best=c} });
+    T = best;
+  });
+  yearRangeEl.addEventListener('change', function(){ draggingRange=false });
+}
+function syncTimeline(year, idx){
+  tickButtons.forEach(function(b){ b.setAttribute('aria-selected', (+b.dataset.cat===year) ? 'true':'false') });
+  if(!draggingRange){ yearRangeEl.value = (N-1) - idx }
+}
+
+/* ---------- interacción: flechas, teclado, rueda, arrastre ---------- */
+$('prevBtn').addEventListener('click', anterior);
+$('nextBtn').addEventListener('click', siguiente);
+
+document.addEventListener('keydown', function(e){
+  if(sheetOpen) return;
+  var tag=(e.target&&e.target.tagName)||'';
+  if(tag==='INPUT'||tag==='TEXTAREA') return;
+  if(e.key==='ArrowRight'){ siguiente(); e.preventDefault() }
+  else if(e.key==='ArrowLeft'){ anterior(); e.preventDefault() }
+});
+
+var wheelTimer=null;
+stage.addEventListener('wheel', function(e){
+  e.preventDefault();
+  var delta = Math.abs(e.deltaX)>Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+  s += delta/(ws+gap)*0.6; T=s;
+  clearTimeout(wheelTimer);
+  wheelTimer=setTimeout(function(){ T=Math.round(s) }, 110);
+}, {passive:false});
+
+stage.addEventListener('pointerdown', function(e){
+  dragging=true; dragMoved=false; dragStartX=e.clientX; dragStartS=s;
+  stage.setPointerCapture && stage.setPointerCapture(e.pointerId);
+});
+stage.addEventListener('pointermove', function(e){
+  if(!dragging) return;
+  var dx=e.clientX-dragStartX;
+  if(!dragMoved){
+    /* el temblor normal de un clic con ratón no debe mover nada: solo a partir de aquí se considera un arrastre real */
+    if(Math.abs(dx)<=8) return;
+    dragMoved=true;
+  }
+  s = dragStartS - dx/(ws+gap);
+  T = s;
+});
+function endDrag(){ if(!dragging) return; dragging=false; T=Math.round(s) }
+stage.addEventListener('pointerup', endDrag);
+stage.addEventListener('pointercancel', endDrag);
+stage.addEventListener('pointerleave', function(){ if(dragging) endDrag() });
+
+/* ---------- ficha animada ---------- */
+var sheet=$('sheet'), sheetOpen=false;
+function abrirFicha(it, originEl){
+  lastFocusBeforeSheet = document.activeElement;
+  $('sheetTag').textContent = it.year ? ('Actualidad · '+it.year) : 'Actualidad';
+  $('sheetTitle').textContent = it.title;
+  $('sheetAuthor').textContent = it.author || '';
+  $('sheetDate').textContent = it.note || '';
+  $('sheetDesc').textContent = it.summary || 'Sin resumen disponible: abre la noticia completa para leerla.';
+  $('sheetNote').textContent = '';
+  $('sheetVer').href = it.url;
+  var coverWrap=$('sheetCover'); coverWrap.innerHTML='';
+  if(it.cover){ var img=document.createElement('img'); img.src=it.cover; img.alt=''; img.loading='lazy';
+    img.onerror=function(){ coverWrap.innerHTML=''; coverWrap.appendChild(fallbackBig(it)) };
+    coverWrap.appendChild(img);
+  } else { coverWrap.appendChild(fallbackBig(it)) }
+
+  sheet.hidden=false;
+  var rect = originEl ? originEl.getBoundingClientRect() : {top:innerHeight/2-40,left:innerWidth/2-60,right:innerWidth/2+60,bottom:innerHeight/2+40};
+  var top=Math.max(0,rect.top), left=Math.max(0,rect.left);
+  var right=Math.max(0,innerWidth-rect.right), bottom=Math.max(0,innerHeight-rect.bottom);
+  sheet.style.clipPath = reduced ? 'inset(0 0 0 0 round 0px)' : ('inset('+top+'px '+right+'px '+bottom+'px '+left+'px round 10px)');
+  sheet.removeAttribute('data-open');
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){
+      sheet.setAttribute('data-open','true');
+      sheet.style.clipPath='';
+    });
+  });
+  sheetOpen=true;
+  $('sheetClose').focus();
+  document.body.style.overflow='hidden';
+}
+function fallbackBig(it){
+  var w=document.createElement('div'); w.className='fb'; w.style.color=it.type; w.style.background=it.color;
+  var m=document.createElement('div'); m.style.position='absolute'; m.style.inset='0'; m.style.opacity='.5'; m.style.color=it.art; m.innerHTML=MOTIFS[it.motif]||MOTIFS.orbit;
+  w.appendChild(m);
+  var cfx=document.createElement('div'); cfx.className='cfx'; cfx.textContent=it.title;
+  w.appendChild(cfx);
+  return w;
+}
+function cerrarFicha(){
+  if(!sheetOpen) return;
+  sheet.removeAttribute('data-open');
+  sheetOpen=false;
+  document.body.style.overflow='';
+  setTimeout(function(){ sheet.hidden=true }, reduced?0:950);
+  if(lastFocusBeforeSheet && lastFocusBeforeSheet.focus) lastFocusBeforeSheet.focus();
+}
+$('sheetClose').addEventListener('click', cerrarFicha);
+document.addEventListener('keydown', function(e){
+  if(!sheetOpen) return;
+  if(e.key==='Escape'){ cerrarFicha() }
+  else if(e.key==='Tab'){
+    var f=sheet.querySelectorAll('button,a[href]');
+    if(!f.length) return;
+    var first=f[0], last=f[f.length-1];
+    if(e.shiftKey && document.activeElement===first){ last.focus(); e.preventDefault() }
+    else if(!e.shiftKey && document.activeElement===last){ first.focus(); e.preventDefault() }
+  }
+});
+
+/* ---------- cursor personalizado ---------- */
+if(fino){
+  document.body.classList.add('cursor-fino');
+  var cur=$('cursor');
+  document.addEventListener('mousemove', function(e){
+    cur.style.left=e.clientX+'px'; cur.style.top=e.clientY+'px';
+    var t=e.target;
+    var sobreLibro = t.closest && t.closest('.book');
+    var activo = sobreLibro && sobreLibro.classList.contains('activo');
+    cur.classList.toggle('sobre-libro', !!sobreLibro && !activo);
+    cur.classList.toggle('sobre-activo', !!activo);
+  });
+}
+
+/* ---------- arranque ---------- */
+buildTimeline();
+medir();
+window.addEventListener('resize', medir);
+sync(); render();
+requestAnimationFrame(loop);
+
+/* el logotipo y el menú vuelven a la portada desde la que se llegó */
+(function(){var h='';try{h=localStorage.getItem('rts3dp')||''}catch(_){}
+  if(!/^portada-[\w-]+\.html$/.test(h)||h==='portada-3d-ventana.html')return;
+  [].forEach.call(document.querySelectorAll('a[href^="portada-3d-ventana.html"]'),function(a){a.setAttribute('href',a.getAttribute('href').replace('portada-3d-ventana.html',h))});})();
+})();
+</script>
+</body>
+</html>

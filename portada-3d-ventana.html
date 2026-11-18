@@ -1,0 +1,977 @@
+<!doctype html>
+<html lang="es" data-variant="pastoral">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tierra Santa · un siglo de revista, portada a portada</title>
+<meta name="description" content="Portada 3D de la copia local de la revista Tierra Santa: recorre en espiral las portadas publicadas desde 1921 y abre cualquiera de ellos.">
+<meta property="og:title" content="Tierra Santa · un siglo de revista, portada a portada">
+<meta property="og:description" content="Recorre en espiral todas las portadas de la revista Tierra Santa.">
+<link rel="icon" href="wp-content/uploads/2023/03/1200px-Croix_de_l_Ordre_du_Saint-Sepulcre.svg.png">
+<style>
+@font-face {font-family: 'Montserrat'; font-style: normal; font-weight: 400; unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;font-display:swap; src: url(wp-content/themes/yootheme/fonts/montserrat-dade07bd.woff2) format('woff2'); }
+@font-face {font-family: 'Montserrat'; font-style: normal; font-weight: 400; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;font-display:swap; src: url(wp-content/themes/yootheme/fonts/montserrat-ab105b20.woff2) format('woff2'); }
+@font-face {font-family: 'Montserrat'; font-style: normal; font-weight: 500; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;font-display:swap; src: url(wp-content/themes/yootheme/fonts/montserrat-552d3dce.woff2) format('woff2'); }
+@font-face {font-family: 'Montserrat'; font-style: normal; font-weight: 600; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;font-display:swap; src: url(wp-content/themes/yootheme/fonts/montserrat-a77dae9d.woff2) format('woff2'); }
+@font-face {font-family: 'Taviraj'; font-style: normal; font-weight: 200; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;font-display:swap; src: url(wp-content/themes/yootheme/fonts/taviraj-bd1da705.woff2) format('woff2'); }
+@font-face {font-family: 'Taviraj'; font-style: normal; font-weight: 300; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;font-display:swap; src: url(wp-content/themes/yootheme/fonts/taviraj-24c3961e.woff2) format('woff2'); }
+:root{
+  --font-display:Taviraj,"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --font-body:Montserrat,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --step-hero:clamp(3.1rem,7.4vw,8rem);
+  --step-num:clamp(5.5rem,13vw,13rem);
+  --step-h2:clamp(2.2rem,5vw,4.5rem);
+  --step-h3:clamp(1.3rem,2vw,1.8rem);
+  --step-body:clamp(1rem,.3vw + .95rem,1.125rem);
+  --step-small:.74rem;
+  --bg:#F8F2E4; --bg-2:#EDE0C3; --fg:#3B2A18; --muted:#7C6447; --accent:#9C6B30; --accent-2:#6E3B23;
+  --paper:#FFFDF7; --ink:#1B1915;
+  --line:color-mix(in srgb,var(--accent) 30%,transparent);
+  --line-soft:color-mix(in srgb,var(--fg) 12%,transparent);
+  --space-1:.5rem;--space-2:1rem;--space-3:1.5rem;--space-4:2.5rem;--space-5:4rem;--space-6:6.5rem;
+  --section-y:clamp(5rem,14vh,10rem); --gutter:clamp(1.25rem,4vw,4rem); --maxw:1440px;
+  --ease-out:cubic-bezier(.22,1,.36,1);
+  --dur-micro:180ms; --dur-ui:380ms; --dur-reveal:1100ms;
+  --card-w:176px; --card-h:246px; --head-h:76px;
+}
+*{box-sizing:border-box}
+html{overflow-x:clip;background:var(--bg);color:var(--fg);font-family:var(--font-body);-webkit-font-smoothing:antialiased}
+body{margin:0;font-size:var(--step-body);line-height:1.55}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+::selection{background:var(--accent);color:var(--bg)}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter)}
+.caps{font-size:var(--step-small);font-weight:600;letter-spacing:.18em;text-transform:uppercase}
+.skip{position:fixed;left:-999px;top:1rem;z-index:99;background:var(--fg);color:var(--bg);padding:.75rem 1rem}
+.skip:focus{left:1rem}
+
+/* ---------- Cabecera ---------- */
+.top{position:fixed;inset:0 0 auto 0;z-index:20;height:var(--head-h);display:flex;align-items:center;
+  background:linear-gradient(var(--bg),color-mix(in srgb,var(--bg) 0%,transparent))}
+.top .wrap{width:100%;display:flex;align-items:center;justify-content:space-between;gap:var(--space-3)}
+.brand{display:flex;align-items:center;gap:.7rem;min-height:44px;font-family:var(--font-display);font-weight:300;font-size:1.45rem;letter-spacing:-.01em;white-space:nowrap}
+.brand img{width:26px;height:26px;display:block}
+.brand small{font-family:var(--font-body);font-size:.62rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);align-self:flex-end;padding-bottom:.35rem}
+.nav{display:flex;align-items:center;gap:clamp(1rem,2.4vw,2.5rem)}
+.nav a{white-space:nowrap;font-size:var(--step-small);font-weight:500;letter-spacing:.14em;text-transform:uppercase;min-height:44px;display:inline-flex;align-items:center;color:var(--fg);
+  background:linear-gradient(var(--accent),var(--accent)) 0 72%/0 1px no-repeat;transition:background-size var(--dur-ui) var(--ease-out),color var(--dur-micro) var(--ease-out)}
+.nav a:hover{color:var(--accent);background-size:100% 1px}
+.goto{display:flex;align-items:center;gap:.6rem;border-bottom:1px solid var(--line);min-height:44px}
+.goto label{color:var(--muted);white-space:nowrap}
+.goto input{width:4.6rem;background:transparent;border:0;font-family:var(--font-display);font-weight:300;font-size:1.35rem;color:var(--fg);padding:0;min-height:42px}
+.goto input::placeholder{color:var(--muted);opacity:.6}
+.goto input:focus{outline:0}
+.goto:focus-within{border-bottom-color:var(--accent)}
+
+/* ---------- Escena 3D ---------- */
+.track{position:relative}
+.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;isolation:isolate}
+.glow{position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:
+   radial-gradient(42vmax 46vmax at var(--cx) 52%,color-mix(in srgb,var(--accent) 16%,transparent),transparent 70%),
+   radial-gradient(90vmax 60vmax at 10% 110%,color-mix(in srgb,var(--accent-2) 11%,transparent),transparent 70%)}
+.axis{position:absolute;top:0;bottom:0;left:var(--cx);width:1px;z-index:-1;background:linear-gradient(transparent,var(--line) 25%,var(--line) 75%,transparent)}
+.scene{position:absolute;inset:0;perspective:1500px;perspective-origin:var(--cx) 46%;
+  -webkit-mask-image:linear-gradient(transparent 2%,#000 22%,#000 76%,transparent 98%);mask-image:linear-gradient(transparent 2%,#000 22%,#000 76%,transparent 98%)}
+.rig{position:absolute;left:var(--cx);top:50%;width:0;height:0;transform-style:preserve-3d;will-change:transform}
+.helix{position:absolute;left:0;top:0;width:0;height:0;transform-style:preserve-3d;will-change:transform}
+.card{position:absolute;left:calc(var(--card-w) / -2);top:calc(var(--card-h) / -2);width:var(--card-w);height:var(--card-h);
+  backface-visibility:hidden;-webkit-backface-visibility:hidden;cursor:pointer;
+  background-color:var(--bg-2);background-repeat:no-repeat;background-size:1000% 900%;
+  box-shadow:0 34px 60px -30px rgba(0,0,0,.95),0 0 0 1px rgba(242,235,221,.08)}
+.card[hidden]{display:none}
+.card::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(255,255,255,.14),transparent 34%,rgba(0,0,0,.28));pointer-events:none}
+.card.is-active{outline:1px solid var(--accent);outline-offset:6px}
+
+/* ---------- Texto sobre la escena ---------- */
+.copy{position:absolute;z-index:2;left:0;right:0;top:0;bottom:0;pointer-events:none}
+.copy .wrap{height:100%;position:relative}
+.intro,.hud{position:absolute;left:var(--gutter);width:min(46%,44rem);top:50%;transform:translateY(-50%);will-change:transform,opacity}
+.intro .caps{color:var(--accent);margin:0 0 var(--space-3)}
+.intro h1{margin:0;font-family:var(--font-display);font-weight:200;font-size:var(--step-hero);line-height:.9;letter-spacing:-.02em;text-wrap:balance}
+.intro h1 .ln{display:block;overflow:hidden;padding-bottom:.08em}
+.intro h1 .ln>span{display:block}
+.intro h1 em{font-style:normal;color:var(--accent)}
+.intro p.lede{margin:var(--space-4) 0 0;max-width:36ch;color:var(--muted)}
+.hint{margin:var(--space-4) 0 0;display:flex;align-items:center;gap:1rem;color:var(--fg)}
+.hint i{display:block;width:1px;height:2.4rem;background:var(--line);position:relative;overflow:hidden}
+.hint i::after{content:"";position:absolute;left:0;top:0;width:1px;height:40%;background:var(--accent)}
+.hud{opacity:0}
+.hud .caps{color:var(--accent);margin:0}
+.hud-num{margin:.1em 0 0;font-family:var(--font-display);font-weight:200;font-size:var(--step-num);line-height:.82;letter-spacing:-.04em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.hud-num.is-long{font-size:clamp(3.4rem,8.4vw,8.5rem)}
+.hud-meta{margin:var(--space-3) 0 0;color:var(--muted);max-width:34ch;min-height:1.55em}
+.hud-act{margin:var(--space-3) 0 0;display:flex;flex-wrap:wrap;gap:.75rem;pointer-events:auto}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;min-height:48px;padding:0 1.5rem;border:1px solid var(--accent);
+  font-size:var(--step-small);font-weight:600;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;background:transparent;color:var(--fg);
+  transition:background-color var(--dur-ui) var(--ease-out),color var(--dur-ui) var(--ease-out),transform var(--dur-micro) var(--ease-out)}
+.btn:hover{background:var(--accent);color:var(--bg)}
+.btn:active{transform:translateY(1px)}
+.btn.is-solid{background:var(--accent);color:var(--bg)}
+.btn.is-solid:hover{background:var(--fg);border-color:var(--fg)}
+.btn[hidden]{display:none}
+.step{pointer-events:auto;display:flex;gap:.5rem;margin:var(--space-3) 0 0}
+.step button{width:48px;height:48px;border:1px solid var(--line-soft);background:transparent;cursor:pointer;font-size:1.1rem;transition:border-color var(--dur-ui) var(--ease-out),color var(--dur-ui) var(--ease-out)}
+.step button:hover{border-color:var(--accent);color:var(--accent)}
+
+/* Regla de centenas */
+.ruler{position:absolute;z-index:3;right:var(--gutter);top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:flex-end;gap:0;margin:0;padding:0;list-style:none}
+.ruler button{background:transparent;border:0;cursor:pointer;display:flex;align-items:center;justify-content:flex-end;gap:.7rem;min-height:44px;min-width:44px;padding:0;
+  font-size:var(--step-small);font-weight:500;letter-spacing:.1em;color:var(--muted);font-variant-numeric:tabular-nums;transition:color var(--dur-micro) var(--ease-out)}
+.ruler button::after{content:"";display:block;height:1px;width:14px;background:currentColor;transition:width var(--dur-ui) var(--ease-out)}
+.ruler button:hover,.ruler button[aria-current=true]{color:var(--accent)}
+.ruler button[aria-current=true]::after{width:36px}
+
+/* ---------- Actualidad ---------- */
+.news{background:var(--bg);padding:var(--section-y) 0;border-top:1px solid var(--line);position:relative;z-index:1}
+.news-h{display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--space-3);align-items:end;margin-bottom:var(--space-5)}
+.news-h .caps{grid-column:1/-1;color:var(--accent);margin:0 0 var(--space-3)}
+.news-h h2{grid-column:1/span 8;margin:0;font-family:var(--font-display);font-weight:200;font-size:var(--step-h2);line-height:.98;letter-spacing:-.02em}
+.news-h a{grid-column:10/-1;justify-self:end}
+.news-g{display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--space-4);row-gap:var(--space-5)}
+.lead{grid-column:1/span 7;display:block;perspective:1200px}
+.lead figure{margin:0;aspect-ratio:16/10;overflow:hidden;background:var(--bg-2);transform-style:preserve-3d;transition:transform var(--dur-reveal) var(--ease-out);will-change:transform}
+.lead img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.06);transition:transform var(--dur-reveal) var(--ease-out)}
+.lead:hover img{transform:scale(1)}
+.lead time,.item time{display:block;color:var(--accent);margin:var(--space-3) 0 .7rem}
+.lead h3{margin:0;font-family:var(--font-display);font-weight:300;font-size:clamp(1.7rem,3vw,2.7rem);line-height:1.08;letter-spacing:-.015em;max-width:22ch;text-wrap:balance;transition:color var(--dur-micro) var(--ease-out)}
+.lead p{margin:var(--space-2) 0 0;color:var(--muted);max-width:52ch}
+.lead:hover h3,.item:hover h3{color:var(--accent)}
+.list{grid-column:9/-1;list-style:none;margin:0;padding:0;align-self:start}
+.item{display:grid;grid-template-columns:5.5rem 1fr;column-gap:var(--space-2);align-items:start;padding:var(--space-3) 0;border-top:1px solid var(--line-soft)}
+.list li:first-child .item{padding-top:0;border-top:0}
+.item img{width:5.5rem;aspect-ratio:1;object-fit:cover;display:block;filter:saturate(.85);transition:filter var(--dur-ui) var(--ease-out)}
+.item:hover img{filter:none}
+.item time{margin:0 0 .45rem}
+.item h3{margin:0;font-family:var(--font-display);font-weight:300;font-size:1.22rem;line-height:1.22;transition:color var(--dur-micro) var(--ease-out)}
+
+/* ---------- Puertas y pie ---------- */
+.doors{border-top:1px solid var(--line);position:relative;z-index:1;background:var(--bg)}
+.doors ul{list-style:none;margin:0;padding:0}
+.doors a{display:grid;grid-template-columns:4rem 1fr auto;align-items:baseline;column-gap:var(--space-3);padding:clamp(1.4rem,3.4vw,2.8rem) 0;border-bottom:1px solid var(--line-soft);
+  transition:padding-left var(--dur-reveal) var(--ease-out),color var(--dur-ui) var(--ease-out)}
+.doors a:hover{color:var(--accent);padding-left:var(--space-3)}
+.doors .ix{color:var(--muted);font-family:var(--font-display);font-size:1.1rem}
+.doors .tt{font-family:var(--font-display);font-weight:200;font-size:clamp(1.9rem,4.6vw,4.2rem);line-height:1;letter-spacing:-.02em}
+.doors .ds{color:var(--muted);font-size:.9rem;text-align:right;max-width:26ch}
+.foot{padding:var(--space-5) 0 var(--space-4);color:var(--muted);font-size:.85rem;position:relative;z-index:1;background:var(--bg)}
+.foot .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--space-2)}
+.foot p{margin:0;max-width:60ch}
+
+/* ---------- Entrada ---------- */
+@media (prefers-reduced-motion:no-preference){
+  @keyframes line-up{from{transform:translateY(105%)}to{transform:none}}
+  @keyframes fade-up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+  @keyframes drop{from{transform:translateY(-100%)}to{transform:translateY(250%)}}
+  .intro h1 .ln>span{animation:line-up var(--dur-reveal) var(--ease-out) both}
+  .intro h1 .ln:nth-child(2)>span{animation-delay:90ms}
+  .intro h1 .ln:nth-child(3)>span{animation-delay:180ms}
+  .intro .caps,.intro .lede,.intro .hint{animation:fade-up var(--dur-reveal) var(--ease-out) 420ms both}
+  .scene{animation:fade-up 1600ms var(--ease-out) 150ms both}
+  .hint i::after{animation:drop 2200ms cubic-bezier(.65,0,.35,1) infinite}
+}
+@media (prefers-reduced-motion:reduce){*{transition-duration:150ms!important;animation:none!important}}
+
+/* ---------- Adaptación ---------- */
+.stage{--cx:62%}
+@media (max-width:1100px){
+  .nav a.opt{display:none}
+  .stage{--cx:64%}
+  :root{--card-w:150px;--card-h:210px}
+}
+@media (max-width:760px){
+  :root{--card-w:118px;--card-h:165px;--head-h:64px}
+  .stage{--cx:50%}
+  .scene{perspective-origin:50% 40%;-webkit-mask-image:linear-gradient(transparent 6%,#000 18%,#000 46%,transparent 60%);mask-image:linear-gradient(transparent 6%,#000 18%,#000 46%,transparent 60%)}
+  .rig{top:33%}
+  .intro,.hud{top:auto;bottom:4.5rem;transform:none;width:calc(100% - 2 * var(--gutter))}
+  .intro h1{font-size:clamp(2.5rem,11.5vw,3.6rem)}
+  .intro p.lede{margin-top:var(--space-2);font-size:.95rem}
+  .hint{display:none}
+  .hud-num{font-size:clamp(4.5rem,25vw,7rem)}
+  .hud-num.is-long{font-size:clamp(2.6rem,13vw,4rem)}
+  .hud-meta{margin-top:var(--space-1);font-size:.9rem}
+  .hud-act{margin-top:var(--space-2)}
+  .step{display:none}
+  .ruler{display:none}
+  .ruler button{font-size:.62rem;min-height:30px}
+  .ruler button::after{width:8px}
+  .nav a{display:none}.nav a.keep{display:inline-flex}
+  .brand small{display:none}
+  .goto label{display:none}
+  .news-h h2,.news-h a{grid-column:1/-1}.news-h a{justify-self:start;margin-top:var(--space-3)}
+  .news-g,.news-h{grid-template-columns:1fr;column-gap:0}
+  .lead,.list{grid-column:1/-1}
+  .doors a{grid-template-columns:2.2rem 1fr}.doors .ds{display:none}
+}
+
+/* ====== v4 · escena en una sola pantalla, portada activa destacada, línea del tiempo ====== */
+.stage{position:relative;top:auto;height:100vh;height:100svh;min-height:640px;overflow:hidden;isolation:isolate}
+.scene{cursor:grab;touch-action:pan-y;-webkit-user-select:none;user-select:none;
+  -webkit-mask-image:linear-gradient(transparent 4%,#000 20%,#000 74%,transparent 92%);mask-image:linear-gradient(transparent 4%,#000 20%,#000 74%,transparent 92%)}
+.scene.is-drag{cursor:grabbing}
+.card{background:none;box-shadow:none;transform-style:preserve-3d}
+.card::after{display:none}
+.card .face{position:absolute;inset:0;background-color:var(--bg-2);background-repeat:no-repeat;background-size:1000% 900%;
+  box-shadow:0 34px 60px -30px rgba(0,0,0,.95),0 0 0 1px rgba(242,235,221,.08);
+  transition:transform var(--dur-reveal) var(--ease-out),box-shadow var(--dur-reveal) var(--ease-out);will-change:transform}
+.card.is-active{outline:0;z-index:2}
+.card.is-active .face{transform:translateZ(90px) scale(1.42);
+  box-shadow:0 0 0 2px var(--accent),0 0 0 9px color-mix(in srgb,var(--accent) 16%,transparent),0 50px 90px -30px #000,0 0 120px 10px color-mix(in srgb,var(--accent) 28%,transparent)}
+.spot{position:absolute;z-index:-1;left:var(--cx);top:50%;width:min(46vw,620px);aspect-ratio:1;transform:translate(-50%,-50%);pointer-events:none;
+  background:radial-gradient(closest-side,color-mix(in srgb,var(--accent) 24%,transparent),transparent 72%)}
+.intro,.hud{position:absolute;left:var(--gutter);width:min(40%,34rem);transform:none;opacity:1;will-change:auto}
+.intro{top:calc(var(--head-h) + clamp(1rem,5vh,3.5rem))}
+.intro h1{font-size:clamp(2.2rem,3.9vw,4.2rem);line-height:.98;letter-spacing:-.02em}
+.intro .caps{margin-bottom:var(--space-2)}
+.hud{top:auto;bottom:clamp(8.5rem,21vh,12rem);pointer-events:auto}
+.hud-k{color:var(--muted)!important}
+.hud-date{margin:.5rem 0 0;font-family:var(--font-display);line-height:.92;letter-spacing:-.02em;display:flex;flex-direction:column}
+.hud-date span{font-weight:300;font-size:clamp(1.7rem,3.1vw,3.2rem);color:var(--accent);min-height:1em}
+.hud-date b{font-weight:200;font-size:clamp(4.5rem,9.5vw,10rem);line-height:.86;font-variant-numeric:tabular-nums;color:var(--fg)}
+.step{align-items:center}
+.step-h{color:var(--muted);margin-left:.75rem;max-width:30ch;line-height:1.5}
+.ruler{display:none}
+
+/* Línea del tiempo */
+.time{position:absolute;z-index:4;left:var(--gutter);right:var(--gutter);bottom:clamp(1rem,3.5vh,2rem)}
+.time-row{display:flex;align-items:center;gap:1rem}
+.time-end{color:var(--muted);white-space:nowrap}
+#range{flex:1;min-width:0;height:44px;margin:0;background:transparent;-webkit-appearance:none;appearance:none;cursor:pointer}
+#range::-webkit-slider-runnable-track{height:1px;background:var(--line)}
+#range::-moz-range-track{height:1px;background:var(--line)}
+#range::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:14px;height:34px;margin-top:-17px;border:0;border-radius:0;background:var(--accent);box-shadow:0 0 0 6px color-mix(in srgb,var(--accent) 18%,transparent)}
+#range::-moz-range-thumb{width:14px;height:34px;border:0;border-radius:0;background:var(--accent);box-shadow:0 0 0 6px color-mix(in srgb,var(--accent) 18%,transparent)}
+#range:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.decades{list-style:none;margin:0;padding:0 3.4rem;display:flex;justify-content:space-between;flex-direction:row}
+.decades button{background:transparent;border:0;cursor:pointer;min-height:44px;min-width:44px;padding:0 .25rem;font-size:var(--step-small);font-weight:500;letter-spacing:.1em;color:var(--muted);font-variant-numeric:tabular-nums;
+  transition:color var(--dur-micro) var(--ease-out)}
+.decades button:hover,.decades button[aria-current=true]{color:var(--accent)}
+.decades button[aria-current=true]{box-shadow:inset 0 1px 0 var(--accent)}
+.stage{--cx:66%}
+@media (max-width:1100px){.stage{--cx:68%}.step-h{display:none}}
+@media (max-width:760px){
+  .stage{--cx:50%;min-height:600px}
+  .scene{perspective-origin:50% 36%;-webkit-mask-image:linear-gradient(transparent 8%,#000 20%,#000 54%,transparent 66%);mask-image:linear-gradient(transparent 8%,#000 20%,#000 54%,transparent 66%)}
+  .rig,.spot{top:36%}
+  .spot{width:86vw}
+  .intro{display:none}
+  .hud{left:var(--gutter);right:var(--gutter);width:auto;bottom:8.75rem;top:auto;transform:none}
+  .hud-date{flex-direction:row;align-items:baseline;gap:.6rem;flex-wrap:wrap}
+  .hud-date span{font-size:1.5rem;order:1}
+  .hud-date b{font-size:3.6rem;order:2}
+  .hud-act{margin-top:var(--space-2)}
+  .step{display:flex;position:absolute;right:0;top:-.5rem;margin:0}
+  .step button{width:44px;height:44px}
+  .card.is-active .face{transform:translateZ(60px) scale(1.3)}
+  .decades{padding:0}.decades li:nth-child(even){display:none}
+  .time-end{display:none}
+}
+@media (prefers-reduced-motion:reduce){.card .face{transition-duration:150ms}}
+
+/* ====== Donaciones ====== */
+.nav a.give{background:var(--accent-2);color:#FBF7EE;padding:0 1.1rem;min-height:44px;background-image:none;transition:background-color var(--dur-ui) var(--ease-out)}
+.nav a.give:hover{background:var(--accent);color:var(--bg)}
+.give .g-s{display:none}
+.give-band{position:relative;z-index:1;background:var(--bg-2);border-top:1px solid var(--line);padding:var(--section-y) 0}
+.give-band .caps{color:var(--accent);margin:0 0 var(--space-3)}
+.give-band h2{margin:0;font-family:var(--font-display);font-weight:200;font-size:var(--step-hero);line-height:.92;letter-spacing:-.02em;max-width:14ch;text-wrap:balance}
+.give-band h2 em{font-style:normal;color:var(--accent)}
+.give-g{display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--space-4);margin-top:var(--space-5);align-items:start}
+.give-cta{grid-column:1/span 5;display:flex;flex-wrap:wrap;gap:.75rem}
+.btn.is-give{background:var(--accent-2);border-color:var(--accent-2);color:#FBF7EE;min-height:56px;padding:0 2rem}
+.btn.is-give:hover{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.give-band .btn{min-height:56px}
+.give-d{grid-column:7/-1;margin:0;display:grid;gap:0}
+.give-d>div{display:grid;grid-template-columns:9rem 1fr;column-gap:var(--space-3);padding:var(--space-3) 0;border-top:1px solid var(--line-soft);align-items:baseline}
+.give-d dt{color:var(--muted)}
+.give-d dd{margin:0;font-family:var(--font-display);font-weight:300;font-size:clamp(1.25rem,1.9vw,1.75rem);line-height:1.25;font-variant-numeric:tabular-nums}
+.give-d dd span{font-family:var(--font-body);font-size:.9rem;color:var(--muted)}
+@media (max-width:760px){
+  .give .g-l{display:none}.give .g-s{display:inline}
+  .nav a.give{padding:0 .8rem;min-height:40px}
+  .give-cta,.give-d{grid-column:1/-1}.give-g{grid-template-columns:1fr;column-gap:0;row-gap:var(--space-4)}
+  .give-d>div{grid-template-columns:1fr;row-gap:.35rem}
+  .give-cta .btn{flex:1 1 100%}
+}
+
+/* Logo más grande */
+:root{--head-h:92px}
+.brand{font-size:clamp(1.7rem,2.3vw,2.25rem);gap:.85rem}
+.brand img{width:40px;height:40px}
+.brand small{font-size:.7rem;padding-bottom:.55rem}
+@media (max-width:760px){.goto input{width:3.4rem;font-size:1.15rem}.nav{gap:.6rem}:root{--head-h:72px}.brand{font-size:1.55rem;gap:.6rem}.brand img{width:32px;height:32px}}
+
+/* ====== Suscripciones ====== */
+html{scroll-behavior:smooth}
+#archivo,#actualidad,#suscripciones,#donar{scroll-margin-top:0}
+.subs{position:relative;z-index:1;background:var(--bg);border-top:1px solid var(--line);padding:var(--section-y) 0}
+.subs-h .caps{color:var(--accent);margin:0 0 var(--space-3)}
+.subs-h h2{margin:0 0 var(--space-5);font-family:var(--font-display);font-weight:200;font-size:var(--step-h2);line-height:1;letter-spacing:-.02em;max-width:22ch;text-wrap:balance}
+.plans{list-style:none;margin:0;padding:0;border-top:1px solid var(--fg)}
+.plan{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,4fr) minmax(0,3fr) auto;column-gap:var(--space-3);align-items:baseline;padding:clamp(1.2rem,2.6vw,2.1rem) 0;border-bottom:1px solid var(--line-soft);
+  transition:padding-left var(--dur-reveal) var(--ease-out),color var(--dur-ui) var(--ease-out)}
+.plan:hover{padding-left:var(--space-3);color:var(--accent)}
+.pl-n{font-family:var(--font-display);font-weight:200;font-size:clamp(1.9rem,4.2vw,3.8rem);line-height:1;letter-spacing:-.02em}
+.pl-d{color:var(--muted);font-size:.95rem}
+.pl-p{font-family:var(--font-display);font-weight:300;font-size:1.2rem;color:var(--fg);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.pl-p b{font-weight:200;font-size:clamp(1.9rem,3.6vw,3.2rem);color:var(--accent);letter-spacing:-.02em}
+.pl-p i{font-style:normal;font-family:var(--font-body);font-size:.8rem;color:var(--muted)}
+.pl-go{min-height:44px;display:inline-flex;align-items:center;padding-left:var(--space-3);color:var(--fg);white-space:nowrap}
+.pl-go::after{content:"→";margin-left:.6rem;transition:transform var(--dur-ui) var(--ease-out)}
+.plan:hover .pl-go{color:var(--accent)}.plan:hover .pl-go::after{transform:translateX(6px)}
+.dom{display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--space-4);margin-top:var(--space-6);align-items:start}
+.dom-t{grid-column:1/span 6}
+.dom-t h3{margin:0;font-family:var(--font-display);font-weight:300;font-size:var(--step-h3);line-height:1.15;max-width:22ch}
+.dom-t p{color:var(--muted);max-width:52ch;margin:var(--space-2) 0 var(--space-3)}
+.dom-d{grid-column:8/-1}
+@media (max-width:900px){
+  .plan{grid-template-columns:1fr auto;row-gap:.35rem}
+  .pl-d{grid-column:1;grid-row:2}.pl-p{grid-column:2;grid-row:1}.pl-go{grid-column:2;grid-row:2;justify-self:end;padding-left:0}
+  .dom{grid-template-columns:1fr;column-gap:0;row-gap:var(--space-4)}.dom-t,.dom-d{grid-column:1/-1}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* ====== Quiénes somos · Dónde estamos ====== */
+.nav{gap:clamp(.7rem,1.35vw,1.75rem)}
+.nav a{letter-spacing:.1em}
+.top .wrap{gap:var(--space-2)}
+.goto label{display:none}
+.goto input{width:4.2rem}
+@media (max-width:1320px){.nav a.opt{display:none}.goto label{display:inline}}
+@media (max-width:760px){.goto label{display:none}}
+.about{position:relative;z-index:1;background:var(--bg);border-top:1px solid var(--line);padding:var(--section-y) 0}
+.about-h .caps,.where>.wrap>.caps{color:var(--accent);margin:0 0 var(--space-3)}
+.about-h h2{margin:0 0 var(--space-5);font-family:var(--font-display);font-weight:200;font-size:var(--step-h2);line-height:1;letter-spacing:-.02em;max-width:20ch;text-wrap:balance}
+.about-g{display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--space-4);align-items:start}
+.about-l{grid-column:1/span 7;margin:0;font-family:var(--font-display);font-weight:300;font-size:clamp(1.25rem,1.9vw,1.75rem);line-height:1.4;color:var(--fg)}
+.about-p{grid-column:9/-1;margin:0;color:var(--muted);line-height:1.65}
+.team{list-style:none;margin:var(--space-6) 0 0;padding:0;border-top:1px solid var(--fg)}
+.team li{display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--space-4);padding:var(--space-4) 0;border-bottom:1px solid var(--line-soft);align-items:start}
+.tm-w{grid-column:1/span 4}
+.tm-w h3{margin:0;font-family:var(--font-display);font-weight:300;font-size:var(--step-h3);line-height:1.12;letter-spacing:-.01em}
+.tm-w .caps{margin:.7rem 0 0;color:var(--accent)}
+.tm-b{grid-column:6/-1;margin:0;color:var(--muted);line-height:1.65;max-width:68ch}
+.where{position:relative;z-index:1;background:var(--bg-2);border-top:1px solid var(--line);padding:var(--section-y) 0}
+.where h2{margin:0;font-family:var(--font-display);font-weight:200;font-size:var(--step-hero);line-height:.94;letter-spacing:-.02em}
+.where h2 em{font-style:normal;color:var(--accent)}
+.where-g{display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--space-4);margin-top:var(--space-5);align-items:start}
+.where-cta{grid-column:1/span 5;display:flex;flex-wrap:wrap;gap:.75rem}
+.where-cta .btn{min-height:56px}
+.where-d{grid-column:7/-1}
+.where-d a{background:linear-gradient(var(--accent),var(--accent)) 0 100%/0 1px no-repeat;transition:background-size var(--dur-ui) var(--ease-out),color var(--dur-micro) var(--ease-out);overflow-wrap:anywhere}
+.where-d a:hover{color:var(--accent);background-size:100% 1px}
+.legal{margin:var(--space-5) 0 0;color:var(--muted);font-size:.8rem;max-width:90ch}
+@media (max-width:900px){
+  .about-l,.about-p,.tm-w,.tm-b,.where-cta,.where-d{grid-column:1/-1}
+  .about-g,.team li,.where-g{grid-template-columns:1fr;column-gap:0;row-gap:var(--space-3)}
+  .where-cta .btn{flex:1 1 100%}
+  .where h2{font-size:clamp(2.4rem,11vw,3.6rem)}
+}
+
+/* ====== Jerusalén como horizonte: franja propia bajo las portadas, sin solaparse ====== */
+.stage{--hz-b:clamp(7.6rem,13.5vh,8.6rem);--hz-h:min(calc(100vw * 140 / 1024),21vh)}
+.horizon{position:absolute;z-index:0;left:0;right:0;bottom:var(--hz-b);height:var(--hz-h);overflow:hidden;pointer-events:none;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.horizon-i{position:absolute;inset:0;width:100%;
+  background:url(wp-content/uploads/yootheme/cache/00/BANNER_ABRIL_2023-00de8814.jpg) center/contain no-repeat}
+/* las portadas ocupan solo la zona de arriba */
+.scene{inset:0 0 calc(var(--hz-b) + var(--hz-h)) 0;perspective-origin:var(--cx) 52%;
+  -webkit-mask-image:linear-gradient(transparent 6%,#000 22%,#000 84%,transparent 99%);mask-image:linear-gradient(transparent 6%,#000 22%,#000 84%,transparent 99%)}
+.rig{top:54%}
+.spot{top:calc((100% - var(--hz-b) - var(--hz-h)) * .54)}
+.axis{bottom:calc(var(--hz-b) + var(--hz-h))}
+.hud{bottom:calc(var(--hz-b) + var(--hz-h) + clamp(.5rem,2vh,1.5rem))}
+.hud-date b{font-size:clamp(3.6rem,7.2vw,7.6rem)}
+.hud-date span{font-size:clamp(1.5rem,2.6vw,2.7rem)}
+.hud-act{margin-top:var(--space-2);align-items:center}
+.step{margin:0}
+.step-h{display:none}
+.intro{top:calc(var(--head-h) + clamp(.25rem,2vh,1.5rem))}
+.intro h1{font-size:clamp(2rem,3.3vw,3.6rem)}
+@media (max-width:760px){
+  .stage{--hz-h:118px}
+  .horizon{bottom:auto;top:50%}.horizon-i{inset:0 auto 0 0;width:calc(118px * 1024 / 140);background-size:100% 100%;will-change:transform}
+  .scene{inset:0;-webkit-mask-image:linear-gradient(transparent 8%,#000 20%,#000 44%,transparent 50%);mask-image:linear-gradient(transparent 8%,#000 20%,#000 44%,transparent 50%)}
+  .rig,.spot{top:31%}
+  .axis{bottom:50%}
+  .hud{bottom:8.75rem}
+  .hud-date b{font-size:3.4rem}.hud-date span{font-size:1.4rem}
+  .step{position:absolute;right:0;top:-.5rem}
+}
+
+/* ====== Quiénes somos: imagen del centenario y fotos del equipo ====== */
+.about-t{grid-column:1/span 6}
+.about-l,.about-p{grid-column:auto}
+.about-p{margin-top:var(--space-3);max-width:60ch}
+.about-f{grid-column:8/-1;margin:0;overflow:hidden;background:var(--bg-2)}
+.about-f img{display:block;width:100%;height:auto;aspect-ratio:1200/797;object-fit:cover}
+.tm-i{grid-column:1/span 2;width:100%;max-width:190px;height:auto;aspect-ratio:1;object-fit:cover;display:block;background:var(--bg-2)}
+.tm-w{grid-column:3/span 3}
+.tm-b{grid-column:7/-1}
+@media (max-width:900px){
+  .about-t,.about-f{grid-column:1/-1}
+  .team li{grid-template-columns:96px 1fr;column-gap:var(--space-2);row-gap:var(--space-2)}
+  .tm-i{grid-column:1;max-width:96px}.tm-w{grid-column:2;align-self:center}.tm-b{grid-column:1/-1}
+}
+
+/* ====== Suscripciones en cajas ====== */
+.boxes{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(.75rem,1.4vw,1.5rem)}
+.box{display:flex;flex-direction:column;align-items:center;text-align:center;height:100%;padding:clamp(1rem,1.6vw,1.75rem);background:var(--bg-2);border:1px solid var(--line-soft);
+  transition:border-color var(--dur-ui) var(--ease-out),transform var(--dur-reveal) var(--ease-out)}
+.box:hover{border-color:var(--accent);transform:translateY(-6px)}
+.box-i{display:block;width:100%;aspect-ratio:1;background:var(--paper);overflow:hidden}
+.box-i img{width:100%;height:100%;object-fit:contain;display:block;transition:transform var(--dur-reveal) var(--ease-out)}
+.box:hover .box-i img{transform:scale(1.05)}
+.box-n{margin-top:var(--space-3);font-family:var(--font-display);font-weight:300;font-size:clamp(1.4rem,2vw,2rem);line-height:1.1;letter-spacing:-.01em;transition:color var(--dur-micro) var(--ease-out)}
+.box:hover .box-n{color:var(--accent)}
+.box-p{margin-top:.6rem;font-size:.85rem;font-weight:600;letter-spacing:.14em;color:var(--accent);font-variant-numeric:tabular-nums}
+.box-d{margin-top:.6rem;color:var(--muted);font-size:.9rem;line-height:1.45}
+@media (max-width:1100px){.boxes{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:640px){.boxes{grid-template-columns:repeat(2,1fr)}}
+/* ====== Contacta con nosotros ====== */
+#contacto h2{font-size:var(--step-h2);line-height:1}
+.ct-g{display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--space-4);margin-top:var(--space-5);align-items:start}
+.ct-f{grid-column:1/span 7;display:grid;gap:var(--space-3)}
+.ct-a{grid-column:9/-1}
+.ct-2{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3)}
+.ct-f label{display:grid;gap:.5rem}
+.ct-f label>.caps{color:var(--muted)}
+.ct-f label>.caps i{font-style:normal;color:var(--accent);letter-spacing:.06em;text-transform:none;font-weight:500}
+.ct-f input:not([type=checkbox]),.ct-f textarea{width:100%;min-height:48px;padding:.7rem .9rem;background:color-mix(in srgb,var(--fg) 5%,transparent);border:1px solid var(--line-soft);border-radius:0;color:var(--fg);font:inherit;
+  transition:border-color var(--dur-ui) var(--ease-out)}
+.ct-f textarea{resize:vertical;line-height:1.5}
+.ct-f input:focus,.ct-f textarea:focus{outline:0;border-color:var(--accent)}
+.ct-f small{color:var(--muted);font-size:.8rem}
+.ct-l{margin:0;color:var(--muted);font-size:.85rem;line-height:1.6}
+.ct-l a{color:var(--accent);text-decoration:underline;text-underline-offset:.2em}
+.ct-c{grid-template-columns:auto 1fr!important;align-items:start;gap:.75rem!important;cursor:pointer}
+.ct-c input{width:22px;height:22px;margin:.1rem 0 0;accent-color:var(--accent)}
+.ct-c span{font-size:.95rem}
+.ct-e{margin:0;color:#F0A39C;font-size:.9rem}
+.ct-s{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-2)}
+.ct-s .btn{min-height:56px;padding:0 2.5rem}
+.ct-a .where-d{grid-column:auto}
+.ct-a .where-d>div{grid-template-columns:1fr;row-gap:.35rem}
+.ct-a .legal{margin-top:var(--space-3)}
+.ct-m{margin-top:var(--space-5)}
+.ct-m iframe{display:block;width:100%;height:clamp(260px,34vh,380px);border:1px solid var(--line-soft);background:var(--bg);filter:grayscale(.35) contrast(.95)}
+.ct-ml{display:inline-flex;align-items:center;min-height:44px;margin-top:.5rem;color:var(--fg)}
+.ct-ml:hover{color:var(--accent)}
+@media (max-width:900px){.ct-f,.ct-a{grid-column:1/-1}.ct-g{grid-template-columns:1fr;column-gap:0;row-gap:var(--space-5)}.ct-2{grid-template-columns:1fr}}
+
+/* Enlaces de interés (a la derecha de la actualidad) */
+.news-l{display:grid;grid-template-columns:minmax(0,1fr) clamp(15.5rem,21vw,19rem);column-gap:var(--space-5);align-items:start}
+.links{border-left:1px solid var(--line);padding-left:var(--space-4)}
+.links h3{margin:0 0 var(--space-3);color:var(--accent)}
+.links ul{list-style:none;margin:0;padding:0}
+.lk{display:grid;grid-template-columns:3.25rem 1fr auto;column-gap:.9rem;align-items:center;padding:.8rem 0;border-top:1px solid var(--line-soft);color:var(--fg);text-decoration:none}
+.links li:first-child .lk{border-top:0;padding-top:0}
+.lk-i{position:relative;width:3.25rem;height:3.25rem;background:var(--fg);display:grid;place-items:center;overflow:hidden}
+.lk-i b{font-family:var(--font-display);font-weight:400;font-size:.95rem;letter-spacing:.02em;color:var(--bg)}
+.lk-i img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:.3rem;background:#fff;box-sizing:border-box}
+.lk-t{font-size:.92rem;line-height:1.3;transition:color var(--dur-micro) var(--ease-out)}
+.lk-t small{display:block;margin-top:.15rem;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.lk-a{color:var(--muted);transition:transform var(--dur-micro) var(--ease-out),color var(--dur-micro) var(--ease-out)}
+.lk:hover .lk-t,.lk:hover .lk-a,.lk:focus-visible .lk-t{color:var(--accent)}
+.lk:hover .lk-a{transform:translate(2px,-2px)}
+@media (max-width:1100px){
+  .news-l{grid-template-columns:1fr;row-gap:var(--space-5)}
+  .links{border-left:0;padding-left:0;border-top:1px solid var(--line);padding-top:var(--space-4)}
+  .links ul{display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));column-gap:var(--space-4)}
+  .links li:first-child .lk{border-top:1px solid var(--line-soft);padding-top:.8rem}
+}
+
+/* Pie con la cruz de Jerusalén (final del scroll) */
+.foot{display:block;padding:var(--space-6,5rem) 0 var(--space-4);border-top:1px solid var(--line);background:var(--bg);color:var(--fg);font-size:1rem;position:relative;z-index:1}
+.foot .wrap.foot-g{display:grid;grid-template-columns:minmax(9rem,13rem) 2fr 1.3fr 1fr;column-gap:var(--space-5);row-gap:var(--space-4);align-items:start;justify-content:initial}
+.foot-x{display:block;align-self:center}
+.foot-x img{width:100%;max-width:190px;height:auto;display:block;transition:transform var(--dur-reveal) var(--ease-out)}
+.foot-x:hover img{transform:rotate(90deg)}
+.foot-c h2{margin:0 0 var(--space-3);color:var(--accent);font-family:var(--font-body);font-size:.78rem;font-weight:600;letter-spacing:.18em}
+.foot-c ul{list-style:none;margin:0;padding:0;display:grid;row-gap:.35rem}
+.foot-c2 ul{grid-template-columns:1fr 1fr;column-gap:var(--space-4)}
+.foot-c a{display:inline-flex;align-items:center;min-height:44px;color:var(--fg);text-decoration:none;background:linear-gradient(var(--accent),var(--accent)) 0 calc(100% - 9px)/0 1px no-repeat;transition:background-size var(--dur-ui) var(--ease-out),color var(--dur-micro) var(--ease-out)}
+.foot-c a:hover,.foot-c a:focus-visible{color:var(--accent);background-size:100% 1px}
+.foot p.foot-n{margin:var(--space-5) auto 0;max-width:none;text-align:center;color:var(--muted);font-size:.85rem}
+@media (max-width:900px){
+  .foot .wrap.foot-g{grid-template-columns:1fr 1fr}
+  .foot-x{grid-column:1/-1;justify-self:center}.foot-x img{max-width:120px}
+  .foot-c2{grid-column:1/-1}
+}
+
+/* ==========================================================================
+   VERSIÓN CON VENTANA: a la izquierda, un ventanal en arco con reja de hierro
+   (inspirado en el de Dominus Flevit) que mira a Jerusalén
+   ========================================================================== */
+.dfw{display:none}
+@media (min-width:1101px){
+  .stage{--hz-h:0px;--cx:75%;--dfw:clamp(15rem,22vw,27rem)}
+  .horizon{display:none}
+  .dfw{display:block;position:absolute;z-index:1;left:var(--gutter);top:calc(var(--head-h) + clamp(.5rem,2vh,1.5rem));bottom:calc(var(--hz-b) + clamp(.5rem,2vh,1.5rem));width:var(--dfw);
+    border-radius:calc(var(--dfw)/2) calc(var(--dfw)/2) 0 0;overflow:hidden;background:linear-gradient(#6F9CC6,#B5CDDA 38%,#EFDDB6 58%,#F6E3BE);
+    box-shadow:0 0 0 .45rem #15100A,0 0 0 .55rem color-mix(in srgb,var(--accent) 55%,#000),0 0 8rem 1rem rgba(255,205,130,.16)}
+  .dfw-v{position:absolute;left:50%;bottom:0;height:46%;aspect-ratio:1024/140;margin-left:calc(var(--dfw-h,300px)*-.318*1024/140);will-change:transform;
+    background:url(wp-content/uploads/yootheme/cache/00/BANNER_ABRIL_2023-00de8814.jpg) 0 0/100% 100% no-repeat;
+    -webkit-mask-image:linear-gradient(transparent,#000 22%);mask-image:linear-gradient(transparent,#000 22%)}
+  .dfw::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 30% at 50% 50%,rgba(255,236,190,.5),transparent 70%);box-shadow:inset 0 0 3rem rgba(0,0,0,.5)}
+  .dfw svg{position:absolute;inset:0;width:100%;height:100%;z-index:1;filter:drop-shadow(0 2px 3px rgba(0,0,0,.5))}
+  .intro,.hud{left:calc(var(--gutter) + var(--dfw) + clamp(1.5rem,3vw,3.5rem));width:min(24rem,26vw)}
+  .intro h1{font-size:clamp(1.8rem,2.7vw,3rem)}
+  .hud-date b{font-size:clamp(3.2rem,6.2vw,6.6rem)}
+  .hud-date span{font-size:clamp(1.3rem,2.2vw,2.3rem)}
+  .step-h{display:none}
+}
+/* Enlaces de interés dentro de Contacto */
+#contacto .links{border-left:0;padding-left:0;border-top:1px solid var(--line);padding-top:var(--space-4);margin-top:var(--space-5)}
+#contacto .links ul{display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));column-gap:var(--space-4)}
+#contacto .links li:first-child .lk{border-top:1px solid var(--line-soft);padding-top:.8rem}
+</style>
+</head>
+<body>
+<a class="skip" href="#suscripciones">Saltar las portadas e ir a las suscripciones</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="portada-3d-ventana.html" aria-label="Tierra Santa · portada 3D">
+      <img src="wp-content/uploads/2023/03/1200px-Croix_de_l_Ordre_du_Saint-Sepulcre.svg.png" alt="" width="26" height="26">
+      Tierra Santa <small>Revista</small>
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <a class="opt" href="#archivo">Hemeroteca</a>
+      <a class="opt" href="noticias.html">Actualidad</a>
+      <a class="opt" href="#suscripciones">Suscripciones</a>
+      <a class="opt" href="#quienes-somos">Quiénes somos</a>
+      <a class="opt" href="#contacto">Contacto</a>
+      <a class="keep give" href="donaciones/index.html"><span class="g-l">Haz una donación</span><span class="g-s">Donar</span></a>
+      <form class="goto" id="goto" autocomplete="off">
+        <label class="caps" for="go">Ir al año</label>
+        <input id="go" inputmode="numeric" placeholder="Año" aria-label="Ir a un año" maxlength="4">
+      </form>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="stage" id="archivo" aria-label="Portadas de la revista en espiral">
+    <div class="glow"></div>
+    <div class="dfw" aria-hidden="true"><div class="dfw-v" id="dfwV"></div><svg viewBox="0 0 100 150" preserveAspectRatio="none" aria-hidden="true" fill="none" stroke="#17110A" stroke-linecap="round">
+<g stroke-width="1.5"><path d="M50 2V150M24 12V150M76 12V150M0 62H100M0 104H100"/></g>
+<g stroke-width="1"><path d="M50 50L8 22M50 50L92 22M50 50L26 6M50 50L74 6"/><path d="M12 62V150M38 62V150M62 62V150M88 62V150M0 126H100"/></g>
+<g stroke-width="2.2"><circle cx="50" cy="50" r="15" fill="rgba(23,17,10,.18)"/><path d="M50 39V61M42 47H58"/>
+<path d="M36 68C36 84 43 90 50 90C57 90 64 84 64 68Z" fill="rgba(23,17,10,.28)"/><path d="M50 90V110M40 114H60M44 110H56"/></g>
+<g stroke-width="1.2"><path d="M28 44C34 40 36 34 34 28M72 44C66 40 64 34 66 28M22 58C28 58 32 54 33 49M78 58C72 58 68 54 67 49"/></g>
+</svg></div>
+    <div class="horizon" aria-hidden="true"><div class="horizon-i" id="horizon"></div></div>
+    <div class="axis"></div>
+    <div class="scene" id="scene" aria-hidden="true"><div class="rig" id="rig"><div class="helix" id="helix"></div></div></div>
+    <div class="spot" aria-hidden="true"></div>
+
+    <div class="copy">
+      <div class="intro">
+        <p class="caps">Revista Tierra Santa · desde 1921</p>
+        <h1>Un siglo, portada <em>a portada</em></h1>
+      </div>
+      <div class="hud" id="hud" aria-live="polite">
+        <p class="caps hud-k">Portada seleccionada</p>
+        <p class="hud-date"><span id="hudMonth"></span><b id="hudYear"></b></p>
+        <div class="hud-act">
+          <a class="btn is-solid" id="hudRead" href="#">Leer la revista</a>
+          <div class="step">
+          <button type="button" id="older" aria-label="Portada anterior en el tiempo">←</button>
+          <button type="button" id="newer" aria-label="Portada siguiente en el tiempo">→</button>
+          <span class="caps step-h">Arrastra las portadas o usa las flechas</span>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="time" id="time">
+      <div class="time-row">
+        <span class="caps time-end">1921</span>
+        <input type="range" id="range" min="0" max="1" step="1" value="1" aria-label="Línea del tiempo: arrastra para viajar entre 1921 y hoy">
+        <span class="caps time-end">Hoy</span>
+      </div>
+      <ol class="decades" id="decades" aria-label="Saltar a una década"></ol>
+    </div>
+    <noscript><p class="wrap" style="padding:2rem 0">Sin JavaScript no hay espiral: abre la <a href="hemeroteca/index.html" style="text-decoration:underline">hemeroteca</a>.</p></noscript>
+</section>
+
+<section class="subs" id="suscripciones" aria-labelledby="subs-t">
+  <div class="wrap">
+    <header class="subs-h">
+      <p class="caps">Suscripciones</p>
+      <h2 id="subs-t">Cinco formas de recibir la revista y ayudar a los cristianos de Tierra Santa</h2>
+    </header>
+    <ul class="boxes"><li><a class="box" href="producto/ordinaria-pdf/index.html"><span class="box-i"><img src="wp-content/uploads/yootheme/cache/89/ORDINARIA-8980b255.png" alt="" loading="lazy" decoding="async" width="400" height="382"></span><span class="box-n">Ordinaria PDF</span><span class="box-p">20,00 €</span><span class="box-d">Suscripción Ordinaria en formato PDF 20€ / año.</span></a></li><li><a class="box" href="producto/ordinaria/index.html"><span class="box-i"><img src="wp-content/uploads/yootheme/cache/89/ORDINARIA-8980b255.png" alt="" loading="lazy" decoding="async" width="400" height="382"></span><span class="box-n">Ordinaria</span><span class="box-p">30,00 €</span><span class="box-d">Suscripción Ordinaria 30€ / año.</span></a></li><li><a class="box" href="producto/amigo/index.html"><span class="box-i"><img src="wp-content/uploads/yootheme/cache/91/AMIGO-91eaa286.png" alt="" loading="lazy" decoding="async" width="400" height="382"></span><span class="box-n">Amigo</span><span class="box-p">50,00 €</span><span class="box-d">Suscripción como donante Amigo 50€ / año</span></a></li><li><a class="box" href="producto/benefactor/index.html"><span class="box-i"><img src="wp-content/uploads/yootheme/cache/dd/BENEFACTOR-dd7aef32.png" alt="" loading="lazy" decoding="async" width="400" height="382"></span><span class="box-n">Benefactor</span><span class="box-p">80,00 €</span><span class="box-d">Suscripción como donante Benefactor 80€ / año</span></a></li><li><a class="box" href="producto/protector/index.html"><span class="box-i"><img src="wp-content/uploads/yootheme/cache/e2/PROTECTOR-e2a0cf79.png" alt="" loading="lazy" decoding="async" width="400" height="382"></span><span class="box-n">Protector</span><span class="box-p">150,00 €</span><span class="box-d">Suscripción como donante Protector 150€ / año</span></a></li></ul>
+    <div class="dom">
+      <div class="dom-t">
+        <h3>Domicilia tu suscripción y olvídate de renovaciones</h3>
+        <p>Suscribirte a la revista Tierra Santa mediante domiciliación bancaria es la forma más cómoda y segura de recibirla: seguirás recibiendo la revista sin interrupciones, sin tener que renovarla cada año.</p>
+        <a class="btn is-solid" href="formulario-suscripciones/index.html">Suscripción por domiciliación bancaria</a>
+      </div>
+      <dl class="give-d dom-d">
+        <div><dt class="caps">Titular</dt><dd>Franciscanos Frailes Menores · Centro Tierra Santa</dd></div>
+        <div><dt class="caps">Cuenta de suscripciones</dt><dd>ES33 0075 0123 5206 0023 8278<br><span>Banco Santander · SWIFT BSCHESMM</span></dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="give-band" id="donar" aria-labelledby="donar-t">
+  <div class="wrap">
+    <p class="caps">Ayuda a Tierra Santa</p>
+    <h2 id="donar-t">¡Deja tu huella en <em>Tierra Santa</em>!</h2>
+    <div class="give-g">
+      <div class="give-cta">
+        <a class="btn is-give" href="donaciones/index.html">Haz una donación</a>
+        <a class="btn" href="donacion-periodica/index.html">Donación periódica</a>
+      </div>
+      <dl class="give-d">
+        <div><dt class="caps">Titular</dt><dd>Franciscanos Frailes Menores · Centro Tierra Santa</dd></div>
+        <div><dt class="caps">Transferencia</dt><dd>ES07 0075 0123 5806 0021 1001<br><span>Banco Santander · SWIFT BSCHESMM</span></dd></div>
+        <div><dt class="caps">Bizum</dt><dd>00771<br><span>Comisaría de Tierra Santa</span></dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="quienes-somos" aria-labelledby="about-t">
+  <div class="wrap">
+    <header class="about-h">
+      <p class="caps">Quiénes somos</p>
+      <h2 id="about-t">Franciscanos de la Custodia de Tierra Santa en España</h2>
+    </header>
+    <div class="about-g">
+      <div class="about-t"><p class="about-l">La Revista Tierra Santa pertenece a los franciscanos de la Orden de los Hermanos Menores, concretamente a la Custodia de Tierra Santa en España (Centro de Tierra Santa). El fin principal es ayudar a Tierra Santa. Otros fines son dar a conocer la Tierra de Jesús mediante la revista, la edición de obras que divulguen todos los aspectos de aquella Tierra y la formación bíblica, teológica, histórica y arqueológica mediante cursos, conferencias y jornadas que permitan a los asistentes profundizar en el conocimiento de todos los aspectos relacionados con la figura de Nuestro Señor y de la Tierra en la que se encarnó y vivió hasta su Resurrección.</p>
+      <p class="about-p">La revista Tierra Santa, que se edita cada dos meses, es el medio que permite dar a conocer en lengua castellana el espíritu franciscano de Tierra Santa, proporcionando información de actualidad, histórica, arqueológica y bíblica de los Santos Lugares.</p></div>
+      <figure class="about-f"><img src="wp-content/uploads/yootheme/cache/d0/327215271_956172911949876_98742452763943903_n-1-d02d3e61.jpeg" alt="Revista Tierra Santa, 100 años (1921-2021)" loading="lazy" decoding="async" width="1200" height="797"></figure>
+    </div>
+    <ul class="team"><li><img class="tm-i" src="wp-content/uploads/yootheme/cache/6d/LUIS_QUINTANA_II-6dbcf90d.jpg" alt="Fray Luis Quintana Giménez" loading="lazy" decoding="async" width="250" height="250"><div class="tm-w"><h3>Fray Luis Quintana Giménez</h3><p class="caps">Responsable de la Revista</p></div><p class="tm-b">Franciscano sacerdote de la diócesis de Madrid. Realizó sus estudios de Teología en la Facultad de Teología del Norte de España (Burgos), Licenciatura en Teología dogmática en la Universidad Pontificia de Salamanca, Doctorado en Teología Dogmática por la Universidad Eclesiástica de San Dámaso (Madrid) y Licenciatura en Teología Fundamental por el Instituto Teológico de Murcia (Pontifica Universidad Antonianum), además de otros estudios en Jerusalén (exégesis y arqueología) y Madrid (vida consagrada). Actualmente es Profesor en la Universidad Eclesiástica San Dámaso y en el Instituto Teológico de Murcia, además de Presidente de los Comisarios de Tierra Santa en España y Portugal, y Representante legal del Custodio de Tierra Santa en España.</p></li><li><img class="tm-i" src="wp-content/uploads/yootheme/cache/26/Maria-Diaz-Ripoll-2604d2bb.jpg" alt="María Díaz-Ripoll Lozano" loading="lazy" decoding="async" width="250" height="250"><div class="tm-w"><h3>María Díaz-Ripoll Lozano</h3><p class="caps">Directora</p></div><p class="tm-b">Licenciada en Periodismo, diplomada en Altos Estudios Internacionales con amplios conocimientos de Community Manager y Social Media. Con más de 15 años de experiencia en diferentes puestos de comunicación, tanto en multinacionales como Repsol; institucionales, como el Ministerio de Defensa; privadas como el Instituto de Seguridad Global o fundaciones como CODESPA. Asimismo, ha trabajado como profesora de Comunicación en la Universidad Complutense de Madrid y ha colaborado escribiendo artículos en diversas revistas especializadas.</p></li><li><img class="tm-i" src="wp-content/uploads/yootheme/cache/8a/Cayetana-8ac28bce.jpg" alt="Cayetana H. Johnson" loading="lazy" decoding="async" width="250" height="250"><div class="tm-w"><h3>Cayetana H. Johnson</h3><p class="caps">Consejo de redacción</p></div><p class="tm-b">Doctora en Teología en la Universidad Eclesiástica San Dámaso (Madrid), en la que es profesora Adjunta a Cátedra, y profesora Asociada de la Facultad de Literatura Cristiana y Clásica-San Justino ( UESD ). Líneas de Investigación: Arqueología Bíblica, Iconografía comparada, estudios bíblicos, judaísmo y sus lenguas. Profesora de Arameo y hebreo. Es también profesora invitada de la Universidad Francisco de Vitoria, con la asignatura Historia de las Civilizaciones. Tiene una larga experiencia en Arqueología: desde 1996, es arqueóloga en Tel Hazor ( Galilea,Israel ) y desde 2012 en la Ciudad de David, Jerusalem. Colaboradora de National Geographic España, y otras revistas científicas.</p></li><li><img class="tm-i" src="wp-content/uploads/yootheme/cache/96/MARIA_JOSE_III-9650f8c2.jpg" alt="María José Villegas" loading="lazy" decoding="async" width="250" height="250"><div class="tm-w"><h3>María José Villegas</h3><p class="caps">Secretaria</p></div><p class="tm-b">María José Villegas Villena, nació en Madrid, está casada y es madre de 6 hijos. Se licenció en Psicología, especialidad en Piscologia evolultiva por la Universidad Complutense de Madrid. Miembro del Camino Neocatecumenal del que ha recibido su amor a la Igleisa y a Tierra Santa como fuente de la Fe de donde brotan las raíces del cristianismo. Ha peregrinado en múltiples ocasiones a Israel desde 1999 descubriendo que es el lugar que Dios eligió para hacerse carne para salvar a los hombres.</p></li></ul>
+  </div>
+</section>
+
+<section class="where" id="contacto" aria-labelledby="where-t">
+  <div class="wrap">
+    <p class="caps">Contacta con nosotros</p>
+    <h2 id="where-t">Escríbenos <em>o ven a vernos</em></h2>
+    <div class="ct-g">
+      <form class="ct-f" id="ctForm" novalidate>
+        <div class="ct-2">
+          <label><span class="caps">Nombre <i>(obligatorio)</i></span><input name="nombre" autocomplete="given-name" required></label>
+          <label><span class="caps">Apellidos</span><input name="apellidos" autocomplete="family-name"></label>
+        </div>
+        <div class="ct-2">
+          <label><span class="caps">Email <i>(obligatorio)</i></span><input name="email" type="email" autocomplete="email" required></label>
+          <label><span class="caps">Confirmar email</span><input name="email2" type="email" autocomplete="email" required></label>
+        </div>
+        <label><span class="caps">Asunto <i>(obligatorio)</i></span><input name="asunto" required></label>
+        <label><span class="caps">Mensaje <i>(obligatorio)</i></span><textarea name="mensaje" rows="6" maxlength="600" required></textarea><small id="ctCount">0 de 600 caracteres máximos</small></label>
+        <p class="ct-l">Información básica sobre protección de datos. – La Revista Tierra Santa le informa de que los datos de carácter personal por usted facilitados serán destinados a la gestión de su consulta, no siendo los mismos objeto de comunicación ni cesión a terceros, salvo prescripción legal. Ud. podrá ejercer sus derechos en materia de protección de datos mediante comunicación escrita a la siguiente dirección: Calle San Buenaventura, 1, CP 28005 Madrid con la referencia “Protección de datos”. Antes de continuar con el proceso, deberá leer nuestra política de protección de datos a través de este <a href="politica-de-privacidad/index.html">enlace</a>.</p>
+        <label class="ct-c"><input type="checkbox" name="ok" required><span>He leído y consiento expresamente el tratamiento de protección de datos en los términos establecidos.</span></label>
+        <p class="ct-e" id="ctErr" role="alert" hidden></p>
+        <div class="ct-s"><button class="btn is-solid" type="submit">Enviar</button><small>Se abrirá tu programa de correo con el mensaje ya escrito, dirigido a la redacción.</small></div>
+      </form>
+      <div class="ct-a">
+        <dl class="give-d where-d">
+          <div><dt class="caps">Dirección</dt><dd>Calle San Buenaventura, 1<br><span>CP 28005 Madrid</span></dd></div>
+          <div><dt class="caps">Redacción</dt><dd><a href="mailto:direccion@revistatierrasanta.com">direccion@revistatierrasanta.com</a></dd></div>
+          <div><dt class="caps">Suscripciones</dt><dd><a href="mailto:suscripciones@revistatierrasanta.com">suscripciones@revistatierrasanta.com</a></dd></div>
+          <div><dt class="caps">Teléfono</dt><dd><a href="tel:+34621096477">+34 621 096 477</a></dd></div>
+        </dl>
+        <p class="legal">Amparado por la Ley 49/2002 de entidades sin fines lucrativos con la denominación de Franciscanos Frailes Menores, Centro Tierra Santa · NIE: R2800567F · Depósito legal de la revista Tierra Santa: M-37351-2012 · ISSN: 0333-6212</p>
+      </div>
+    </div>
+    <div class="ct-m">
+      <iframe title="Mapa: Calle San Buenaventura, 1, Madrid" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-3.7206%2C40.4076%2C-3.7086%2C40.4136&amp;layer=mapnik&amp;marker=40.4106%2C-3.7146"></iframe>
+      <a class="caps ct-ml" href="https://www.openstreetmap.org/?mlat=40.4106&amp;mlon=-3.7146#map=17/40.4106/-3.7146" target="_blank" rel="noopener">Abrir el mapa en grande →</a>
+    </div>
+  <aside class="links" aria-labelledby="links-t">
+      <h3 class="caps" id="links-t">Enlaces de interés</h3>
+      <ul><li><a class="lk" href="https://tierrasanta.ofminmaculada.org/" target="_blank" rel="noopener"><span class="lk-i" aria-hidden="true"><b>CT</b><img src="wp-content/uploads/yootheme/cache/2f/comisaria-logo-scaled-2f361831.jpeg" alt="" loading="lazy" onerror="this.remove()"></span><span class="lk-t">Comisaría de Tierra Santa<small>P. Inmaculada</small></span><span class="lk-a" aria-hidden="true">↗</span></a></li><li><a class="lk" href="http://tierrasanta-ofminmaculada.blogspot.com/" target="_blank" rel="noopener"><span class="lk-i" aria-hidden="true"><b>B</b><img src="wp-content/uploads/yootheme/cache/3b/1200px-Blogger_icon.svg-3bf5a8e9.png" alt="" loading="lazy" onerror="this.remove()"></span><span class="lk-t">Blog de la Comisaría de Tierra Santa<small>P. Inmaculada</small></span><span class="lk-a" aria-hidden="true">↗</span></a></li><li><a class="lk" href="https://custodia.org/es" target="_blank" rel="noopener"><span class="lk-i" aria-hidden="true"><b>CTS</b><img src="wp-content/uploads/yootheme/cache/5c/logo-custodia-terra-santa2-5cf2c081.png" alt="" loading="lazy" onerror="this.remove()"></span><span class="lk-t">Custodia de Tierra Santa</span><span class="lk-a" aria-hidden="true">↗</span></a></li><li><a class="lk" href="https://www.terrasanta.net/" target="_blank" rel="noopener"><span class="lk-i" aria-hidden="true"><b>TS</b><img src="wp-content/uploads/yootheme/cache/1a/logo-terra-santa-1ab8d6cd.png" alt="" loading="lazy" onerror="this.remove()"></span><span class="lk-t">Revista Terrasanta<small>Italiano – Francés</small></span><span class="lk-a" aria-hidden="true">↗</span></a></li><li><a class="lk" href="https://www.cmc-terrasanta.com/es" target="_blank" rel="noopener"><span class="lk-i" aria-hidden="true"><b>CMC</b><img src="wp-content/uploads/yootheme/cache/cf/logo-CMC-TS-cf98b86b.jpeg" alt="" loading="lazy" onerror="this.remove()"></span><span class="lk-t">Christian Media Center</span><span class="lk-a" aria-hidden="true">↗</span></a></li><li><a class="lk" href="https://ofminmaculada.org/" target="_blank" rel="noopener"><span class="lk-i" aria-hidden="true"><b>OFM</b><img src="wp-content/uploads/yootheme/cache/0f/OFM-0fe1d566.png" alt="" loading="lazy" onerror="this.remove()"></span><span class="lk-t">Franciscanos<small>P. Inmaculada</small></span><span class="lk-a" aria-hidden="true">↗</span></a></li><li><a class="lk" href="https://ofm.org/" target="_blank" rel="noopener"><span class="lk-i" aria-hidden="true"><b>OFM</b><img src="wp-content/uploads/yootheme/cache/13/ofm_logo_3-1308736a.png" alt="" loading="lazy" onerror="this.remove()"></span><span class="lk-t">Franciscanos<small>OFM</small></span><span class="lk-a" aria-hidden="true">↗</span></a></li></ul>
+    </aside>
+  </div>
+</section>
+
+<footer class="foot" id="pie">
+  <div class="wrap foot-g">
+    <a class="foot-x" href="#archivo" aria-label="Volver arriba, a las portadas"><img src="wp-content/uploads/2023/03/1200px-Croix_de_l_Ordre_du_Saint-Sepulcre.svg.png" alt="" width="190" height="190" loading="lazy"></a>
+    <nav class="foot-c foot-c2" aria-labelledby="ft-1">
+      <h2 class="caps" id="ft-1">Enlaces</h2>
+      <ul>
+        <li><a href="#suscripciones">Suscripciones</a></li>
+        <li><a href="noticias.html">Actualidad</a></li>
+        <li><a href="#archivo">Hemeroteca</a></li>
+        <li><a href="#contacto">Contacta</a></li>
+        <li><a href="#quienes-somos">Quiénes somos</a></li>
+        <li><a href="#donar">Donaciones</a></li>
+      </ul>
+    </nav>
+    <nav class="foot-c" aria-labelledby="ft-2">
+      <h2 class="caps" id="ft-2">Legal</h2>
+      <ul>
+        <li><a href="politica-de-privacidad/index.html">Aviso legal</a></li>
+        <li><a href="politica-de-cookies/index.html">Política de cookies</a></li>
+        <li><a href="politica-de-privacidad/index.html">Política de privacidad</a></li>
+      </ul>
+    </nav>
+    <nav class="foot-c" aria-labelledby="ft-3">
+      <h2 class="caps" id="ft-3">Síguenos</h2>
+      <ul>
+        <li><a href="https://www.facebook.com/groups/587737163281903" target="_blank" rel="noopener">Facebook ↗</a></li>
+        <li><a href="https://www.instagram.com/r_tierrasanta/" target="_blank" rel="noopener">Instagram ↗</a></li>
+        <li><a href="https://twitter.com/R_TierraSanta" target="_blank" rel="noopener">Twitter ↗</a></li>
+      </ul>
+    </nav>
+  </div>
+  <p class="foot-n">© 2026 Revista Tierra Santa</p>
+</footer>
+
+<script src="revistas-cache.js"></script>
+<script>
+(async function(){
+'use strict';
+/* se recuerda qué portada es esta, para que las revistas y la página de noticias vuelvan aquí */
+try{localStorage.setItem('rts3dp',location.pathname.split('/').pop()||'portada-3d-ventana.html')}catch(_){}
+
+var YP={"revista-no-894":[2025,"Mayo – Junio",0],"revista-no-893":[2025,"Marzo – Abril",1],"revista-no-892":[2025,"Enero – Febrero",2],"revista-no-891":[2024,"Noviembre – Diciembre",3],"revista-no-890":[2024,"Septiembre – Octubre",4],"revista-no-889":[2024,"Julio – Agosto",5],"revista-no-888":[2024,"Mayo – Junio",6],"revista-no-887":[2024,"Marzo – Abril",7],"revista-no-886":[2024,"Enero – Febrero",8],"revista-no-885":[2023,"Noviembre",9],"revista-no-884":[2023,"Septiembre – Octubre",10],"revista-no-883":[2023,"Julio",11],"revista-no-882":[2023,"Mayo – Junio",12],"revista-no-881":[2023,"Marzo – Abril",13],"revista-no-880":[2023,"Enero – Febrero",14],"revista-no-879":[2023,"Noviembre – Diciembre",15],"revista-no-878":[2023,"Septiembre – Octubre",16],"revista-no-877":[2023,"Julio – Agosto",17],"revista-no-876":[2023,"Mayo – Junio",18],"revista-no-875":[2023,"Marzo – Abril",19],"revista-no-60":[2021,"Noviembre – Diciembre",20],"revista-no-59":[2021,"Septiembre – Octubre",21],"revista-no-58":[2021,"Mayo – Junio",22],"revista-no-57":[2021,"Mayo – Junio",23],"revista-no-56":[2021,"Marzo – Abril",24],"revista-no-55":[2021,"Enero – Febrero",25],"revista-no-867":[2020,"Noviembre – Diciembre",26],"revista-no-866":[2020,"Septiembre – Octubre",27],"revista-no-865":[2020,"Julio – Agosto",28],"revista-no-864":[2020,"Mayo – Junio",29],"revista-no-863":[2020,"Marzo – Abril",30],"revista-no-49":[2020,"Enero – Febrero",31],"revista-no-861":[2019,"Noviembre – Diciembre",32],"revista-no-860":[2019,"Septiembre – Octubre",33],"revista-no-859":[2019,"Julio – Agosto",34],"revista-no-858":[2019,"Mayo – Junio",35],"revista-no-857":[2019,"Marzo – Abril",36],"revista-no-856":[2019,"Enero – Febrero",37],"revista-no-855":[2018,"Noviembre – Diciembre",38],"revista-no-854":[2018,"Septiembre – Octubre",39],"revista-no-853":[2018,"Julio – Agosto",40],"revista-no-852":[2018,"Mayo – Junio",41],"revista-no-851":[2018,"Marzo – Abril",42],"revista-no-37":[2018,"Enero – Febrero",43],"revista-no-849":[2018,"Noviembre – Diciembre",44],"revista-no-848":[2017,"Septiembre – Octubre",45],"revista-no-847":[2017,"Julio – Agosto",46],"revista-no-846":[2017,"Mayo – Junio",47],"revista-no-845":[2017,"Marzo – Abril",48],"revista-no-31":[2017,"Enero – Febrero",49],"revista-no-843":[2017,"Noviembre – Diciembre",50],"revista-no-842":[2017,"Septiembre – Octubre",51],"revista-no-841":[2017,"Julio – Agosto",52],"revista-no-840":[2016,"Mayo – Junio",53],"revista-no-839":[2016,"Marzo – Abril",54],"revista-no-25":[2016,"Enero – Febrero",55],"revista-no-837":[2016,"Noviembre – Diciembre",56],"revista-no-836":[2015,"Septiembre – Octubre",57],"revista-no-835":[2015,"Julio – Agosto",58],"revista-no-834":[2013,"Mayo – Junio",59],"revista-no-833":[2015,"Marzo – Abril",60],"revista-no-19":[2014,"Enero – Febrero",61],"revista-no-831":[2014,"Noviembre – Diciembre",62],"revista-no-830":[2014,"Septiembre – Octubre",63],"revista-no-829":[2013,"Julio – Agosto",64],"revista-no-828":[2013,"Mayo – Junio",65],"revista-no-827":[2013,"Marzo – Abril",66],"revista-no-826":[2013,"Enero – Febrero",67],"revista-no-825":[2013,"Noviembre – Diciembre",68],"revista-no-824":[2013,"Septiembre – Octubre",69],"revista-no-823":[2013,"Julio – Agosto",70],"revista-no-822":[2013,"Mayo – Junio",71],"revista-no-821":[2013,"Marzo – Abril",72],"revista-no-820":[2013,"Enero – Febrero",73],"revista-no-819":[2013,"Septiembre",74],"revista-no-818":[2013,"Agosto",75],"revista-no-817":[2013,"Agosto",76],"revista-no-816":[2013,"Julio",77],"revista-no-815":[2013,"Julio",78],"revista-no-814":[2012,"Enero",79],"revista-no-813":[2011,"Noviembre",80],"revista-no-812":[2011,"Septiembre",81],"revista-no-811":[2011,"Julio",82],"revista-no-810":[2011,"Mayo",83],"revista-no-809":[2011,"Marzo",84],"revista-no-808":[2011,"Enero",85],"revista-no-807":[2010,"Noviembre",86],"revista-no-806":[2010,"Agosto",87],"revista-no-805":[2010,"",88],"revista-no-804":[2010,"",89],"revista-no-803":[2009,"Diciembre",90],"revista-no-802":[2009,"",91],"revista-no-801":[2009,"",92],"revista-no-800":[2009,"",93],"revista-no-799":[2009,"",94],"revista-no-798":[2009,"",95],"revista-no-797":[2009,"",96],"revista-no-796":[2008,"",97],"revista-no-795":[2008,"",98],"revista-no-794":[2008,"",99],"revista-no-793":[2008,"",100],"revista-no-792":[2008,"",101],"revista-no-791":[2008,"",102],"revista-no-790":[2008,"",103],"revista-no-789":[2007,"",104],"revista-no-788":[2007,"",105],"revista-no-787":[2007,"",106],"revista-no-786":[2007,"",107],"revista-no-785":[2007,"",108],"revista-no-784":[2007,"Junio",109],"revista-no-783":[2007,"",110],"revista-no-782":[2006,"",111],"revista-no-781":[2006,"",112],"revista-no-780":[2006,"",113],"revista-no-779":[2006,"",114],"revista-no-778":[2006,"Enero",115],"revista-no-777":[2005,"Julio",116],"revista-no-776":[2005,"Septiembre",117],"revista-no-775":[2005,"Julio",118],"revista-no-774":[2005,"Mayo",119],"revista-no-773":[2005,"Marzo",120],"revista-no-772":[2005,"Enero",121],"revista-no-771":[2004,"Diciembre",122],"revista-no-770-769":[2004,"Julio",123],"revista-no-768":[2004,"Mayo",124],"revista-no-767":[2004,"Marzo",125],"revista-no-766":[2004,"Enero",126],"revista-no-765":[2003,"Noviembre",127],"revista-no-764":[2003,"Septiembre",128],"revista-no-763":[2003,"Julio",129],"revista-no-762":[2003,"Mayo",130],"revista-no-761":[2003,"Marzo",131],"revista-no-760":[2003,"Enero",132],"revista-no-759":[2002,"Noviembre",133],"revista-no-758":[2002,"Septiembre",134],"revista-no-757":[2002,"Agosto",135],"revista-no-756":[2002,"Mayo",136],"revista-no-755":[2002,"Marzo",137],"revista-no-754":[2002,"Enero",138],"revista-no-753":[2001,"Noviembre",139],"revista-no-752":[2001,"Octubre",140],"revista-no-751":[2001,"Julio",141],"revista-no-750":[2001,"Mayo",142],"revista-no-749":[2001,"Marzo",143],"revista-no-748":[2001,"Enero",144],"revista-no-747":[2000,"Noviembre",145],"revista-no-746":[2000,"Septiembre",146],"revista-no-745":[2000,"Julio",147],"revista-no-744":[2000,"Junio",148],"revista-no-743":[2000,"",149],"revista-no-742":[2000,"Enero",150],"revista-no-741":[1999,"Noviembre",151],"revista-no-740":[1999,"Septiembre",152],"revista-no-739":[1999,"Julio",153],"revista-no-738":[1999,"",154],"revista-no-737":[1999,"",155],"revista-no-736":[1999,"Enero",156],"revista-no-735":[1998,"Noviembre",157],"revista-no-734":[1998,"Septiembre",158],"revista-no-733":[1998,"",159],"revista-no-732":[1998,"Mayo",160],"revista-no-731":[1998,"Marzo",161],"revista-no-730":[1998,"Enero",162],"revista-no-729":[1997,"Noviembre",163],"revista-no-728":[1997,"Septiembre",164],"revista-no-727":[1997,"Mayo",165],"revista-no-726":[1997,"Mayo",166],"revista-no-725":[1997,"Enero",167],"revista-no-724":[1997,"Enero",168],"revista-no-723":[1996,"Septiembre",169],"revista-no-722":[1996,"Julio",170],"revista-no-721":[1996,"Julio",171],"revista-no-720":[1996,"Mayo",172],"revista-no-719":[1996,"Marzo",173],"revista-no-718":[1996,"Enero",174],"revista-no-717":[1995,"Noviembre",175],"revista-no-716":[1995,"Octubre",176],"revista-no-715":[1995,"Julio",177],"revista-no-714":[1995,"Marzo",178],"revista-no-713":[1995,"Marzo",179],"revista-no-712":[1995,"Enero",180],"revista-no-711":[1994,"Noviembre",181],"revista-no-710":[1994,"Septiembre",182],"revista-no-709":[1994,"Julio",183],"revista-no-708":[1994,"Mayo",184],"revista-no-707":[1994,"Enero",185],"revista-no-706":[1994,"Enero",186],"revista-no-705":[1993,"Octubre",187],"revista-no-704":[1993,"Septiembre",188],"revista-no-703":[1993,"Julio",189],"revista-no-702":[1993,"Marzo",190],"revista-no-701":[1993,"Enero",191],"revista-no-700":[1993,"Enero",192],"revista-no-699":[1992,"Septiembre",193],"revista-no-698":[1992,"Septiembre",194],"revista-no-697":[1992,"Julio",195],"revista-no-696":[1992,"Mayo",196],"revista-no-695":[1992,"Marzo",197],"revista-no-694":[1992,"Enero",198],"revista-no-693":[1991,"Noviembre",199],"revista-no-692":[1991,"Septiembre",200],"revista-no-691":[1991,"Julio",201],"revista-no-690":[1991,"Mayo",202],"revista-no-689":[1991,"Marzo",203],"revista-no-688":[1991,"Enero",204],"revista-no-687":[1990,"Noviembre",205],"revista-no-686":[1990,"Septiembre",206],"revista-no-685":[1990,"Julio",207],"revista-no-684":[1990,"Mayo",208],"revista-no-683":[1990,"Marzo",209],"revista-no-682":[1990,"Enero",210],"revista-no-681":[1989,"Noviembre",211],"revista-no-680":[1989,"Septiembre",212],"revista-no-679":[1989,"Agosto",213],"revista-no-678":[1989,"Junio",214],"revista-no-677":[1989,"Junio",215],"revista-no-676":[1989,"",216],"revista-no-675":[1988,"Noviembre",217],"revista-no-674":[1988,"Septiembre",218],"revista-no-673":[1988,"Julio",219],"revista-no-672":[1988,"Mayo",220],"revista-no-671":[1988,"Marzo",221],"revista-no-670":[1988,"Enero",222],"revista-no-669":[1987,"Noviembre",223],"revista-no-668":[1987,"Septiembre",224],"revista-no-667":[1987,"Julio",225],"revista-no-666":[1987,"",226],"revista-no-665":[1987,"Marzo",227],"revista-no-664":[1987,"Enero",228],"revista-no-663":[1986,"Noviembre",229],"revista-no-662":[1986,"Octubre",230],"revista-no-661":[1986,"Agosto",231],"revista-no-660":[1986,"",232],"revista-no-659":[1986,"Marzo",233],"revista-no-658":[1986,"Febrero",234],"revista-no-657":[1985,"Diciembre",235],"revista-no-656":[1985,"Octubre",236],"revista-no-655":[1985,"",237],"revista-no-654":[1985,"Abril",238],"revista-no-653":[1985,"Marzo",239],"revista-no-652":[1985,"Febrero",240],"revista-no-651":[1984,"Diciembre",241],"revista-no-650":[1984,"Septiembre",242],"revista-no-649":[1984,"Agosto",243],"revista-no-648":[1984,"Junio",244],"revista-no-647":[1984,"Marzo",245],"revista-no-646":[1984,"Enero",246],"revista-no-645":[1983,"Noviembre",247],"revista-no-644":[1983,"Septiembre",248],"revista-no-643":[1983,"",249],"revista-no-642":[1983,"Mayo",250],"revista-no-641":[1983,"Marzo",251],"revista-no-640":[1983,"Enero",252],"revista-no-639":[1982,"Noviembre",253],"revista-no-638":[1982,"Agosto",254],"revista-no-637":[1982,"",255],"revista-no-636":[1982,"Abril",256],"revista-no-635":[1982,"Marzo",257],"revista-no-634":[1982,"Enero",258],"revista-no-633":[1981,"Diciembre",259],"revista-no-632":[1981,"Noviembre",260],"revista-no-630-631":[1981,"Septiembre",261],"revista-no-628-629":[1981,"Julio",262],"revista-no-627":[1981,"Junio",263],"revista-no-625-626":[1981,"Abril",264],"revista-no-623-624":[1981,"Febrero",265],"revista-no-622":[1981,"Enero",266],"revista-no-620-621":[1980,"Noviembre",267],"revista-no-619":[1980,"Octubre",268],"revista-no-617-618":[1980,"Agosto",269],"revista-no-616":[1980,"Julio",270],"revista-no-615":[1980,"Junio",271],"revista-no-613-614":[1980,"Abril",272],"revista-no-612":[1980,"Marzo",273],"revista-no-611":[1980,"Enero",274],"revista-no-610":[1979,"Diciembre",275],"revista-no-609":[1979,"Noviembre",276],"revista-no-608":[1979,"Octubre",277],"revista-no-606-607":[1979,"Agosto",278],"revista-no-605":[1979,"Julio",279],"revista-no-604":[1979,"Junio",280],"revista-no-602-603":[1979,"Abril",281],"revista-no-601":[1979,"Marzo",282],"revista-no-599-600":[1979,"Enero",283],"revista-no-598":[1978,"Diciembre",284],"revista-no-597":[1978,"Noviembre",285],"revista-no-596":[1978,"Octubre",286],"revista-no-595":[1978,"Septiembre",287],"revista-no-593-594":[1978,"Agosto",288],"revista-no-592":[1978,"Julio",289],"revista-no-591":[1978,"",290],"revista-no-589-590":[1978,"Marzo",291],"revista-no-587-588":[1978,"Enero",292],"revista-no-586":[1977,"Diciembre",293],"revista-no-585":[1977,"Noviembre",294],"revista-no-583-584":[1977,"Septiembre",295],"revista-no-582":[1977,"Agosto",296],"revista-no-581":[1977,"Julio",297],"revista-no-580":[1977,"Junio",298],"revista-no-579":[1977,"Junio",299],"revista-no-578":[1977,"",300],"revista-no-577":[1977,"Marzo",301],"revista-no-575-576":[1977,"Febrero",302],"revista-no-574":[1977,"Enero",303],"revista-no-572-573":[1976,"Octubre",304],"revista-no-571":[1976,"Septiembre",305],"revista-no-570":[1976,"Agosto",306],"revista-no-569":[1976,"Julio",307],"revista-no-567-568":[1976,"Mayo",308],"revista-no-566":[1976,"Abril",309],"revista-no-565":[1976,"Marzo",310],"revista-no-563-564":[1976,"Enero",311],"revista-no-561-562":[1975,"Noviembre",312],"revista-no-560":[1975,"Octubre",313],"revista-no-559":[1975,"Octubre",314],"revista-no-557-558":[1975,"Agosto",315],"revista-no-555-556":[1975,"Julio",316],"revista-no-554":[1975,"Julio",317],"revista-no-553":[1975,"Julio",318],"revista-no-551-552":[1975,"",319],"revista-no-550":[1975,"Marzo",320],"revista-no-549":[1975,"Enero",321],"revista-no-548":[1974,"Octubre",322],"revista-no-545":[1974,"",323],"revista-no-544":[1974,"Junio",324],"revista-no-543":[1974,"Mayo",325],"revista-no-541":[1974,"Marzo",326],"revista-no-539-540":[1973,"Octubre",327],"revista-no-537-538":[1973,"",328],"revista-no-535-536":[1973,"",329],"revista-no-533-534":[1973,"",330],"revista-no-531-532":[1973,"",331],"revista-no-530":[1973,"Abril",332],"revista-no-529":[1973,"Marzo",333],"revista-no-528":[1973,"Febrero",334],"revista-no-527":[1973,"Enero",335],"revista-no-526":[1972,"Diciembre",336],"revista-no-525":[1972,"Noviembre",337],"revista-no-524":[1972,"Octubre",338],"revista-no-523":[1972,"Septiembre",339],"revista-no-521-522":[1972,"",340],"revista-no-520":[1972,"Mayo",341],"revista-no-519":[1972,"Abril",342],"revista-no-518":[1972,"Abril",343],"revista-no-517":[1972,"Marzo",344],"revista-no-516":[1972,"Febrero",345],"revista-no-515":[1972,"Enero",346],"revista-no-514":[1971,"Diciembre",347],"revista-no-513":[1971,"Noviembre",348],"revista-no-512":[1971,"Octubre",349],"revista-no-511":[1971,"Septiembre",350],"revista-no-508-509-510":[1971,"Junio",351],"revista-no-507":[1971,"Mayo",352],"revista-no-506":[1971,"Abril",353],"revista-no-505":[1971,"Marzo",354],"revista-no-504":[1971,"Febrero",355],"revista-no-503":[1971,"Enero",356],"revista-no-502":[1970,"Diciembre",357],"revista-no-501":[1970,"Noviembre",358],"revista-no-500":[1970,"Octubre",359],"revista-no-499":[1970,"Septiembre",360],"revista-no-496-497-498":[1970,"Junio",361],"revista-no-495":[1970,"Mayo",362],"revista-no-494":[1970,"Abril",363],"revista-no-493":[1970,"Marzo",364],"revista-no-491-492":[1970,"Enero",365],"revista-no-490":[1969,"Diciembre",366],"revista-no-489":[1969,"Noviembre",367],"revista-no-488":[1969,"Octubre",368],"revista-no-487":[1969,"Septiembre",369],"revista-no-485-486":[1969,"Agosto",370],"revista-no-483-484":[1969,"Julio",371],"revista-no-482":[1969,"Julio",372],"revista-no-481":[1969,"Junio",373],"revista-no-480":[1969,"",374],"revista-no-479":[1969,"Abril",375],"revista-478":[1969,"Febrero",376],"revista-476-477":[1968,"Octubre",377],"revista-475":[1968,"",378],"revista-no-473-474":[1968,"Junio",379],"revista-no-472":[1968,"Junio",380],"revista-no-471":[1968,"",381],"revista-469-470":[1968,"Junio",382],"revista-no-468":[1968,"",383],"revista-no-467":[1968,"",384],"revista-no-466":[1967,"",385],"revista-no-465":[1967,"",386],"revista-no-464":[1967,"",387],"revista-no-462-463":[1967,"Junio",388],"revista-no-461":[1967,"Junio",389],"revista-no-460":[1967,"Junio",390],"revista-no-459":[1967,"",391],"revista-no-458":[1967,"",392],"revista-no-457":[1967,"",393],"revista-no-456":[1967,"",394],"revista-no-455":[1967,"Junio",395],"revista-no-454":[1967,"",396],"revista-no-453":[1967,"Abril",397],"revista-no-452":[1967,"Enero",398],"revista-no-450-451":[1966,"Agosto",399],"revista-no-449":[1966,"Julio",400],"revista-no-448":[1966,"",401],"revista-no-447":[1966,"",402],"revista-no-446":[1966,"",403],"revista-no-445":[1966,"",404],"revista-no-444":[1966,"Abril",405],"revista-no-443":[1966,"Marzo",406],"revista-no-440-442":[1965,"Octubre",407],"revista-no-438-439":[1965,"Agosto",408],"revista-no-437":[1965,"",409],"revista-no-436":[1965,"",410],"revista-no-435":[1965,"Mayo",411],"revista-no-433-434":[1965,"Abril",412],"revista-no-432":[1965,"Febrero",413],"revista-no-431":[1965,"Enero",414],"revista-no-430":[1964,"Diciembre",415],"revista-no-428-429":[1964,"Noviembre",416],"revista-no-427":[1964,"Octubre",417],"revista-no-426":[1964,"Agosto",418],"revista-no-425":[1964,"Julio",419],"revista-no-424":[1964,"",420],"revista-no-423":[1964,"",421],"revista-no-422":[1964,"Enero",422],"revista-no-420-421":[1964,"Enero",423],"revista-no-419":[1964,"Enero",424],"revista-no-418":[1963,"Diciembre",425],"revista-no-417":[1963,"Noviembre",426],"revista-no-416":[1963,"Octubre",427],"revista-no-415":[1963,"Septiembre",428],"revista-no-414":[1963,"Agosto",429],"revista-no-413":[1963,"Julio",430],"revista-no-412":[1963,"Junio",431],"revista-no-411":[1963,"Mayo",432],"revista-no-409-410":[1963,"Marzo",433],"revista-no-408":[1963,"Febrero",434],"revista-no-407":[1963,"Enero",435],"revista-no-406":[1962,"Diciembre",436],"revista-no-405":[1962,"Noviembre",437],"revista-no-404":[1962,"Octubre",438],"revista-no-402-403":[1962,"Agosto",439],"revista-no-401":[1962,"Julio",440],"revista-no-400":[1962,"",441],"revista-no-399":[1962,"Mayo",442],"revista-no-398":[1962,"Abril",443],"revista-no-397":[1962,"Marzo",444],"revista-no-396":[1962,"Febrero",445],"revista-no-395":[1962,"Enero",446],"revista-no-394":[1961,"Diciembre",447],"revista-no-392":[1961,"Octubre",448],"revista-no-391":[1961,"Octubre",449],"revista-no-391-oct":[1961,"Septiembre",450],"revista-no-389-390":[1961,"Julio",451],"revista-no-388":[1961,"Junio",452],"revista-no-387":[1961,"Mayo",453],"revista-no-386":[1961,"Abril",454],"revista-no-385":[1961,"Marzo",455],"revista-no-384":[1961,"Febrero",456],"revista-no-383":[1961,"Enero",457],"revista-no-381-382":[1960,"Noviembre",458],"revista-no-380":[1960,"Octubre",459],"revista-no-379":[1960,"Septiembre",460],"revista-no-378":[1960,"Julio",461],"revista-no-377":[1960,"",462],"revista-no-376":[1960,"Mayo",463],"revista-no-375":[1960,"Abril",464],"revista-no-374":[1960,"Marzo",465],"revista-no-373":[1960,"Febrero",466],"revista-no-372":[1960,"Enero",467],"revista-no-371":[1959,"Diciembre",468],"revista-no-370":[1959,"Noviembre",469],"revista-no-369":[1959,"Octubre",470],"revista-no-367-368":[1959,"Agosto",471],"revista-no-366":[1959,"Julio",472],"revista-no-365":[1959,"Junio",473],"revista-no-364":[1959,"Mayo",474],"revista-no-362-363":[1959,"Marzo",475],"revista-no-361":[1959,"Febrero",476],"revista-no-360":[1959,"Enero",477],"revista-no-359":[1958,"Diciembre",478],"revista-no-357-358":[1958,"Octubre",479],"revista-no-356":[1958,"Septiembre",480],"revista-no-354-355":[1958,"Agosto",481],"revista-no-353":[1958,"Junio",482],"revista-no-352":[1958,"Mayo",483],"revista-no-351":[1958,"Abril",484],"revista-no-350":[1958,"Marzo",485],"revista-no-349":[1958,"Febrero",486],"revista-no-348":[1958,"Enero",487],"revista-no-347":[1957,"Diciembre",488],"revista-no-346":[1957,"Noviembre",489],"revista-no-345":[1957,"Octubre",490],"revista-no-344":[1957,"Septiembre",491],"revista-no-342-343":[1957,"Julio",492],"revista-no-341":[1957,"Junio",493],"revista-no-340":[1957,"Junio",494],"revista-no-339":[1957,"Junio",495],"revista-no-338":[1957,"",496],"revista-no-337":[1957,"Febrero",497],"revista-no-336":[1957,"Enero",498],"revista-no-334-335":[1956,"Julio",499],"revista-no-332-333":[1956,"Junio",500],"revista-no-331":[1956,"Junio",501],"revista-no-330":[1956,"Mayo",502],"revista-no-329":[1956,"Mayo",503],"revista-no-328":[1956,"Abril",504],"revista-no-327":[1956,"Abril",505],"revista-no-326":[1956,"Marzo",506],"revista-no-325":[1956,"Febrero",507],"revista-no-324-dic":[1955,"Diciembre",508],"revista-no-324-enero":[1956,"Enero",509],"revista-no-323":[1955,"Noviembre",510],"revista-no-322":[1955,"Octubre",511],"revista-no-321":[1955,"Septiembre",512],"revista-no-319-320":[1955,"Julio",513],"revista-no-317-318":[1955,"Mayo",514],"revista-no-316":[1955,"Abril",515],"revista-no-315":[1955,"Marzo",516],"revista-no-314":[1955,"Febrero",517],"revista-no-313":[1955,"Enero",518],"revista-no-312":[1954,"Diciembre",519],"revista-no-311":[1954,"Noviembre",520],"revista-no-310":[1954,"Octubre",521],"revista-no-309":[1954,"Septiembre",522],"revista-no-308":[1954,"Agosto",523],"revista-no-307":[1954,"Julio",524],"revista-no-306":[1954,"Junio",525],"revista-no-305":[1954,"Mayo",526],"revista-no-304":[1954,"Abril",527],"revista-no-303":[1954,"Marzo",528],"revista-no-302":[1954,"Febrero",529],"revista-no-301":[1954,"Enero",530],"revista-no-300":[1953,"Diciembre",531],"revista-no-299":[1953,"Noviembre",532],"revista-no-298":[1953,"Octubre",533],"revista-no-297":[1953,"Septiembre",534],"revista-no-296":[1953,"Agosto",535],"revista-no-295":[1953,"Julio",536],"revista-no-294":[1953,"",537],"revista-no-293":[1953,"Mayo",538],"revista-no-292":[1953,"Abril",539],"revista-no-291":[1953,"Marzo",540],"revista-no-290":[1953,"Febrero",541],"revista-no-289":[1953,"Enero",542],"revista-no-288":[1952,"Diciembre",543],"revista-no-287":[1952,"Noviembre",544],"revista-no-286":[1952,"Octubre",545],"revista-no-285":[1952,"Septiembre",546],"revista-no-284":[1952,"Agosto",547],"revista-no-283":[1952,"",548],"revista-no-282":[1952,"Junio",549],"revista-no-281":[1952,"Mayo",550],"revista-no-280":[1952,"Abril",551],"revista-no-279":[1952,"Marzo",552],"revista-no-278":[1952,"Febrero",553],"revista-no-277":[1952,"Enero",554],"revista-no-276":[1951,"Diciembre",555],"revista-no-275":[1951,"Noviembre",556],"revista-no-274":[1951,"Octubre",557],"revista-no-273":[1951,"Septiembre",558],"revista-no-272":[1951,"Agosto",559],"revista-no-271":[1951,"Julio",560],"revista-no-270":[1951,"Junio",561],"revista-no-269":[1951,"Mayo",562],"revista-no-268":[1951,"Abril",563],"revista-no-267":[1951,"Marzo",564],"revista-no-266":[1951,"Febrero",565],"revista-no-265":[1951,"Enero",566],"revista-no-264":[1950,"Diciembre",567],"revista-no-263":[1950,"Noviembre",568],"revista-no-262":[1950,"Octubre",569],"revista-no-261":[1950,"Septiembre",570],"revista-no-260":[1950,"Agosto",571],"revista-no-259":[1950,"Julio",572],"revista-no-258":[1950,"Junio",573],"revista-no-257":[1950,"Junio",574],"revista-no-256":[1950,"Junio",575],"revista-no-255":[1950,"Junio",576],"revista-no-254":[1950,"",577],"revista-no-253":[1950,"",578],"revista-no-252":[1949,"Noviembre",579],"revista-no-251":[1949,"Septiembre",580],"revista-no-250":[1949,"Julio",581],"revista-no-249":[1949,"Julio",582],"revista-no-248":[1949,"Junio",583],"revista-no-247":[1949,"",584],"revista-no-245-246":[1948,"Septiembre",585],"revista-no-244":[1948,"Julio",586],"revista-no-243":[1948,"Mayo",587],"revista-no-242":[1948,"Marzo",588],"revista-no-241":[1948,"Enero",589],"revista-no-240":[1947,"Noviembre",590],"revista-no-239":[1947,"Septiembre",591],"revista-no-238":[1947,"Julio",592],"revista-no-237":[1947,"",593],"revista-no-236":[1947,"",594],"revista-no-235":[1947,"Enero",595],"revista-no-234":[1946,"",596],"revista-no-233":[1940,"Mayo",597],"revista-no-232":[1940,"Abril",598],"revista-no-231":[1940,"Marzo",599],"revista-no-230":[1940,"Febrero",600],"revista-no-229":[1940,"Enero",601],"revista-no-227-228":[1939,"Noviembre",602],"revista-no-225-226":[1939,"Septiembre",603],"revista-no-224":[1939,"Agosto",604],"revista-no-223":[1939,"Julio",605],"revista-no-222":[1939,"Junio",606],"revista-no-221":[1939,"Mayo",607],"revista-no-220":[1939,"Marzo",608],"revista-no-219":[1939,"Marzo",609],"revista-no-218":[1939,"Febrero",610],"revista-no-217":[1939,"Enero",611],"revista-no-216":[1938,"Diciembre",612],"revista-no-215":[1938,"Noviembre",613],"revista-no-214":[1938,"Octubre",614],"revista-no-213":[1938,"Septiembre",615],"revista-no-212":[1938,"Agosto",616],"revista-no-211":[1938,"Julio",617],"revista-no-210":[1938,"Julio",618],"revista-no-209":[1938,"Mayo",619],"revista-no-208":[1938,"Abril",620],"revista-no-207":[1938,"Marzo",621],"revista-no-206":[1938,"Febrero",622],"revista-no-205":[1938,"Enero",623],"revista-no-204":[1937,"Diciembre",624],"revista-no-203":[1939,"Marzo",625],"revista-no-202":[1937,"Octubre",626],"revista-no-201":[1937,"Septiembre",627],"revista-no-200":[1937,"Agosto",628],"revista-no-199":[1937,"Julio",629],"revista-no-198":[1937,"Junio",630],"revista-no-197":[1937,"Mayo",631],"revista-no-196":[1937,"Abril",632],"revista-no-195":[1937,"Marzo",633],"revista-no-194":[1937,"Febrero",634],"revista-no-193":[1937,"Enero",635],"revista-no-192":[1936,"Diciembre",636],"revista-no-191":[1936,"Noviembre",637],"revista-no-190":[1936,"Octubre",638],"revista-no-189":[1936,"Septiembre",639],"revista-no-188":[1936,"Agosto",640],"revista-no-186":[1936,"Junio",641],"revista-no-185":[1936,"Mayo",642],"revista-no-184":[1936,"Abril",643],"revista-no-183":[1936,"Marzo",644],"revista-no-182":[1936,"Febrero",645],"revista-no-181":[1936,"Enero",646],"revista-no-180":[1935,"Diciembre",647],"revista-no-179":[1935,"Noviembre",648],"revista-no-178":[1935,"Octubre",649],"revista-no-177":[1935,"Septiembre",650],"revista-no-176":[1935,"Agosto",651],"revista-no-175":[1935,"Julio",652],"revista-no-174":[1935,"Junio",653],"revista-no-173":[1935,"Mayo",654],"revista-no-172":[1935,"Abril",655],"revista-no-171":[1935,"Marzo",656],"revista-no-170":[1935,"Febrero",657],"revista-no-169":[1935,"Enero",658],"revista-no-168":[1934,"Diciembre",659],"revista-no-167":[1934,"Noviembre",660],"revista-no-166":[1934,"Octubre",661],"revista-no-165":[1934,"Septiembre",662],"revista-no-164":[1934,"Agosto",663],"revista-no-163":[1934,"Julio",664],"revista-no-162":[1934,"Junio",665],"revista-no-161":[1934,"Mayo",666],"revista-no-160":[1934,"Abril",667],"revista-no-159":[1934,"Marzo",668],"revista-no-158":[1934,"Febrero",669],"revista-no-157":[1934,"Enero",670],"revista-no-156":[1933,"Diciembre",671],"revista-no-155":[1933,"Noviembre",672],"revista-no-154":[1933,"Octubre",673],"revista-no-153":[1933,"Septiembre",674],"revista-no-152":[1933,"Agosto",675],"revista-no-151":[1933,"Julio",676],"revista-no-150":[1933,"Junio",677],"revista-no-148-149":[1933,"Abril",678],"revista-no-147":[1933,"Marzo",679],"revista-no-146":[1933,"Febrero",680],"revista-no-145":[1933,"Enero",681],"revista-no-144":[1932,"Diciembre",682],"revista-no-143":[1932,"Noviembre",683],"revista-no-142":[1932,"Octubre",684],"revista-no-141":[1932,"Septiembre",685],"revista-no-140":[1932,"Agosto",686],"revista-no-139":[1932,"Julio",687],"revista-no-138":[1932,"Junio",688],"revista-no-137":[1932,"Mayo",689],"revista-no-136":[1932,"Abril",690],"revista-no-135":[1932,"Marzo",691],"revista-no-134":[1932,"Febrero",692],"revista-no-133":[1932,"Enero",693],"revista-no-132":[1931,"Diciembre",694],"revista-no-131":[1931,"Noviembre",695],"revista-no-130":[1931,"Octubre",696],"revista-no-129":[1931,"Septiembre",697],"revista-no-128":[1931,"Agosto",698],"revista-no-127":[1931,"Julio",699],"revista-no-126":[1931,"Junio",700],"revista-no-125":[1931,"Mayo",701],"revista-no-124":[1931,"Abril",702],"revista-no-123":[1931,"Marzo",703],"revista-no-122":[1931,"Febrero",704],"revista-no-121":[1931,"Enero",705],"revista-no-120":[1930,"Diciembre",706],"revista-no-119":[1930,"Noviembre",707],"revista-no-118":[1930,"Octubre",708],"revista-no-117":[1930,"Septiembre",709],"revista-no-116":[1930,"Agosto",710],"revista-no-115":[1930,"Julio",711],"revista-no-114":[1930,"Junio",712],"revista-no-113":[1930,"Mayo",713],"revista-no-112":[1930,"Abril",714],"revista-no-111":[1930,"Marzo",715],"revista-no-110":[1930,"Febrero",716],"revista-no-109":[1930,"Enero",717],"revista-no-108":[1929,"Diciembre",718],"revista-no-107":[1929,"Noviembre",719],"revista-no-106":[1929,"Octubre",720],"revista-no-105":[1929,"Septiembre",721],"revista-no-104":[1929,"Agosto",722],"revista-no-103":[1929,"Julio",723],"revista-no-102":[1929,"Junio",724],"revista-no-101":[1929,"Mayo",725],"revista-no-100":[1929,"Abril",726],"revista-no-099":[1929,"Marzo",727],"revista-no-098":[1929,"Febrero",728],"revista-no-097":[1929,"Enero",729],"revista-no-084":[1927,"Diciembre",730],"revista-no-083":[1927,"Noviembre",731],"revista-no-082":[1927,"Octubre",732],"revista-no-081":[1927,"Septiembre",733],"revista-no-080":[1927,"Agosto",734],"revista-no-079":[1927,"Julio",735],"revista-no-078":[1927,"Junio",736],"revista-no-077":[1927,"Mayo",737],"revista-no-076":[1927,"Abril",738],"revista-no-075":[1927,"Marzo",739],"revista-no-074":[1927,"Febrero",740],"revista-no-073":[1927,"Enero",741],"revista-no-072":[1926,"Diciembre",742],"revista-no-070-071":[1926,"Octubre",743],"revista-no-069":[1926,"Septiembre",744],"revista-no-068":[1926,"Agosto",745],"revista-no-067":[1926,"Julio",746],"revista-no-066":[1926,"Junio",747],"revista-no-065":[1926,"Mayo",748],"revista-no-064":[1926,"Abril",749],"revista-no-063":[1926,"Marzo",750],"revista-no-062":[1926,"Febrero",751],"revista-no-061":[1926,"Enero",752],"revista-no-060":[1925,"Diciembre",753],"revista-no-059":[1925,"Noviembre",754],"revista-no-058":[1925,"Octubre",755],"revista-no-057":[1925,"Septiembre",756],"revista-no-056":[1925,"Agosto",757],"revista-no-055":[1925,"Julio",758],"revista-no-054":[1925,"Junio",759],"revista-no-053":[1925,"Mayo",760],"revista-no-052":[1925,"Abril",761],"revista-no-051":[1925,"Marzo",762],"revista-no-050":[1925,"Febrero",763],"revista-no-049":[1925,"Enero",764],"revista-no-048":[1924,"Diciembre",765],"revista-no-047":[1924,"Noviembre",766],"revista-no-046":[1924,"Octubre",767],"revista-no-045":[1924,"Septiembre",768],"revista-no-044":[1924,"Agosto",769],"revista-no-042-043":[1924,"Junio",770],"revista-no-041":[1924,"Mayo",771],"revista-no-040":[1924,"Abril",772],"revista-no-039":[1924,"Marzo",773],"revista-no-038":[1924,"Febrero",774],"revista-no-037":[1924,"Enero",775],"revista-no-036":[1923,"Diciembre",776],"revista-no-035":[1923,"Noviembre",777],"revista-no-034":[1923,"Octubre",778],"revista-no-033":[1923,"Septiembre",779],"revista-no-032":[1923,"Agosto",780],"revista-no-031":[1923,"Julio",781],"revista-no-030":[1923,"Junio",782],"revista-no-029":[1923,"Mayo",783],"revista-no-028":[1923,"Abril",784],"revista-no-027":[1923,"Marzo",785],"revista-no-026":[1923,"Febrero",786],"revista-no-025":[1923,"Enero",787],"revista-no-024":[1922,"Diciembre",788],"revista-no-023":[1922,"Noviembre",789],"revista-no-022":[1922,"Octubre",790],"revista-no-021":[1922,"Septiembre",791],"revista-no-020":[1922,"Agosto",792],"revista-no-019":[1922,"Julio",793],"revista-no-018":[1922,"Junio",794],"revista-no-017":[1922,"Mayo",795],"revista-no-016":[1922,"Abril",796],"revista-no-015":[1922,"Marzo",797],"revista-no-014":[1922,"Febrero",798],"revista-no-013":[1922,"Enero",799],"revista-no-012":[1921,"Diciembre",800],"revista-no-011":[1921,"Noviembre",801],"revista-no-010":[1921,"Octubre",802],"revista-no-009":[1921,"Septiembre",803],"revista-no-008":[1921,"Agosto",804],"revista-no-007":[1921,"Julio",805],"revista-no-006":[1921,"Junio",806],"revista-no-005":[1921,"Mayo",807],"revista-no-004":[1921,"Abril",808],"revista-no-003":[1921,"Marzo",809],"revista-no-002":[1921,"Febrero",810],"revista-no-001":[1921,"Enero",811]};
+async function cargarRevistas(){
+  var base='https://www.revistatierrasanta.com/wp-json/wp/v2/revistas';
+  var qs='?per_page=100&orderby=date&order=desc&_embed=1&_fields=slug,link,title,date,_links,_embedded';
+  var primera=await fetch(base+qs+'&page=1',{mode:'cors'});
+  var total=+primera.headers.get('X-WP-TotalPages')||1;
+  var paginas=[primera.json()];
+  for(var p=2;p<=total;p++)paginas.push(fetch(base+qs+'&page='+p,{mode:'cors'}).then(function(r){return r.json()}));
+  var listas=await Promise.all(paginas);
+  var items=[].concat.apply([],listas);
+  var vistos={},limpio=[];
+  items.forEach(function(it){if(vistos[it.slug])return;vistos[it.slug]=true;limpio.push(it)});
+  limpio.forEach(function(it){
+    var m=YP[it.slug];
+    it._year=m?m[0]:new Date(it.date).getFullYear();
+    it._period=m?m[1]:'';
+    it._orig=m?m[2]:-1;
+    var media=it._embedded&&it._embedded['wp:featuredmedia']&&it._embedded['wp:featuredmedia'][0];
+    var tam=media&&media.media_details&&media.media_details.sizes;
+    it._cover=(tam&&((tam.medium&&tam.medium.source_url)||(tam.woocommerce_thumbnail&&tam.woocommerce_thumbnail.source_url)))||(media&&media.source_url)||'';
+  });
+  limpio.sort(function(a,b){
+    var au=a._orig<0,bu=b._orig<0;
+    if(au&&bu)return new Date(b.date)-new Date(a.date);
+    if(au)return -1;
+    if(bu)return 1;
+    return a._orig-b._orig;
+  });
+  return limpio.map(function(it){return{link:it.link,year:it._year,period:it._period,slug:it.slug,cover:it._cover}});
+}
+var CACHE_KEY='rts_hemeroteca_v1';
+function leerCacheRevistas(){
+  try{
+    var raw=localStorage.getItem(CACHE_KEY);
+    if(!raw)return null;
+    var o=JSON.parse(raw);
+    return (o&&Array.isArray(o.data)&&o.data.length)?o.data:null;
+  }catch(e){return null}
+}
+function guardarCacheRevistas(data){
+  try{localStorage.setItem(CACHE_KEY,JSON.stringify({ts:Date.now(),data:data}))}catch(e){}
+}
+var archivoEl0=document.getElementById('archivo');
+/* en pruebas: siempre se mira primero la caché cargada por <script src="revistas-cache.js"> (instantánea, sin red, funciona también abriendo el archivo con doble clic) */
+var D=[];
+try{
+  var jCache=window.__RTS_REVISTAS_CACHE;
+  if(jCache&&Array.isArray(jCache.data)&&jCache.data.length)D=jCache.data;
+}catch(e){}
+if(!D.length)D=leerCacheRevistas()||[];
+if(!D.length&&archivoEl0)archivoEl0.insertAdjacentHTML('afterbegin','<p class="wrap" id="cargandoRevistas" style="padding:3rem 0;text-align:center;opacity:.75">Cargando la hemeroteca en vivo desde revistatierrasanta.com…</p>');
+if(!D.length){
+  try{
+    D=await cargarRevistas();
+    if(D.length)guardarCacheRevistas(D);
+  }catch(e){console.warn('No se pudo cargar la hemeroteca en vivo',e)}
+}
+var cargandoR=document.getElementById('cargandoRevistas');
+if(cargandoR)cargandoR.remove();
+if(!D.length){
+  var ar=document.getElementById('archivo');
+  if(ar)ar.insertAdjacentHTML('afterbegin','<p class="wrap" style="padding:3rem 0;text-align:center"><a href="https://revistatierrasanta.com/hemeroteca/" target="_blank" rel="noopener" style="text-decoration:underline">No se pudo cargar la hemeroteca en vivo — ábrela directamente en revistatierrasanta.com</a></p>');
+  return;
+}
+   // [página, pdf, año, mes o bimestre ("" = solo año)] de la más reciente a la más antigua; la portada k está en portadas3d/hoja-NN.jpg (90 por hoja)
+var N=D.length, PER=13, STEP=360/PER, POOL=78, HALF=39;
+var $=function(id){return document.getElementById(id)};
+var stage=$('archivo'),scene=$('scene'),rig=$('rig'),helix=$('helix'),
+    hudMonth=$('hudMonth'),hudYear=$('hudYear'),hudRead=$('hudRead'),horizon=$('horizon'),range=$('range'),decades=$('decades');
+var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+var HZ=0,R=500,DY=19,f=0,target=0,active=-1,px=0,py=0,tx=0,ty=0,raf=0,t0=performance.now(),visible=true,vel=0,dragging=false;
+
+var pool=[];
+for(var i=0;i<POOL;i++){var el=document.createElement('div');el.className='card';el.hidden=true;el._k=-1;
+  var fc=document.createElement('div');fc.className='face';el.appendChild(fc);el._f=fc;helix.appendChild(el);pool.push(el)}
+function fill(el,k){
+  el._k=k;el.hidden=false;
+  var it=D[k],cover=it&&it.cover;
+  if(cover){
+    if(el._cover!==cover){
+      el._cover=cover;
+      el._f.style.backgroundImage='url("'+cover.replace(/"/g,'')+'")';
+      el._f.style.backgroundSize='cover';
+      el._f.style.backgroundPosition='center';
+    }
+  } else {
+    el._cover=null;
+    var sx=k,sh=Math.floor(sx/90),j=sx%90;
+    if(el._sh!==sh){el._sh=sh;el._f.style.backgroundImage='url(portadas3d/hoja-'+(sh<10?'0':'')+sh+'.jpg)';el._f.style.backgroundSize='1000% 900%'}
+    el._f.style.backgroundPosition=((j%10)*100/9).toFixed(3)+'% '+(Math.floor(j/10)*100/8).toFixed(3)+'%';
+  }
+  el.style.transform='translateY('+(k*DY).toFixed(1)+'px) rotateY('+(-k*STEP).toFixed(2)+'deg) translateZ('+R+'px)';
+}
+function layout(){
+  var w=innerWidth,ch=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--card-h'));
+  R=w<=760?Math.min(270,w*.66):w<=1100?Math.max(290,w*.31):Math.min(560,w*.31);
+  DY=ch*1.42/PER;
+  HZ=Math.max(0,horizon.offsetWidth-stage.clientWidth);
+  for(var i=0;i<POOL;i++)pool[i]._k=-1;
+  active=-1;draw(true);kick();
+}
+function clamp(v){return Math.min(N-1,Math.max(0,v))}
+function kick(){if(!raf)raf=requestAnimationFrame(tick)}
+function tick(now){
+  raf=0;
+  if(!dragging&&Math.abs(vel)>.002){target=clamp(target+vel);vel*=.92;if(Math.abs(vel)<=.002){vel=0;target=Math.round(target)}}
+  var d=target-f;f=reduce||Math.abs(d)<.002?target:f+d*.16;
+  px+=(tx-px)*.08;py+=(ty-py)*.08;
+  draw(false,now);
+  if(visible&&!document.hidden)raf=requestAnimationFrame(tick);
+}
+function draw(force,now){
+  var base=Math.round(f),sway=reduce?0:Math.sin(((now||0)-t0)/2600)*1.2;
+  rig.style.transform='rotateX('+(-6+py*2.5).toFixed(2)+'deg) rotateY('+(px*4+sway).toFixed(2)+'deg)';
+  helix.style.transform='translateZ('+(-R)+'px) rotateY('+(f*STEP).toFixed(3)+'deg) translateY('+(-f*DY).toFixed(2)+'px)';
+  if(HZ>0)horizon.style.transform='translate3d('+(-(f/(N-1))*HZ).toFixed(1)+'px,0,0)';else if(horizon.style.transform)horizon.style.transform='';   // Jerusalén se desliza despacio a lo largo del siglo
+  for(var j=0;j<POOL;j++){
+    var k=base-HALF+j,el=pool[((k%POOL)+POOL)%POOL];
+    if(k<0||k>=N){if(!el.hidden){el.hidden=true;el._k=-1}continue}
+    if(el._k!==k)fill(el,k);
+    var rel=k-f,c=Math.cos(rel*STEP*Math.PI/180),on=k===base;
+    var o=c<=0?0:Math.min(1,.1+c*c*.9)*Math.max(0,1-Math.abs(rel)/(HALF*.95));
+    o=on?1:Math.round(o*.5*40)/40;                      // las demás, a media luz
+    if(el._o!==o){el._o=o;el.style.opacity=o}
+    if(el._on!==on){el._on=on;el.classList.toggle('is-active',on)}
+  }
+  if(base!==active||force)setActive(base);
+}
+function setActive(k){
+  active=k;var d=D[k];
+  hudMonth.textContent=d.period;hudYear.textContent=d.year;
+  hudRead.href=d.link;
+  if(!range._drag)range.value=N-1-k;
+  remember(k);
+  range.setAttribute('aria-valuetext',(d.period?d.period+' de ':'')+d.year);
+  var cur=null;[].forEach.call(decades.children,function(li){var b=li.firstChild;if(+b.dataset.k>=k&&(!cur||+b.dataset.k<+cur.dataset.k))cur=b;b.setAttribute('aria-current','false')});
+  if(cur)cur.setAttribute('aria-current','true');
+}
+function goTo(k){vel=0;target=clamp(Math.round(k));kick()}
+/* Recordar la portada: al volver de una revista, la espiral se abre donde estaba */
+function slug(k){return D[k].slug}
+var memT=0;
+function remember(k){
+  clearTimeout(memT);
+  memT=setTimeout(function(){
+    var s=slug(k);
+    try{history.replaceState(null,'','#r='+s)}catch(e){}
+    try{localStorage.setItem('rts3d',s)}catch(e){}
+  },250);
+}
+function restore(){
+  var m=/^#r=([\w.-]+)/.exec(location.hash);if(!m)return -1;
+  for(var k=0;k<N;k++){if(slug(k)===m[1])return k}
+  return -1;
+}
+function findYear(y){
+  var best=-1,k;
+  for(k=0;k<N;k++){if(D[k].year===y)best=k}                 // la primera portada de ese año
+  if(best<0){for(k=0;k<N;k++){if(D[k].year<=y){best=k;break}}}
+  return best<0?N-1:best;
+}
+
+/* Línea del tiempo: izquierda 1921, derecha hoy */
+range.max=N-1;range.value=N-1;
+range.addEventListener('input',function(){range._drag=true;goTo(N-1-(+range.value))});
+range.addEventListener('change',function(){range._drag=false});
+(function(){
+  var first=Math.floor(D[N-1].year/10)*10,last=Math.floor(D[0].year/10)*10;
+  for(var h=first;h<=last;h+=10){
+    var li=document.createElement('li'),b=document.createElement('button');b.type='button';
+    b.dataset.k=findYear(h<D[N-1].year?D[N-1].year:h);b.textContent=h;b.setAttribute('aria-label','Ir a la década de '+h);
+    li.appendChild(b);decades.appendChild(li)}
+  decades.addEventListener('click',function(e){var b=e.target.closest('button');if(b)goTo(+b.dataset.k)});
+})();
+
+/* Arrastre de la espiral (ratón y dedo); el scroll de la página queda libre */
+(function(){
+  var x0=0,t=0,moved=0,lastX=0,lastT=0,id=null,PXI=innerWidth<=760?70:110;
+  scene.addEventListener('pointerdown',function(e){if(e.button)return;id=e.pointerId;x0=lastX=e.clientX;t=target;moved=0;lastT=e.timeStamp;vel=0;dragging=true});
+  addEventListener('pointermove',function(e){
+    if(!dragging||e.pointerId!==id)return;
+    var dx=e.clientX-x0;moved=Math.max(moved,Math.abs(dx));
+    if(moved>6){scene.classList.add('is-drag');target=clamp(t+dx/PXI);
+      var dt=Math.max(1,e.timeStamp-lastT);vel=((e.clientX-lastX)/PXI)/dt*16;lastX=e.clientX;lastT=e.timeStamp;kick()}
+  });
+  function end(e){
+    if(!dragging||(e.pointerId!==undefined&&e.pointerId!==id))return;
+    dragging=false;scene.classList.remove('is-drag');
+    if(moved<=6){var c=e.target.closest&&e.target.closest('.card');
+      if(c&&c._k>=0){if(c._k===active)location.href=D[c._k].link;else goTo(c._k)}}
+    else if(Math.abs(vel)<.02){vel=0;target=Math.round(target)}
+    kick();
+  }
+  addEventListener('pointerup',end);addEventListener('pointercancel',end);
+  scene.addEventListener('dragstart',function(e){e.preventDefault()});
+})();
+$('older').addEventListener('click',function(){goTo(Math.round(target)+1)});
+$('newer').addEventListener('click',function(){goTo(Math.round(target)-1)});
+$('goto').addEventListener('submit',function(e){e.preventDefault();var y=parseInt($('go').value,10);if(y){goTo(findYear(y));$('go').blur()}});
+addEventListener('keydown',function(e){
+  if(e.target.tagName==='INPUT'||!visible)return;
+  if(e.key==='ArrowLeft'){goTo(Math.round(target)+1);e.preventDefault()}
+  else if(e.key==='ArrowRight'){goTo(Math.round(target)-1);e.preventDefault()}
+});
+if(matchMedia('(hover:hover) and (pointer:fine)').matches&&!reduce){
+  stage.addEventListener('pointermove',function(e){tx=(e.clientX/innerWidth-.5)*2;ty=(e.clientY/innerHeight-.5)*2});
+  var lead=document.querySelector('.lead');
+  if(lead){var fig=lead.querySelector('figure');
+    lead.addEventListener('pointermove',function(e){var r=lead.getBoundingClientRect();fig.style.transform='rotateY('+(((e.clientX-r.left)/r.width-.5)*7).toFixed(2)+'deg) rotateX('+(-((e.clientY-r.top)/r.height-.5)*5).toFixed(2)+'deg)'});
+    lead.addEventListener('pointerleave',function(){fig.style.transform=''})}
+}
+/* Formulario de contacto: compone un correo a la redacción (sin servidor, funciona en la copia local) */
+(function(){
+  var fm=$('ctForm');if(!fm)return;var err=$('ctErr'),cnt=$('ctCount'),ta=fm.elements.mensaje;
+  ta.addEventListener('input',function(){cnt.textContent=ta.value.length+' de 600 caracteres máximos'});
+  fm.addEventListener('submit',function(e){
+    e.preventDefault();var v=fm.elements,msg='';
+    if(!v.nombre.value.trim())msg='Escribe tu nombre.';
+    else if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v.email.value.trim()))msg='Escribe un email válido.';
+    else if(v.email.value.trim()!==v.email2.value.trim())msg='Los dos emails no coinciden.';
+    else if(!v.asunto.value.trim())msg='Escribe el asunto.';
+    else if(!v.mensaje.value.trim())msg='Escribe tu mensaje.';
+    else if(!v.ok.checked)msg='Debes aceptar el tratamiento de protección de datos.';
+    err.hidden=!msg;err.textContent=msg;if(msg)return;
+    var body=v.mensaje.value.trim()+'\n\n'+v.nombre.value.trim()+' '+v.apellidos.value.trim()+'\n'+v.email.value.trim();
+    location.href='mailto:direccion@revistatierrasanta.com?subject='+encodeURIComponent(v.asunto.value.trim())+'&body='+encodeURIComponent(body);
+  });
+})();
+if('IntersectionObserver' in window)new IntersectionObserver(function(en){visible=en[0].isIntersecting;if(visible)kick()}).observe(stage);
+addEventListener('resize',layout);
+document.addEventListener('visibilitychange',function(){if(!document.hidden)kick()});
+layout();
+var hash=/^#a(\d{4})/.exec(location.hash),back=restore();
+if(back>=0){target=f=back;draw(true)}else if(hash){target=f=findYear(+hash[1]);draw(true)}
+addEventListener('pagehide',function(){clearTimeout(memT);try{history.replaceState(null,'','#r='+slug(active));localStorage.setItem('rts3d',slug(active))}catch(e){}});
+})();
+/* ventana: la vista se ajusta a su altura */(function(){var w=document.querySelector('.dfw');if(!w)return;function f(){w.style.setProperty('--dfw-h',(w.clientHeight*.46)+'px')}f();addEventListener('resize',f)})();
+</script>
+</body>
+</html>
