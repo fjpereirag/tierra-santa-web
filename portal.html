@@ -249,10 +249,13 @@ function crearEtapa(e,i){
   }
   ev.addEventListener('play', function(){ reproduciendo++; });
   ev.addEventListener('timeupdate', function(){
-    if(fin!=null && ev.currentTime>=fin){ ev.pause(); irAlInicio(); }
+    /* en bucle continuo: al llegar al final de su fragmento, vuelve al principio sin detenerse */
+    if(fin!=null && ev.currentTime>=fin){ irAlInicio(); }
   });
   ev.addEventListener('pause', function(){ eBtn.hidden=false; reproduciendo=Math.max(0,reproduciendo-1); });
-  ev.addEventListener('ended', function(){ eBtn.hidden=false; irAlInicio(); reproduciendo=Math.max(0,reproduciendo-1); });
+  /* "ended" solo puede ocurrir en la última etapa (sin límite superior): al llegar al final
+     del vídeo, vuelve a su propio inicio y sigue en bucle, en vez de detenerse */
+  ev.addEventListener('ended', function(){ irAlInicio(); ev.play().catch(function(){}); });
   eBtn.addEventListener('click', function(){
     if(!ev.src){ ev.addEventListener('loadedmetadata', empezar, {once:true}); ev.src = FUENTE; ev.load(); }
     else{ empezar(); }
@@ -322,8 +325,39 @@ function pausarTemporal(){
 }
 pista.addEventListener('mouseenter', function(){ pausado=true; });
 pista.addEventListener('mouseleave', function(){ pausado=false; });
-pista.addEventListener('touchstart', function(){ pausarTemporal(); }, {passive:true});
-pista.addEventListener('pointerdown', function(){ pausarTemporal(); });
+
+/* arrastrar con el ratón (o el dedo) para desplazar el carril a mano.
+   Importante: NO capturamos el puntero en el pointerdown — si se hace en cualquier
+   clic normal (p.ej. sobre el botón de reproducir), el navegador deja de disparar su
+   evento "click" porque el "up" queda redirigido a otro elemento. Solo capturamos una
+   vez que de verdad ha habido arrastre (más de unos pocos píxeles de movimiento). */
+var arrastrando=false, arrastreX=0, arrastreScroll=0, arrastreMovido=false, punteroId=null;
+pista.addEventListener('pointerdown', function(ev){
+  if(ev.pointerType==='mouse' && ev.button!==0) return;
+  arrastrando=true; arrastreMovido=false; punteroId=ev.pointerId;
+  arrastreX=ev.clientX; arrastreScroll=pista.scrollLeft;
+  pausarTemporal();
+});
+pista.addEventListener('pointermove', function(ev){
+  if(!arrastrando) return;
+  var dx = ev.clientX - arrastreX;
+  if(!arrastreMovido && Math.abs(dx)>4){
+    arrastreMovido=true;
+    try{ pista.setPointerCapture(punteroId); }catch(err){}
+  }
+  if(arrastreMovido){ pista.scrollLeft = arrastreScroll - dx; }
+});
+function soltarArrastre(){
+  if(!arrastrando) return;
+  arrastrando=false;
+  pausarTemporal();
+}
+pista.addEventListener('pointerup', soltarArrastre);
+pista.addEventListener('pointercancel', soltarArrastre);
+/* si el gesto fue un arrastre de verdad, que no dispare además el botón de reproducir que haya debajo */
+pista.addEventListener('click', function(ev){
+  if(arrastreMovido){ ev.stopPropagation(); ev.preventDefault(); arrastreMovido=false; }
+}, true);
 
 /* rueda del ratón: desplaza el carril en horizontal aunque el gesto sea vertical */
 pista.addEventListener('wheel', function(ev){
