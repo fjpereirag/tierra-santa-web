@@ -140,7 +140,7 @@ footer a:hover{color:var(--accent);border-color:var(--accent)}
 </section>
 
 <div class="relief-backdrop">
-  <img src="huellas/relieve-real.jpg" alt="Maqueta 3D de Tierra Santa de Huellas franciscanas: relieve desde el Mediterráneo hasta el valle del Jordán">
+  <img src="assets3d_relieve-mapa.jpg" alt="Maqueta 3D de Tierra Santa de Huellas franciscanas: relieve desde el Mediterráneo hasta el valle del Jordán">
 </div>
 
 <nav class="paths" aria-label="Tres webs sobre Tierra Santa">
@@ -199,7 +199,7 @@ var ETAPAS=[
   {image:'05-santuarios.webp', name:'Arquitectura Monumental', period:'1914–1999'},
   {image:'06-conservacion.webp', name:'Era Digital y Conservación Actual', period:'2000–Presente'}
 ];
-var BASE='huellas/historia/';
+var BASE='assets_entrada_historia_';
 var estrecho = matchMedia('(max-width:700px)').matches;
 var pista=document.getElementById('historiaPista');
 var puntosEl=document.getElementById('historiaPuntos');
@@ -211,14 +211,14 @@ var video=document.createElement('div');
 video.className='diapo diapo-video';
 video.innerHTML =
   '<div class="diapo-media">'+
-    '<video playsinline preload="none" poster="'+BASE+'poster.webp"></video>'+
+    '<video playsinline preload="none" poster="assets_entrada_evolucion-franciscana.webp"></video>'+
     '<button type="button" class="reproducir" aria-label="Reproducir la película (25 s)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>'+
   '</div>'+
   '<div class="diapo-texto"><span class="periodo">Película · 25 s</span><b>De la antigüedad a hoy</b></div>';
 pista.appendChild(video);
 var vEl=video.querySelector('video'), playBtn=video.querySelector('.reproducir');
 playBtn.addEventListener('click', function(){
-  if(!vEl.src){ vEl.src = BASE + (estrecho ? 'evolucion-movil.mp4' : 'evolucion.mp4'); vEl.controls=true; }
+  if(!vEl.src){ vEl.src = BASE + (estrecho ? 'evolucion-movil.mp4' : 'evolucion-25s-musica.mp4'); vEl.controls=true; }
   vEl.play().catch(function(){});
   playBtn.hidden=true;
 });
