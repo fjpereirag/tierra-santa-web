@@ -95,10 +95,11 @@ footer a:hover{color:var(--accent);border-color:var(--accent)}
 .historia h2{font-family:var(--font-display);font-weight:300;font-size:clamp(1.4rem,3vw,2rem);margin:0 0 .5rem;line-height:1.12}
 .historia .cab p{margin:0;color:var(--muted);font-size:.92rem;line-height:1.55}
 .carrusel{position:relative}
-.carrusel-pista{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:1rem;padding:.2rem .2rem 1rem;
+.carrusel-pista{display:flex;overflow-x:auto;overflow-anchor:none;gap:1rem;padding:.2rem .2rem 1rem;cursor:grab;
   scrollbar-width:none;-ms-overflow-style:none}
+.carrusel-pista:active{cursor:grabbing}
 .carrusel-pista::-webkit-scrollbar{display:none}
-.diapo{flex:0 0 auto;width:min(78vw,340px);scroll-snap-align:start;background:color-mix(in srgb,var(--bg-2) 94%,transparent);
+.diapo{flex:0 0 auto;width:min(78vw,340px);background:color-mix(in srgb,var(--bg-2) 94%,transparent);
   border:1px solid var(--line);overflow:hidden;display:flex;flex-direction:column}
 .diapo-media{position:relative;aspect-ratio:4/5;background:#000}
 .diapo-media img,.diapo-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
@@ -205,29 +206,31 @@ var pista=document.getElementById('historiaPista');
 var puntosEl=document.getElementById('historiaPuntos');
 
 function esc(t){return String(t==null?'':t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
-
-/* diapositiva 0: la película */
-var video=document.createElement('div');
-video.className='diapo diapo-video';
-video.innerHTML =
-  '<div class="diapo-media">'+
-    '<video playsinline preload="none" poster="assets_entrada_evolucion-franciscana.webp"></video>'+
-    '<button type="button" class="reproducir" aria-label="Reproducir la película (25 s)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>'+
-  '</div>'+
-  '<div class="diapo-texto"><span class="periodo">Película · 25 s</span><b>De la antigüedad a hoy</b></div>';
-pista.appendChild(video);
-var vEl=video.querySelector('video'), playBtn=video.querySelector('.reproducir');
-playBtn.addEventListener('click', function(){
-  if(!vEl.src){ vEl.src = BASE + (estrecho ? 'evolucion-movil.mp4' : 'evolucion-25s-musica.mp4'); vEl.controls=true; }
-  vEl.play().catch(function(){});
-  playBtn.hidden=true;
-});
-vEl.addEventListener('pause', function(){ playBtn.hidden=false });
-vEl.addEventListener('ended', function(){ playBtn.hidden=false });
-
-/* diapositivas 1-6: las etapas, cada una con su propio fragmento de la película */
 var FUENTE = BASE + (estrecho ? 'evolucion-movil.mp4' : 'evolucion-25s-musica.mp4');
-ETAPAS.forEach(function(e,i){
+var reducido = matchMedia('(prefers-reduced-motion:reduce)').matches;
+var reproduciendo = 0; /* nº de vídeos de este carrusel reproduciéndose ahora mismo */
+
+function crearPelicula(){
+  var d=document.createElement('div');
+  d.className='diapo diapo-video';
+  d.innerHTML =
+    '<div class="diapo-media">'+
+      '<video playsinline preload="none" poster="assets_entrada_evolucion-franciscana.webp"></video>'+
+      '<button type="button" class="reproducir" aria-label="Reproducir la película (25 s)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>'+
+    '</div>'+
+    '<div class="diapo-texto"><span class="periodo">Película · 25 s</span><b>De la antigüedad a hoy</b></div>';
+  var vEl=d.querySelector('video'), playBtn=d.querySelector('.reproducir');
+  playBtn.addEventListener('click', function(){
+    if(!vEl.src){ vEl.src = FUENTE; vEl.controls=true; }
+    vEl.play().catch(function(){});
+    playBtn.hidden=true;
+  });
+  vEl.addEventListener('play', function(){ reproduciendo++; });
+  vEl.addEventListener('pause', function(){ playBtn.hidden=false; reproduciendo=Math.max(0,reproduciendo-1); });
+  vEl.addEventListener('ended', function(){ playBtn.hidden=false; reproduciendo=Math.max(0,reproduciendo-1); });
+  return d;
+}
+function crearEtapa(e,i){
   var fin = (i+1<ETAPAS.length) ? ETAPAS[i+1].t : null; /* null = hasta el final del vídeo */
   var d=document.createElement('div');
   d.className='diapo diapo-video';
@@ -237,7 +240,6 @@ ETAPAS.forEach(function(e,i){
       '<button type="button" class="reproducir" aria-label="Reproducir '+esc(e.name)+'"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>'+
     '</div>'+
     '<div class="diapo-texto"><span class="periodo">'+esc(e.period)+'</span><b>'+esc(e.name)+'</b></div>';
-  pista.appendChild(d);
   var ev=d.querySelector('video'), eBtn=d.querySelector('.reproducir');
   function irAlInicio(){ try{ ev.currentTime = e.t; }catch(err){} }
   function empezar(){
@@ -245,45 +247,113 @@ ETAPAS.forEach(function(e,i){
     ev.addEventListener('seeked', alSaltar);
     irAlInicio();
   }
+  ev.addEventListener('play', function(){ reproduciendo++; });
   ev.addEventListener('timeupdate', function(){
     if(fin!=null && ev.currentTime>=fin){ ev.pause(); irAlInicio(); }
   });
-  ev.addEventListener('pause', function(){ eBtn.hidden=false });
-  ev.addEventListener('ended', function(){ eBtn.hidden=false; irAlInicio(); });
+  ev.addEventListener('pause', function(){ eBtn.hidden=false; reproduciendo=Math.max(0,reproduciendo-1); });
+  ev.addEventListener('ended', function(){ eBtn.hidden=false; irAlInicio(); reproduciendo=Math.max(0,reproduciendo-1); });
   eBtn.addEventListener('click', function(){
     if(!ev.src){ ev.addEventListener('loadedmetadata', empezar, {once:true}); ev.src = FUENTE; ev.load(); }
     else{ empezar(); }
     eBtn.hidden=true;
   });
-});
+  return d;
+}
 
-/* puntos + flechas */
+/* el "carril" lógico son estas 7 diapositivas; se construye dos veces seguidas
+   para poder desplazarse sin fin (cuando el carril se desplaza más allá de la
+   primera copia, saltamos hacia atrás exactamente su anchura: como la segunda
+   copia es idéntica, el salto es invisible) */
+var N = ETAPAS.length + 1;
+function construirJuego(){
+  pista.appendChild(crearPelicula());
+  ETAPAS.forEach(function(e,i){ pista.appendChild(crearEtapa(e,i)); });
+}
+construirJuego();
+construirJuego();
 var diapos=[].slice.call(pista.children);
-diapos.forEach(function(_,i){
-  var b=document.createElement('button');
-  b.type='button'; b.setAttribute('aria-label','Ir a la diapositiva '+(i+1));
-  b.addEventListener('click', function(){ irA(i) });
-  puntosEl.appendChild(b);
-});
+
+/* puntos (uno por diapositiva lógica, no por copia) */
+for(var p=0;p<N;p++){
+  (function(i){
+    var b=document.createElement('button');
+    b.type='button'; b.setAttribute('aria-label','Ir a la diapositiva '+(i+1));
+    b.addEventListener('click', function(){ irA(i); pausarTemporal(); });
+    puntosEl.appendChild(b);
+  })(p);
+}
+
+function anchuraJuego(){ return diapos[N] ? (diapos[N].offsetLeft - diapos[0].offsetLeft) : pista.scrollWidth/2; }
 function indiceActual(){
-  /* snap-align es "start": la diapositiva activa es la más cercana al borde izquierdo visible */
-  var borde=pista.scrollLeft, mejor=0, md=Infinity;
-  diapos.forEach(function(d,i){ var dd=Math.abs(d.offsetLeft-borde); if(dd<md){md=dd; mejor=i} });
+  var borde=((pista.scrollLeft % anchuraJuego())+anchuraJuego())%anchuraJuego(), mejor=0, md=Infinity;
+  for(var i=0;i<N;i++){ var dd=Math.abs(diapos[i].offsetLeft-borde); if(dd<md){md=dd; mejor=i} }
   return mejor;
 }
 function actualizarPuntos(){
   var mejor=indiceActual();
   [].forEach.call(puntosEl.children, function(b,i){ b.setAttribute('aria-current', i===mejor ? 'true':'false') });
 }
-function irA(i){
-  i=Math.max(0, Math.min(diapos.length-1, i));
-  diapos[i].scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth', inline:'start', block:'nearest'});
+function irA(iLogico){
+  var anchura=anchuraJuego();
+  var base = Math.floor(pista.scrollLeft/anchura)*anchura;
+  var destino = base + diapos[iLogico].offsetLeft;
+  pista.scrollTo({left:destino, behavior:reducido?'auto':'smooth'});
 }
-document.getElementById('historiaAnt').addEventListener('click', function(){ irA(indiceActual()-1) });
-document.getElementById('historiaSig').addEventListener('click', function(){ irA(indiceActual()+1) });
-var t=null;
-pista.addEventListener('scroll', function(){ clearTimeout(t); t=setTimeout(actualizarPuntos, 80) });
+document.getElementById('historiaAnt').addEventListener('click', function(){ irA((indiceActual()-1+N)%N); pausarTemporal(); });
+document.getElementById('historiaSig').addEventListener('click', function(){ irA((indiceActual()+1)%N); pausarTemporal(); });
+var tPuntos=null;
+pista.addEventListener('scroll', function(){
+  clearTimeout(tPuntos); tPuntos=setTimeout(actualizarPuntos, 80);
+  /* bucle sin fin: si nos hemos desplazado una copia entera, saltamos atrás/adelante sin que se note */
+  var anchura=anchuraJuego();
+  if(pista.scrollLeft>=anchura){ pista.scrollLeft-=anchura; }
+  else if(pista.scrollLeft<0){ pista.scrollLeft+=anchura; }
+});
 actualizarPuntos();
+
+/* ===== movimiento continuo, al estilo de una cinta Awwwards ===== */
+var VELOCIDAD = 28; /* px/segundo */
+var pausado = false, interactuando = false, tReanudar=null;
+function pausarTemporal(){
+  interactuando = true;
+  clearTimeout(tReanudar);
+  tReanudar = setTimeout(function(){ interactuando=false; }, 2200);
+}
+pista.addEventListener('mouseenter', function(){ pausado=true; });
+pista.addEventListener('mouseleave', function(){ pausado=false; });
+pista.addEventListener('touchstart', function(){ pausarTemporal(); }, {passive:true});
+pista.addEventListener('pointerdown', function(){ pausarTemporal(); });
+
+/* rueda del ratón: desplaza el carril en horizontal aunque el gesto sea vertical */
+pista.addEventListener('wheel', function(ev){
+  var d = Math.abs(ev.deltaX) > Math.abs(ev.deltaY) ? ev.deltaX : ev.deltaY;
+  pista.scrollLeft += d;
+  pausarTemporal();
+  ev.preventDefault();
+}, {passive:false});
+
+if(!reducido){
+  var ultimo=null;
+  var pos=pista.scrollLeft; /* posición propia en coma flotante: scrollLeft se redondea a entero
+    en cada lectura, así que sumarle fracciones de píxel cada fotograma (a 28px/s son ~0.46px/fotograma)
+    se perdía siempre por el redondeo y el carril nunca llegaba a moverse */
+  function cinta(ts){
+    if(ultimo==null) ultimo=ts;
+    var dt=(ts-ultimo)/1000; ultimo=ts;
+    var anchura=anchuraJuego();
+    if(!pausado && !interactuando && reproduciendo===0){
+      pos += VELOCIDAD*dt;
+      if(anchura>0){ pos = ((pos % anchura)+anchura)%anchura; }
+      pista.scrollLeft = pos;
+    } else {
+      pos = pista.scrollLeft; /* en pausa: solo seguimos la posición real, sin tocarla
+        (reescribirla aunque sea al mismo valor cancela el scrollTo suave de flechas/puntos y la rueda) */
+    }
+    requestAnimationFrame(cinta);
+  }
+  requestAnimationFrame(cinta);
+}
 })();
 </script>
 
