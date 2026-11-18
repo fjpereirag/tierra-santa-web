@@ -15,49 +15,9 @@
 <script type="importmap">{"imports":{"three":"./three.module.min.js"}}</script>
 </head>
 <body>
-<div id="candado" role="dialog" aria-modal="true" aria-labelledby="candadoTitulo" hidden>
-  <form class="candado-caja" autocomplete="off">
-    <svg viewBox="0 0 64 64" class="tau" aria-hidden="true"><path d="M32 12v40M17 22h30"/></svg>
-    <h1 id="candadoTitulo">Huellas franciscanas</h1>
-    <p>Escribe la contraseña para entrar</p>
-    <input type="password" inputmode="numeric" aria-label="Contraseña" placeholder="Contraseña" required>
-    <button type="submit" class="btn oro">Entrar</button>
-    <p class="candado-error" aria-live="polite"></p>
-  </form>
-</div>
 <canvas id="escena" aria-hidden="true"></canvas>
 <div id="velo" aria-hidden="true"></div>
 <div id="etiquetas" aria-label="Lugares en la maqueta"></div>
-
-<div id="portal" aria-label="Tres webs sobre Tierra Santa" hidden>
-  <div class="portal-cab">
-    <div class="portal-eyebrow">Custodia Franciscana de Tierra Santa</div>
-    <h1>Un mismo amor a los <em>Santos Lugares</em>,<br>contado de tres maneras</h1>
-  </div>
-  <nav class="portal-caminos">
-    <a class="portal-camino" href="https://revistatierrasanta.com/">
-      <span class="portal-tag">Revista</span>
-      <span class="portal-num">I.</span>
-      <h2>Revista Tierra Santa</h2>
-      <p>Más de cien años de crónicas desde los Santos Lugares, número a número, desde 1921 hasta hoy.</p>
-      <span class="portal-ir">Entrar <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-    </a>
-    <a class="portal-camino" href="https://fjpereirag.github.io/peregrinar-por-dentro/">
-      <span class="portal-tag">Oración</span>
-      <span class="portal-num">II.</span>
-      <h2>Peregrinar por dentro</h2>
-      <p>Un lugar santo al día, para rezar desde lo que vivimos: reflexión, oración y un mapa 3D que te lleva hasta allí.</p>
-      <span class="portal-ir">Entrar <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-    </a>
-    <button type="button" class="portal-camino portal-aqui" id="portalEntrar">
-      <span class="portal-tag">3D</span>
-      <span class="portal-num">III.</span>
-      <h2>Huellas franciscanas</h2>
-      <p>Un viaje visual por Tierra Santa: la maqueta 3D de la Custodia, los santuarios y los franciscanos.</p>
-      <span class="portal-ir">Entrar <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-    </button>
-  </nav>
-</div>
 
 <div id="carga" role="status" aria-live="polite">
   <div class="carga-in">
@@ -384,40 +344,14 @@ if (location.protocol === 'file:') {
 </script>
 <script src="contenido.js?v=9"></script>
 <script type="module">
-// Acceso con contraseña sencilla (cortina de privacidad, no seguridad real).
-const CLAVE = 'yhvold';
-const resumen = t => { let h = 5381; for (const c of t) h = ((h * 33) ^ c.charCodeAt(0)) >>> 0; return h.toString(36); };
-const abrir = () => {
-  const candado = document.getElementById('candado');
-  if (candado) candado.remove();
-  const portal = document.getElementById('portal');
-  if (portal) {
-    portal.hidden = false;
-    document.body.classList.add('portal-abierto');
-    const btnEntrar = portal.querySelector('#portalEntrar');
-    if (btnEntrar) btnEntrar.onclick = () => {
-      portal.classList.add('portal-oculto');
-      document.body.classList.remove('portal-abierto');
-    };
-  }
-  import('./app.js?v=18').catch(e => {
-    console.warn('No se pudo cargar app.js', e);
-    const texto = document.querySelector('#carga .carga-texto');
-    if (texto) texto.innerHTML = '<span class="carga-nombre">No se pudo cargar.<br>Revisa tu conexión.</span>' +
-      '<button type="button" style="margin-top:10px;border:1px solid rgba(240,211,148,.4);background:rgba(217,178,106,.12);color:inherit;border-radius:999px;padding:8px 16px;font:500 13px var(--sans);cursor:pointer" onclick="location.reload()">Reintentar</button>';
-  });
-};
-let dentro = false; try { dentro = localStorage.getItem('hf-acceso') === CLAVE; } catch {}
-if (dentro) abrir();
-else {
-  const caja = document.getElementById('candado'), form = caja.querySelector('form'), campo = form.querySelector('input'), error = form.querySelector('.candado-error');
-  caja.hidden = false; campo.focus();
-  form.onsubmit = e => {
-    e.preventDefault();
-    if (resumen(campo.value.trim()) === CLAVE) { try { localStorage.setItem('hf-acceso', CLAVE); } catch {} abrir(); }
-    else { error.textContent = 'Contraseña incorrecta'; campo.value = ''; campo.focus(); }
-  };
-}
+// Se entra directamente a la experiencia 3D: ya no hay contraseña ni pantalla de "tres caminos"
+// intermedia (esa elección ya se hace en portal.html, antes de llegar aquí).
+import('./app.js?v=18').catch(e => {
+  console.warn('No se pudo cargar app.js', e);
+  const texto = document.querySelector('#carga .carga-texto');
+  if (texto) texto.innerHTML = '<span class="carga-nombre">No se pudo cargar.<br>Revisa tu conexión.</span>' +
+    '<button type="button" style="margin-top:10px;border:1px solid rgba(240,211,148,.4);background:rgba(217,178,106,.12);color:inherit;border-radius:999px;padding:8px 16px;font:500 13px var(--sans);cursor:pointer" onclick="location.reload()">Reintentar</button>';
+});
 </script>
 </body>
 </html>
