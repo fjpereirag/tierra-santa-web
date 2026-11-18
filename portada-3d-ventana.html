@@ -821,10 +821,11 @@ function fill(el,k){
       el._f.style.backgroundPosition='center';
     }
   } else {
-    el._cover=null;
-    var sx=k,sh=Math.floor(sx/90),j=sx%90;
-    if(el._sh!==sh){el._sh=sh;el._f.style.backgroundImage='url(portadas3d/hoja-'+(sh<10?'0':'')+sh+'.jpg)';el._f.style.backgroundSize='1000% 900%'}
-    el._f.style.backgroundPosition=((j%10)*100/9).toFixed(3)+'% '+(Math.floor(j/10)*100/8).toFixed(3)+'%';
+    /* sin portada real (muy raro, 1 de ~819): en vez de un atlas de 18MB, un fondo neutro con el año */
+    el._cover=null;el._sh=null;
+    el._f.style.backgroundImage='linear-gradient(160deg,#2a2015,#171310)';
+    el._f.style.backgroundSize='cover';
+    el._f.style.backgroundPosition='center';
   }
   el.style.transform='translateY('+(k*DY).toFixed(1)+'px) rotateY('+(-k*STEP).toFixed(2)+'deg) translateZ('+R+'px)';
 }
