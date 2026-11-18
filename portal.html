@@ -88,7 +88,7 @@ footer{text-align:center;padding:0 0 1.1rem;color:var(--muted);font-size:.78rem;
 footer a{border-bottom:1px solid var(--line)}
 footer a:hover{color:var(--accent);border-color:var(--accent)}
 
-/* ================= Carrusel · Historia franciscana (vídeo + etapas, de Huellas) ================= */
+/* ================= Carrusel · Historia de la presencia franciscana ================= */
 .historia{max-width:var(--maxw-split);margin:1.6rem auto 0;padding:0 var(--gutter);position:relative;z-index:2}
 .historia .cab{text-align:center;max-width:36rem;margin:0 auto 1.3rem}
 .historia .eyebrow{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
@@ -99,17 +99,15 @@ footer a:hover{color:var(--accent);border-color:var(--accent)}
   scrollbar-width:none;-ms-overflow-style:none}
 .carrusel-pista:active{cursor:grabbing}
 .carrusel-pista::-webkit-scrollbar{display:none}
-.diapo{flex:0 0 auto;width:min(78vw,340px);background:color-mix(in srgb,var(--bg-2) 94%,transparent);
+.diapo{flex:0 0 auto;width:min(80vw,360px);background:color-mix(in srgb,var(--bg-2) 94%,transparent);
   border:1px solid var(--line);overflow:hidden;display:flex;flex-direction:column}
 .diapo-media{position:relative;aspect-ratio:4/5;background:#000}
-.diapo-media img,.diapo-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.diapo-video .reproducir{position:absolute;inset:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;
-  background:rgba(20,14,6,.22);border:0;cursor:pointer;color:#fff}
-.diapo-video .reproducir svg{width:52px;height:52px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.5))}
-.diapo-video .reproducir[hidden]{display:none}
-.diapo-texto{padding:.9rem 1rem 1rem}
+.diapo-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;
+  -webkit-user-drag:none;user-select:none;-webkit-touch-callout:none}
+.diapo-texto{padding:.9rem 1rem 1.05rem}
 .diapo-texto .periodo{display:block;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.25rem}
-.diapo-texto b{font-family:var(--font-display);font-weight:400;font-size:1.02rem;line-height:1.2;display:block}
+.diapo-texto b{font-family:var(--font-display);font-weight:400;font-size:1.04rem;line-height:1.2;display:block}
+.diapo-texto p{margin:.45rem 0 0;color:var(--muted);font-size:.82rem;line-height:1.48}
 .carrusel-nav{display:flex;align-items:center;justify-content:center;gap:1rem;margin-top:.2rem}
 .carrusel-flecha{flex:none;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:transparent;
   display:grid;place-items:center;color:var(--fg);cursor:pointer;transition:border-color .2s,background .2s}
@@ -170,11 +168,11 @@ footer a:hover{color:var(--accent);border-color:var(--accent)}
   </a>
 </nav>
 
-<section class="historia" aria-label="Historia franciscana de Tierra Santa">
+<section class="historia" aria-label="Historia de la presencia franciscana en Tierra Santa">
   <div class="cab">
-    <div class="eyebrow">De Huellas franciscanas</div>
-    <h2>De la antigüedad a hoy</h2>
-    <p>Seis etapas en la historia de los Santos Lugares y la película que las recorre, tal y como se cuentan en Huellas franciscanas.</p>
+    <div class="eyebrow">Custodia Franciscana · desde el siglo XIV</div>
+    <h2>Ocho siglos de presencia franciscana en Tierra Santa</h2>
+    <p>Desde que el papa Clemente VI confió a los franciscanos el cuidado de los Santos Lugares, la Custodia los ha acompañado a través de guerras, reconstrucciones y restauraciones. Seis etapas de una historia que continúa hoy.</p>
   </div>
   <div class="carrusel">
     <div class="carrusel-pista" id="historiaPista" tabindex="0"></div>
@@ -185,7 +183,7 @@ footer a:hover{color:var(--accent);border-color:var(--accent)}
     <button type="button" class="carrusel-flecha" id="historiaSig" aria-label="Diapositiva siguiente"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></button>
   </div>
 </section>
-<p class="aviso-ia">Recreaciones animadas creadas con IA; no son fotografías documentales exactas. Música: «Ethereal Ascension», Sandra’s Tape.</p>
+<p class="aviso-ia">Recreaciones visuales creadas con IA; no son fotografías documentales exactas.</p>
 
 <footer>Custodia Franciscana de Tierra Santa</footer>
 
@@ -193,85 +191,42 @@ footer a:hover{color:var(--accent);border-color:var(--accent)}
 (function(){
 'use strict';
 var ETAPAS=[
-  {image:'01-antiguedad.webp', name:'Era Bíblica y Antigüedad', period:'Hasta S. III', t:0},
-  {image:'02-basilicas.webp', name:'Periodo Bizantino y Cruzado', period:'SS. IV–XIII', t:3.9},
-  {image:'03-custodia.webp', name:'Nacimiento de la Custodia Franciscana', period:'SS. XIV–XVIII', t:7.8},
-  {image:'04-arqueologia.webp', name:'Renacimiento Constructivo', period:'1800–1913', t:11.7},
-  {image:'05-santuarios.webp', name:'Arquitectura Monumental', period:'1914–1999', t:15.6},
-  {image:'06-conservacion.webp', name:'Era Digital y Conservación Actual', period:'2000–Presente', t:19.5}
+  {image:'01-antiguedad.webp', name:'Era Bíblica y Antigüedad', period:'Hasta S. III',
+   desc:'Los lugares donde nacieron, vivieron y murieron Jesús y los primeros cristianos conservan memoria viva desde los tiempos apostólicos, venerados por los primeros peregrinos mucho antes de que existiera ningún santuario construido.'},
+  {image:'02-basilicas.webp', name:'Periodo Bizantino y Cruzado', period:'SS. IV–XIII',
+   desc:'Tras la conversión de Constantino, emperadores y obispos bizantinos levantan las primeras grandes basílicas sobre los Santos Lugares. Siglos después los cruzados las reconstruyen y amplían, dejando una huella que aún puede verse en Jerusalén y Belén.'},
+  {image:'03-custodia.webp', name:'Nacimiento de la Custodia Franciscana', period:'SS. XIV–XVIII',
+   desc:'En 1342 el papa Clemente VI confía oficialmente a los franciscanos el cuidado de los Santos Lugares. Comienza así, hace ya casi siete siglos, una presencia ininterrumpida de oración, acogida y custodia de los santuarios.'},
+  {image:'04-arqueologia.webp', name:'Renacimiento Constructivo', period:'1800–1913',
+   desc:'El siglo XIX trae una intensa labor de restauración y ampliación de los santuarios, junto con las primeras excavaciones arqueológicas modernas y la llegada de los primeros peregrinos de la era contemporánea.'},
+  {image:'05-santuarios.webp', name:'Arquitectura Monumental', period:'1914–1999',
+   desc:'A lo largo del siglo XX se construyen o reconstruyen algunos de los santuarios más conocidos hoy, con una arquitectura que busca unir memoria bíblica y dignidad litúrgica, pese a las guerras y los cambios políticos de la región.'},
+  {image:'06-conservacion.webp', name:'Era Digital y Conservación Actual', period:'2000–Presente',
+   desc:'Hoy la Custodia combina la labor pastoral y de acogida con la conservación del patrimonio, la documentación arqueológica y nuevas formas de acompañar también a quienes no pueden peregrinar físicamente hasta Tierra Santa.'}
 ];
 var BASE='assets_entrada_historia_';
-var estrecho = matchMedia('(max-width:700px)').matches;
 var pista=document.getElementById('historiaPista');
 var puntosEl=document.getElementById('historiaPuntos');
 
 function esc(t){return String(t==null?'':t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
-var FUENTE = BASE + (estrecho ? 'evolucion-movil.mp4' : 'evolucion-25s-musica.mp4');
 var reducido = matchMedia('(prefers-reduced-motion:reduce)').matches;
-var reproduciendo = 0; /* nº de vídeos de este carrusel reproduciéndose ahora mismo */
 
-function crearPelicula(){
+function crearEtapa(e){
   var d=document.createElement('div');
-  d.className='diapo diapo-video';
+  d.className='diapo';
   d.innerHTML =
-    '<div class="diapo-media">'+
-      '<video playsinline preload="none" poster="assets_entrada_evolucion-franciscana.webp"></video>'+
-      '<button type="button" class="reproducir" aria-label="Reproducir la película (25 s)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>'+
-    '</div>'+
-    '<div class="diapo-texto"><span class="periodo">Película · 25 s</span><b>De la antigüedad a hoy</b></div>';
-  var vEl=d.querySelector('video'), playBtn=d.querySelector('.reproducir');
-  playBtn.addEventListener('click', function(){
-    if(!vEl.src){ vEl.src = FUENTE; vEl.controls=true; }
-    vEl.play().catch(function(){});
-    playBtn.hidden=true;
-  });
-  vEl.addEventListener('play', function(){ reproduciendo++; });
-  vEl.addEventListener('pause', function(){ playBtn.hidden=false; reproduciendo=Math.max(0,reproduciendo-1); });
-  vEl.addEventListener('ended', function(){ playBtn.hidden=false; reproduciendo=Math.max(0,reproduciendo-1); });
-  return d;
-}
-function crearEtapa(e,i){
-  var fin = (i+1<ETAPAS.length) ? ETAPAS[i+1].t : null; /* null = hasta el final del vídeo */
-  var d=document.createElement('div');
-  d.className='diapo diapo-video';
-  d.innerHTML =
-    '<div class="diapo-media">'+
-      '<video playsinline preload="none" poster="'+BASE+e.image+'"></video>'+
-      '<button type="button" class="reproducir" aria-label="Reproducir '+esc(e.name)+'"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>'+
-    '</div>'+
-    '<div class="diapo-texto"><span class="periodo">'+esc(e.period)+'</span><b>'+esc(e.name)+'</b></div>';
-  var ev=d.querySelector('video'), eBtn=d.querySelector('.reproducir');
-  function irAlInicio(){ try{ ev.currentTime = e.t; }catch(err){} }
-  function empezar(){
-    function alSaltar(){ ev.removeEventListener('seeked', alSaltar); ev.play().catch(function(){}); }
-    ev.addEventListener('seeked', alSaltar);
-    irAlInicio();
-  }
-  ev.addEventListener('play', function(){ reproduciendo++; });
-  ev.addEventListener('timeupdate', function(){
-    /* en bucle continuo: al llegar al final de su fragmento, vuelve al principio sin detenerse */
-    if(fin!=null && ev.currentTime>=fin){ irAlInicio(); }
-  });
-  ev.addEventListener('pause', function(){ eBtn.hidden=false; reproduciendo=Math.max(0,reproduciendo-1); });
-  /* "ended" solo puede ocurrir en la última etapa (sin límite superior): al llegar al final
-     del vídeo, vuelve a su propio inicio y sigue en bucle, en vez de detenerse */
-  ev.addEventListener('ended', function(){ irAlInicio(); ev.play().catch(function(){}); });
-  eBtn.addEventListener('click', function(){
-    if(!ev.src){ ev.addEventListener('loadedmetadata', empezar, {once:true}); ev.src = FUENTE; ev.load(); }
-    else{ empezar(); }
-    eBtn.hidden=true;
-  });
+    '<div class="diapo-media"><img src="'+BASE+e.image+'" alt="'+esc(e.name)+'" loading="lazy" draggable="false"></div>'+
+    '<div class="diapo-texto"><span class="periodo">'+esc(e.period)+'</span><b>'+esc(e.name)+'</b><p>'+esc(e.desc)+'</p></div>';
   return d;
 }
 
-/* el "carril" lógico son estas 7 diapositivas; se construye dos veces seguidas
+/* el "carril" lógico son estas 6 diapositivas; se construye dos veces seguidas
    para poder desplazarse sin fin (cuando el carril se desplaza más allá de la
    primera copia, saltamos hacia atrás exactamente su anchura: como la segunda
    copia es idéntica, el salto es invisible) */
-var N = ETAPAS.length + 1;
+var N = ETAPAS.length;
 function construirJuego(){
-  pista.appendChild(crearPelicula());
-  ETAPAS.forEach(function(e,i){ pista.appendChild(crearEtapa(e,i)); });
+  ETAPAS.forEach(function(e){ pista.appendChild(crearEtapa(e)); });
 }
 construirJuego();
 construirJuego();
@@ -376,7 +331,7 @@ if(!reducido){
     if(ultimo==null) ultimo=ts;
     var dt=(ts-ultimo)/1000; ultimo=ts;
     var anchura=anchuraJuego();
-    if(!pausado && !interactuando && reproduciendo===0){
+    if(!pausado && !interactuando){
       pos += VELOCIDAD*dt;
       if(anchura>0){ pos = ((pos % anchura)+anchura)%anchura; }
       pista.scrollLeft = pos;
